@@ -1,0 +1,8 @@
+{
+  "name": "KKAS",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "37d462c9"
+}

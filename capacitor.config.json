@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "KKAS",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
