@@ -1,4 +1,9 @@
 {
-    "LABELS": "label-ek"
-
+    "LABELS": "label-ek",
+    "TITLE": "KKAS",
+    "SUBTITLE": "Kajak-Kenu Adminisztrációs Rendszer",
+    "TEAMS": "Egyesületek",
+    "COMPETITORS": "Versenyzők",
+    "EVENTS": "Versenyek",
+    "HOMEPAGE": "Főoldal"
 }
