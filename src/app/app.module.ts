@@ -25,7 +25,8 @@ import { AppRoutingModule } from './app-routing.module';
       },
       defaultLanguage: 'hu'
     }),
-    AppRoutingModule],
+    AppRoutingModule,
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

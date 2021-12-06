@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-toggle autoHide="false">
+                <ion-button (click)="toggleMenu()">
+                    <ion-icon slot="icon-only" name="menu"></ion-icon>
+                </ion-button>
+            </ion-menu-toggle>
+        </ion-buttons>
+
+        <ion-item lines="none">
+            <ion-title>{{ title | translate }}</ion-title>
+            <ion-button shape="round" slot="end" color="secondary">
+                <ion-icon slot="icon-only" name="language-outline"></ion-icon>
+                <ion-select selectedText=" " interface="popover" (ionChange)="switchLang($event)">
+                    <ion-select-option *ngFor="let language of translate.getLangs()" [value]="language">{{ language }}
+                    </ion-select-option>
+                </ion-select>
+            </ion-button>
+        </ion-item>
+
+    </ion-toolbar>
+</ion-header>

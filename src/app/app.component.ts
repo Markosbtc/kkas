@@ -13,13 +13,6 @@ export class AppComponent {
     { title: 'TEAMS', url: '/folder/Archived', icon: 'bookmarks' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor(public translate: TranslateService) {
-    translate.use('hu');
-    translate.addLangs(['en', 'hu', 'sr']);
-  }
-
-  switchLang(lang: string) {
-    this.translate.use(lang);
-  }
+  constructor() { }
 
 }
