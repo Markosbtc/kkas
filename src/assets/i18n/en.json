@@ -1,5 +1,17 @@
 {
-    "LABELS": "labels",
-    "TITLE": "KKAS",
-    "SUBTITLE": "Canoe Administration System"
+    "home": {
+        "LABELS": "labels",
+        "TITLE": "KKAS",
+        "SUBTITLE": "Canoe Administration System",
+        "TEAMS": "Teams",
+        "COMPETITORS": "Competitors",
+        "EVENTS": "Events",
+        "HOMEPAGE": "Homepage"
+    },
+    "event_status_type": {
+        "scheduled": "Competition is scheduled.",
+        "postponed": "Competition will be postponed without being rescheduled yet.",
+        "rescheduled": "Competition is rescheduled.",
+        "cancelled": "Competition will not take place (suspended, cancelled)"
+    }
 }
