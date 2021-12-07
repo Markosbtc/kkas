@@ -1,9 +1,9 @@
 export interface Person {
-    id: string,
+    id?: string,
     name: {
         familyName: string,
         givenName: string,
-        fullName: string
+        fullName?: string
     },
     image?: any,
     email?: string,

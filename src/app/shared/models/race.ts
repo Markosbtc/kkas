@@ -3,7 +3,7 @@ import { Referee } from "./referee";
 import { Result } from "./result";
 
 export interface Race {
-    id: string,
+    id?: string,
     eventId: string,
     number: number,
     distance: Distance.DistanceType,

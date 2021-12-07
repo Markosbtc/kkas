@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "kkas-33155": {
+      "hosting": {
+        "app": [
+          "kkas-33155"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "kkas-33155"
+  }
+}

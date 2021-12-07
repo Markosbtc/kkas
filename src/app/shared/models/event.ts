@@ -3,7 +3,7 @@ import { Race } from "./race";
 import { Organization, SportsTeam } from "./sportsTeam"
 
 export interface Event {
-    identifier: string,
+    id?: string,
     name: string,
     alternateName?: string,
     description?: string,

@@ -1,20 +1,21 @@
 import { Athlete } from "./athlete";
+import { Coach } from "./coach";
 import { Person } from "./person";
 
 export interface Organization {
-    identifier: string,
+    id?: string,
     name: string,
     alternateName?: string,
     address: string,
     email?: string[],
-    url?: string,
+    url?: string[],
     telephone?: string[]
 }
 
 export interface SportsTeam extends Organization {
-    logo: any,
+    logo?: any,
     captain: Person,
     president: Person,
-    coaches: Person,
-    athletes: Athlete,
+    coaches?: Coach[],
+    athletes?: Athlete[],
 }

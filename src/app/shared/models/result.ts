@@ -1,17 +1,17 @@
 import { Athlete } from "./athlete";
 
 export interface Result {
-    identifier: string,
+    id?: string,
     raceId: string,
     created: Date,
-    modified: Date,
+    modified?: Date,
     competitor: Athlete,
     resultStatus: ResultStatus.ResultStatusType,
     lane: number,
     rank: number,
-    performance: string,
-    points: number,
-    disqualificationReason: string,
+    performance?: string,
+    points?: number,
+    disqualificationReason?: string,
 }
 
 export namespace ResultStatus {

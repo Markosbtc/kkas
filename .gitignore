@@ -31,3 +31,8 @@ npm-debug.log*
 /www
 
 .lingua
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
