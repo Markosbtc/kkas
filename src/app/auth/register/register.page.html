@@ -1,0 +1,88 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Register</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+        <ion-item lines="full">
+            <ion-label position="floating">First name</ion-label>
+            <ion-input type="text" formControlName="firstName" required></ion-input>
+        </ion-item>
+        <span class="ion-padding" *ngIf="isSubmitted && registerForm.hasError('required', 'firstName')">
+          <ion-text color="danger">
+            Name is required.
+          </ion-text>
+        </span>
+
+        <ion-item lines="full">
+            <ion-label position="floating">Last name</ion-label>
+            <ion-input type="text" formControlName="lastName" required></ion-input>
+        </ion-item>
+        <span class="ion-padding" *ngIf="isSubmitted && registerForm.hasError('required', 'lastName')">
+          <ion-text color="danger">
+            Name is required.
+          </ion-text>
+        </span>
+
+        <ion-item lines="full">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="email" required></ion-input>
+        </ion-item>
+        <span class="ion-padding" *ngIf="isSubmitted && registerForm.hasError('required', 'email')">
+          <ion-text color="danger">
+            Email is required.
+          </ion-text>
+        </span>
+        <span class="ion-padding" *ngIf="isSubmitted && registerForm.hasError('pattern', 'email')">
+          <ion-text color="danger">
+            <!-- {{'form.err_format_error' | translate }} -->
+            Not an e-mail
+          </ion-text>
+        </span>
+
+        <ion-item lines="full">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" formControlName="password" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="isSubmitted && registerForm.hasError('required', 'password')">
+          <ion-text color="danger">
+            Password is required.
+          </ion-text>
+        </span>
+
+        <ion-item lines="full">
+            <ion-label position="floating">Repeat password</ion-label>
+            <ion-input type="password" formControlName="password2" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="registerForm.hasError('noMatch') && !(registerForm.get('password').pristine)">
+          <ion-text color="danger">
+            Passwords don't match.
+          </ion-text>
+        </span>
+
+        <ion-row>
+            <ion-col>
+                <ion-button type="submit" color="danger" expand="block">Sign Up</ion-button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-button (click)="authService.GoogleAuth()" color="danger" expand="block">
+                    Login with Google
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-label>Already have an account? </ion-label>
+                <ion-button [routerLink]="['/login']" expand="block">
+                    Login
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </form>
+</ion-content>

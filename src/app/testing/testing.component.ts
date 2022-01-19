@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Athlete } from '../shared/models/athlete';
 import { AthleteService } from '../shared/services/athlete.service';
+import { AuthService } from '../shared/services/auth.service';
 
 //TODO: delete this component
 //TODO: delete from HomeModule declarations
@@ -14,7 +15,10 @@ import { AthleteService } from '../shared/services/athlete.service';
 export class TestingComponent implements OnInit {
   athlete: Athlete;
 
-  constructor(private athleteService: AthleteService) { }
+  constructor(
+    private athleteService: AthleteService,
+    public authService: AuthService
+    ) { }
 
   ngOnInit() {
     this.athleteService.getAthletes().subscribe(res => {
