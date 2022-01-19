@@ -12,8 +12,7 @@ export class AthleteService {
 
   getAthletes(): Observable<Athlete[]> {
     const athleteRef = collection(this.firestore, 'athletes');
-    return collectionData(athleteRef) as Observable<Athlete[]>;
-    //return collectionData(athleteRef, { idField: 'id'});
+    return collectionData(athleteRef, { idField: 'id' }) as Observable<Athlete[]>;
   }
 
   getAthleteById(id: string): Observable<Athlete> {

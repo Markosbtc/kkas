@@ -1,28 +1,64 @@
 <app-header [title]="'HOMEPAGE'"></app-header>
 <ion-content [fullscreen]="true">
-    <!--   <div id="container">
-        <strong class="capitalize">{{ 'HOMEPAGE' | translate }}</strong>
-        <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI
-        Components</a></p>
-    </div>
- -->
 
+    <ion-accordion-group>
+        <!-- to make it open: value="colors" //  inside ion-accordion-group  -->
+        <ion-accordion value="colors">
+            <!-- toggle-icon="arrow-down-circle"   // inside ion-accordition -->
+            <ion-item slot="header">
+                <ion-label>Kereses</ion-label>
+            </ion-item>
 
-    <ion-item lines="none">
-        <ion-label>Következő események</ion-label>
-    </ion-item>
-    <ion-grid fixed>
-        <ion-row>
-            <ion-col size="6">
+            <ion-list slot="content">
                 <ion-item>
-                    <ion-label>Awesome Label</ion-label>
-                    <ion-label>Awesome Labe1</ion-label>
-                    <ion-label>Awesome Label2</ion-label>
+                    <ion-label>Verseny neve</ion-label>
+                    <ion-input></ion-input>
                 </ion-item>
-            </ion-col>
-            <ion-col size="6"></ion-col>
-        </ion-row>
-    </ion-grid>
+                <ion-item>
+                    <ion-label>Megrendzés éve</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Verseny helyszíne</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+            </ion-list>
+        </ion-accordion>
+    </ion-accordion-group>
+
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Jelenlegi verseny</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item lines="none">
+                <ion-label>Awesome Label</ion-label>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Következő események</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item lines="none">
+                <ion-label>Awesome Label</ion-label>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Összes</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item lines="none">
+                <ion-label>Awesome Label</ion-label>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
 
 
 
