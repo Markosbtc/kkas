@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { SplitPaneLayoutPage } from './layout/split-pane-layout/split-pane-layout';
 import { AuthGuard } from './shared/guard/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home/test',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    path: '',
+    component: SplitPaneLayoutPage,
+    children: [{
+      path: '',
+      loadChildren: () => import('./layout/split-pane-layout/split-pane-layout.module').then(m => m.SplitPaneLayoutPageModule)
+    }]
   },
   {
     path: 'forgot-password',

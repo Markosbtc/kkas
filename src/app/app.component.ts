@@ -1,18 +1,12 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'HOMEPAGE', url: '/home', icon: 'home' },
-    { title: 'EVENTS', url: '/folder/Outbox', icon: 'play' },
-    { title: 'COMPETITORS', url: '/folder/Favorites', icon: 'people' },
-    { title: 'TEAMS', url: '/folder/Archived', icon: 'bookmarks' },
-  ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+
   constructor() { }
 
 }
