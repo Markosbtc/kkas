@@ -8,6 +8,8 @@ import { SplitPaneLayoutPageRoutingModule } from './split-pane-layout-routing.mo
 
 import { SplitPaneLayoutPage } from './split-pane-layout';
 import { TranslateModule } from '@ngx-translate/core';
+import { EventsComponent } from 'src/app/events/events.component';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -15,8 +17,12 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     IonicModule,
     SplitPaneLayoutPageRoutingModule,
+    ComponentsModule,
     TranslateModule
   ],
-  declarations: [SplitPaneLayoutPage]
+  declarations: [
+    SplitPaneLayoutPage,
+    EventsComponent
+  ]
 })
 export class SplitPaneLayoutPageModule { }

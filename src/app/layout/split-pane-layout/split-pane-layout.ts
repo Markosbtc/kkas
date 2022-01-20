@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class SplitPaneLayoutPage implements OnInit {
   public appPages = [
     { title: 'HOMEPAGE', url: '/home', icon: 'home' },
-    { title: 'EVENTS', url: '/folder/Outbox', icon: 'play' },
+    { title: 'EVENTS', url: '/events', icon: 'play' },
     { title: 'COMPETITORS', url: '/folder/Favorites', icon: 'people' },
     { title: 'TEAMS', url: '/folder/Archived', icon: 'bookmarks' },
   ];

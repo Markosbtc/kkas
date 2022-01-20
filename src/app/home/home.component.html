@@ -1,32 +1,6 @@
 <app-header [title]="'HOMEPAGE'"></app-header>
 <ion-content [fullscreen]="true">
 
-    <ion-accordion-group>
-        <!-- to make it open: value="colors" //  inside ion-accordion-group  -->
-        <ion-accordion value="colors">
-            <!-- toggle-icon="arrow-down-circle"   // inside ion-accordition -->
-            <ion-item slot="header">
-                <ion-label>Kereses</ion-label>
-            </ion-item>
-
-            <ion-list slot="content">
-                <ion-item>
-                    <ion-label>Verseny neve</ion-label>
-                    <ion-input></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Megrendzés éve</ion-label>
-                    <ion-input></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Verseny helyszíne</ion-label>
-                    <ion-input></ion-input>
-                </ion-item>
-            </ion-list>
-        </ion-accordion>
-    </ion-accordion-group>
-
-
     <ion-card>
         <ion-card-header>
             <ion-card-title>Jelenlegi verseny</ion-card-title>
@@ -48,19 +22,5 @@
             </ion-item>
         </ion-card-content>
     </ion-card>
-
-    <ion-card>
-        <ion-card-header>
-            <ion-card-title>Összes</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            <ion-item lines="none">
-                <ion-label>Awesome Label</ion-label>
-            </ion-item>
-        </ion-card-content>
-    </ion-card>
-
-
-
 
 </ion-content>

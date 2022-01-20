@@ -1,0 +1,39 @@
+<app-header [title]="'EVENTS'"></app-header>
+<ion-content [fullscreen]="true">
+
+    <ion-accordion-group value="filter">
+        <ion-accordion value="filter">
+            <!-- toggle-icon="arrow-down-circle"   // inside ion-accordition -->
+            <ion-item slot="header">
+                <ion-label>Kereses</ion-label>
+            </ion-item>
+
+            <ion-list slot="content">
+                <ion-item>
+                    <ion-label>Verseny neve</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Megrendzés éve</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Verseny helyszíne</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+            </ion-list>
+        </ion-accordion>
+    </ion-accordion-group>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>ALL</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item lines="none">
+                <ion-label>Awesome Label</ion-label>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>
