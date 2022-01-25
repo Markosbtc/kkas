@@ -1,8 +1,5 @@
-<app-header [title]="id" [withBack]="true"></app-header>
+<app-header [title]="title" [withBack]="true"></app-header>
 <ion-content [fullscreen]="true">
-
-    <h1>{{ title }}</h1>
-
 
     <ion-card *ngIf="event && event.races">
         <ion-card-header>

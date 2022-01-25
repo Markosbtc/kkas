@@ -4,25 +4,43 @@
         "TITLE": "KKAS",
         "SUBTITLE": "Canoe Administration System",
         "TEAMS": "Teams",
-        "COMPETITORS": "Competitors",
+        "COMPETITORS": "Athletes",
         "EVENTS": "Events",
         "HOMEPAGE": "Homepage",
         "current": "Ongoing Event",
         "next": "Upcoming Events"
     },
+    "shared": {
+        "filter": "Filter",
+        "open": "Open",
+        "error": "Error"
+    },
     "event": {
         "result": "Result",
-        "open": "Open",
-        "filter": "Filter",
         "filter_event_name": "Name of event",
         "filter_year": "Year of Organization",
         "filter_place": "Place of the Event",
-        "all": "Events"
+        "all": "Events",
+        "no_event": "No events found in the database"
     },
     "event_status_type": {
         "scheduled": "Competition is scheduled.",
         "postponed": "Competition will be postponed without being rescheduled yet.",
         "rescheduled": "Competition is rescheduled.",
         "cancelled": "Competition will not take place (suspended, cancelled)"
+    },
+    "athlete": {
+        "filter_name": "Name",
+        "filter_team": "Sports Team",
+        "filter_gender": "Gender",
+        "filter_placement": "Placement",
+        "filter_boat": "Boat",
+        "filter_distance": "Distance",
+        "filter_progressing_scheme": "Race",
+        "filter_event_category": "Event Category",
+        "all": "Athletes",
+        "no_athlete": "No athletes found in the database",
+        "error": "There was an error displaying the athlete",
+        "error_no_achievement": "There are no achievements to display"
     }
 }

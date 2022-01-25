@@ -11,6 +11,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { EventListComponent } from 'src/app/events/event-list/event-list.component';
 import { EventComponent } from 'src/app/events/event/event.component';
+import { AthleteListComponent } from 'src/app/athletes/athlete-list/athlete-list.component';
+import { AthleteComponent } from 'src/app/athletes/athlete/athlete.component';
 
 @NgModule({
   imports: [
@@ -24,7 +26,9 @@ import { EventComponent } from 'src/app/events/event/event.component';
   declarations: [
     SplitPaneLayoutPage,
     EventListComponent,
-    EventComponent
+    EventComponent,
+    AthleteListComponent,
+    AthleteComponent
   ]
 })
 export class SplitPaneLayoutPageModule { }

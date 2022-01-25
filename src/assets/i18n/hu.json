@@ -10,19 +10,37 @@
         "current": "Jelenleg zajló esemény",
         "next": "Következő események"
     },
+    "shared": {
+        "filter": "Szűrők",
+        "open": "Megtekintés",
+        "error": "Hiba történt"
+    },
     "event": {
         "result": "Eredmény",
-        "open": "Megtekintés",
-        "filter": "Keresés",
         "filter_event_name": "Esemény neve",
         "filter_year": "Megrendezés éve",
         "filter_place": "Helyszín",
-        "all": "Összes"
+        "all": "Összes",
+        "no_event": "Nincs megjeleníthető esemény az adatbázisban"
     },
     "event_status_type": {
         "scheduled": "Competition is scheduled.",
         "postponed": "Competition will be postponed without being rescheduled yet.",
         "rescheduled": "Competition is rescheduled.",
         "cancelled": "Competition will not take place (suspended, cancelled)"
+    },
+    "athlete": {
+        "filter_name": "Versenyző neve",
+        "filter_team": "Tagszervezet",
+        "filter_gender": "Versenyző neme",
+        "filter_placement": "Elért helyezés",
+        "filter_boat": "Hajó",
+        "filter_distance": "Táv",
+        "filter_progressing_scheme": "Futam típus",
+        "filter_event_category": "Versny típus",
+        "all": "Versenyzők",
+        "no_athlete": "Nincs megjeleníthető versenyző az adatbázisban",
+        "error": "Nem megjeleníthető a versenyző",
+        "error_no_achievement": "Nincs megjelíthető eredmény"
     }
 }

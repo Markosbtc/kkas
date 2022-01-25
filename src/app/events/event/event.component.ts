@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Event, EventCategory, EventStatus } from 'src/app/shared/models/event';
 import { Gender } from 'src/app/shared/models/person';
 import { AgeGroup, Boat, Distance, RaceT } from 'src/app/shared/models/race';
-import { Result, ResultStatus } from 'src/app/shared/models/result';
+import { ResultStatus } from 'src/app/shared/models/result';
 import { Athlete } from 'src/app/shared/models/athlete';
 
 @Component({
@@ -13,7 +13,7 @@ import { Athlete } from 'src/app/shared/models/athlete';
 })
 export class EventComponent implements OnInit {
   id: string;
-  title: string; //TODO: get event by id and assign event name to title
+  title: string;
   event: Event;
 
   constructor(
@@ -22,6 +22,7 @@ export class EventComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
+    this.title = this.id; //TODO: get event by id and assign event name to title
 
     // --
     this.event = {
@@ -81,7 +82,7 @@ export class EventComponent implements OnInit {
               //disqualificationReason?: string,
             }
           ],
-          progressingScheme: 'Döntő', 
+          progressingScheme: 'Döntő',
           /*  note?: string,
            startReferee?: Referee[],
            finishReferee?: Referee[],

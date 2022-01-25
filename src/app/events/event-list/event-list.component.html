@@ -1,11 +1,10 @@
-<app-header [title]="'EVENTS'"></app-header>
+<app-header [title]="'home.EVENTS'"></app-header>
 <ion-content [fullscreen]="true">
 
-    <ion-accordion-group value="filter">
-        <ion-accordion value="filter">
-            <!-- toggle-icon="arrow-down-circle"   // inside ion-accordition -->
+    <ion-accordion-group>
+        <ion-accordion value="filter" toggle-icon="filter">
             <ion-item slot="header">
-                <ion-label>{{ 'event.filter' | translate}}</ion-label>
+                <ion-label>{{ 'shared.filter' | translate}}</ion-label>
             </ion-item>
 
             <ion-list slot="content">
@@ -25,18 +24,26 @@
         </ion-accordion>
     </ion-accordion-group>
 
-    <ion-card *ngIf="events">
+    <ion-card>
         <ion-card-header>
             <ion-card-title>{{ 'event.all' | translate }}</ion-card-title>
         </ion-card-header>
-        <ion-card-content>
-            <ion-item lines="none" *ngFor="let event of events">
-                <ion-label [routerLink]="['/event', event.id]">{{ event.name + ' ' + (event.alternateName ? event.alternateName : '') + ' - ' + event.location + ' - ' + (event.startDate | date) + ' - ' + (event.endDate | date ) }} </ion-label>
+        <ion-card-content *ngIf="events && events.length > 0; else noEvent">
+            <ion-item lines="none" *ngFor="let event of events" [routerLink]="['/event', event.id]">
+                <ion-label>{{ event.name + ' ' + (event.alternateName ? event.alternateName : '') + ' - ' + event.location + ' - ' + (event.startDate | date) + ' - ' + (event.endDate | date ) }} </ion-label>
                 <ion-button [routerLink]="['/event', event.id]" expand="block" fill="clear">
-                    {{ 'event.open' | translate}}
+                    {{ 'shared.open' | translate}}
                 </ion-button>
             </ion-item>
         </ion-card-content>
+
+        <ng-template #noEvent>
+            <ion-card-content>
+                <ion-item lines="none">
+                    <ion-label>{{ 'event.no_event' | translate }} </ion-label>
+                </ion-item>
+            </ion-card-content>
+        </ng-template>
     </ion-card>
 
 </ion-content>

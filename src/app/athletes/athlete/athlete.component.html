@@ -1,0 +1,87 @@
+<app-header [title]="title" [withBack]="true"></app-header>
+<ion-content [fullscreen]="true">
+
+    <ion-card *ngIf="athlete;else noAthlete">
+        <ion-card-header>
+            <ion-avatar>
+                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                <!-- TODO: src = athlete.image -->
+            </ion-avatar>
+            <ion-card-title>{{ athlete.name.familyName + ' ' + athlete.name.givenName + ' (' + (athlete.birthDate | date: 'y') + ')' }}</ion-card-title>
+            <ion-card-subtitle>{{ athlete.memberOf.name + ' ' + (athlete.memberOf.alternateName? '(' + athlete.memberOf.alternateName + ')' : '' ) }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item lines="none">
+                <ion-label> </ion-label>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+    <ng-template #noAthlete>
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>{{ 'shared.error' | translate }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                {{ 'athlete.error' | translate }}
+            </ion-card-content>
+        </ion-card>
+    </ng-template>
+
+    <ion-accordion-group *ngIf="athlete">
+        <ion-accordion value="filter" toggle-icon="filter">
+            <ion-item slot="header">
+                <ion-label>{{ 'shared.filter' | translate}}</ion-label>
+            </ion-item>
+
+            <ion-list slot="content">
+                <ion-item>
+                    <ion-label>{{ 'event.filter_event_name' | translate }}</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>{{ 'athlete.filter_placement' | translate }}</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>{{ 'athlete.filter_boat' | translate }}</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>{{ 'athlete.filter_distance' | translate }}</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>{{ 'athlete.filter_progressing_scheme' | translate }}</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>{{ 'athlete.filter_event_category' | translate }}</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+            </ion-list>
+        </ion-accordion>
+    </ion-accordion-group>
+
+    <ng-container *ngIf="athlete && athlete.achievements?.length > 0; else noAchievement">
+        <ion-card *ngFor="let achievement of athlete.achievements">
+            <ion-card-header>
+                <ion-card-title>{{ '//TODO:' }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-item lines="none">
+                    <ion-label> </ion-label>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+    </ng-container>
+
+    <ng-template #noAchievement>
+        <ion-card>
+            <ion-card-header>
+                <ion-card-subtitle>{{ 'athlete.error_no_achievement' | translate }}</ion-card-subtitle>
+            </ion-card-header>
+        </ion-card>
+    </ng-template>
+
+</ion-content>
