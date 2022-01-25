@@ -25,13 +25,16 @@
         </ion-accordion>
     </ion-accordion-group>
 
-    <ion-card>
+    <ion-card *ngIf="events">
         <ion-card-header>
             <ion-card-title>ALL</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-            <ion-item lines="none">
-                <ion-label>Awesome Label</ion-label>
+            <ion-item lines="none" *ngFor="let event of events">
+                <ion-label [routerLink]="['/event', event.id]">{{ event.name + ' ' + (event.alternateName ? event.alternateName : '') + ' - ' + event.location + ' - ' + (event.startDate | date) + ' - ' + (event.endDate | date ) }} </ion-label>
+                <ion-button [routerLink]="['/event', event.id]" expand="block" fill="clear">
+                    {{ 'Megtekintés' | translate}}
+                </ion-button>
             </ion-item>
         </ion-card-content>
     </ion-card>

@@ -6,6 +6,7 @@
                     <ion-icon slot="icon-only" name="menu"></ion-icon>
                 </ion-button>
             </ion-menu-toggle>
+            <ion-back-button *ngIf="withBack" defaultHref="home"></ion-back-button> <!-- FIXME: nem a legszebb így -->
         </ion-buttons>
 
         <ion-item lines="none">

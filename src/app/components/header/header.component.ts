@@ -9,10 +9,11 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent implements OnInit {
   @Input() title: string;
+  @Input() withBack: boolean = false;
 
   constructor(public translate: TranslateService) { 
     translate.use('hu');
-    translate.addLangs(['en', 'hu', 'sr']);
+    translate.addLangs(['hu', 'sr', 'en']);
   }
 
   ngOnInit() { }

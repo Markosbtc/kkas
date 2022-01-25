@@ -1,0 +1,21 @@
+<app-header [title]="id" [withBack]="true"></app-header>
+<ion-content [fullscreen]="true">
+
+    <h1>{{ title }}</h1>
+
+
+    <ion-card *ngIf="event && event.races">
+        <ion-card-header>
+            <ion-card-title>ALL</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item lines="none" *ngFor="let race of event.races">
+                <ion-label> {{ race.number + '. ' + race.boat + ' ' + race.gender + ' ' + race.age + ' ' + race.distance + 'm ' + ( race.progressingScheme? race.progressingScheme : '') }} </ion-label>
+                <ion-button [routerLink]="['/event', event.id]" expand="block" fill="clear">
+                    {{ 'Eredmény' | translate}}
+                </ion-button>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

@@ -8,8 +8,9 @@ import { SplitPaneLayoutPageRoutingModule } from './split-pane-layout-routing.mo
 
 import { SplitPaneLayoutPage } from './split-pane-layout';
 import { TranslateModule } from '@ngx-translate/core';
-import { EventsComponent } from 'src/app/events/events.component';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { EventListComponent } from 'src/app/events/event-list/event-list.component';
+import { EventComponent } from 'src/app/events/event/event.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
   ],
   declarations: [
     SplitPaneLayoutPage,
-    EventsComponent
+    EventListComponent,
+    EventComponent
   ]
 })
 export class SplitPaneLayoutPageModule { }

@@ -10,9 +10,9 @@ export interface Race {
     boat: Boat.BoatType,
     gender: Gender.GenderType,
     age: AgeGroup.AgeGroupType,
-    type: RaceT.RaceType,
+    type?: RaceT.RaceType,
     time: string,
-    day: Date,
+    day?: Date,
     results?: Result[],
     note?: string,
     progressingScheme?: any, //TODO:
