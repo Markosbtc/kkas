@@ -6,13 +6,13 @@
 
     <ion-card *ngIf="event && event.races">
         <ion-card-header>
-            <ion-card-title>ALL</ion-card-title>
+            <ion-card-title>{{ 'event.all' | translate }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
             <ion-item lines="none" *ngFor="let race of event.races">
                 <ion-label> {{ race.number + '. ' + race.boat + ' ' + race.gender + ' ' + race.age + ' ' + race.distance + 'm ' + ( race.progressingScheme? race.progressingScheme : '') }} </ion-label>
                 <ion-button [routerLink]="['/event', event.id]" expand="block" fill="clear">
-                    {{ 'Eredmény' | translate}}
+                    {{ 'event.result' | translate}}
                 </ion-button>
             </ion-item>
         </ion-card-content>

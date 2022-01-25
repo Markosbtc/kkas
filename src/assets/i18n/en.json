@@ -6,7 +6,18 @@
         "TEAMS": "Teams",
         "COMPETITORS": "Competitors",
         "EVENTS": "Events",
-        "HOMEPAGE": "Homepage"
+        "HOMEPAGE": "Homepage",
+        "current": "Ongoing Event",
+        "next": "Upcoming Events"
+    },
+    "event": {
+        "result": "Result",
+        "open": "Open",
+        "filter": "Filter",
+        "filter_event_name": "Name of event",
+        "filter_year": "Year of Organization",
+        "filter_place": "Place of the Event",
+        "all": "Events"
     },
     "event_status_type": {
         "scheduled": "Competition is scheduled.",

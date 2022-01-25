@@ -5,20 +5,20 @@
         <ion-accordion value="filter">
             <!-- toggle-icon="arrow-down-circle"   // inside ion-accordition -->
             <ion-item slot="header">
-                <ion-label>Kereses</ion-label>
+                <ion-label>{{ 'event.filter' | translate}}</ion-label>
             </ion-item>
 
             <ion-list slot="content">
                 <ion-item>
-                    <ion-label>Verseny neve</ion-label>
+                    <ion-label>{{ 'event.filter_event_name' | translate }}</ion-label>
                     <ion-input></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Megrendzés éve</ion-label>
+                    <ion-label>{{ 'event.filter_year' | translate }}</ion-label>
                     <ion-input></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Verseny helyszíne</ion-label>
+                    <ion-label>{{ 'event.filter_place' | translate }}</ion-label>
                     <ion-input></ion-input>
                 </ion-item>
             </ion-list>
@@ -27,13 +27,13 @@
 
     <ion-card *ngIf="events">
         <ion-card-header>
-            <ion-card-title>ALL</ion-card-title>
+            <ion-card-title>{{ 'event.all' | translate }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
             <ion-item lines="none" *ngFor="let event of events">
                 <ion-label [routerLink]="['/event', event.id]">{{ event.name + ' ' + (event.alternateName ? event.alternateName : '') + ' - ' + event.location + ' - ' + (event.startDate | date) + ' - ' + (event.endDate | date ) }} </ion-label>
                 <ion-button [routerLink]="['/event', event.id]" expand="block" fill="clear">
-                    {{ 'Megtekintés' | translate}}
+                    {{ 'event.open' | translate}}
                 </ion-button>
             </ion-item>
         </ion-card-content>

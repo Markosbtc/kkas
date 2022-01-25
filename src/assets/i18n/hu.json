@@ -1,9 +1,28 @@
 {
-    "LABELS": "label-ek",
-    "TITLE": "KKAS",
-    "SUBTITLE": "Kajak-Kenu Adminisztrációs Rendszer",
-    "TEAMS": "Egyesületek",
-    "COMPETITORS": "Versenyzők",
-    "EVENTS": "Versenyek",
-    "HOMEPAGE": "Főoldal"
+    "home": {
+        "LABELS": "label-ek",
+        "TITLE": "KKAS",
+        "SUBTITLE": "Kajak-Kenu Adminisztrációs Rendszer",
+        "TEAMS": "Egyesületek",
+        "COMPETITORS": "Versenyzők",
+        "EVENTS": "Versenyek",
+        "HOMEPAGE": "Főoldal",
+        "current": "Jelenleg zajló esemény",
+        "next": "Következő események"
+    },
+    "event": {
+        "result": "Eredmény",
+        "open": "Megtekintés",
+        "filter": "Keresés",
+        "filter_event_name": "Esemény neve",
+        "filter_year": "Megrendezés éve",
+        "filter_place": "Helyszín",
+        "all": "Összes"
+    },
+    "event_status_type": {
+        "scheduled": "Competition is scheduled.",
+        "postponed": "Competition will be postponed without being rescheduled yet.",
+        "rescheduled": "Competition is rescheduled.",
+        "cancelled": "Competition will not take place (suspended, cancelled)"
+    }
 }

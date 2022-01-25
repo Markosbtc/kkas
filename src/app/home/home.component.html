@@ -1,9 +1,9 @@
-<app-header [title]="'HOMEPAGE'"></app-header>
+<app-header [title]="'home.HOMEPAGE'"></app-header>
 <ion-content [fullscreen]="true">
 
     <ion-card>
         <ion-card-header>
-            <ion-card-title>Jelenlegi verseny</ion-card-title>
+            <ion-card-title>{{ 'home.current' | translate }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
             <ion-item lines="none">
@@ -14,7 +14,7 @@
 
     <ion-card>
         <ion-card-header>
-            <ion-card-title>Következő események</ion-card-title>
+            <ion-card-title>{{ 'home.next' | translate }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
             <ion-item lines="none">

@@ -8,10 +8,10 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SplitPaneLayoutPage implements OnInit {
   public appPages = [
-    { title: 'HOMEPAGE', url: '/home', icon: 'home' },
-    { title: 'EVENTS', url: '/events', icon: 'play' },
-    { title: 'COMPETITORS', url: '/folder/Favorites', icon: 'people' },
-    { title: 'TEAMS', url: '/folder/Archived', icon: 'bookmarks' },
+    { title: 'home.HOMEPAGE', url: '/home', icon: 'home' },
+    { title: 'home.EVENTS', url: '/events', icon: 'play' },
+    { title: 'home.COMPETITORS', url: '/folder/Favorites', icon: 'people' },
+    { title: 'home.TEAMS', url: '/folder/Archived', icon: 'bookmarks' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
