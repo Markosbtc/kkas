@@ -1,0 +1,42 @@
+<app-header [title]="'home.TEAMS'"></app-header>
+<ion-content [fullscreen]="true">
+
+    <ion-accordion-group expand="inset">
+        <ion-accordion value="filter" toggle-icon="filter">
+            <ion-item slot="header">
+                <ion-label>{{ 'shared.filter' | translate}}</ion-label>
+            </ion-item>
+
+            <ion-list slot="content">
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="teamName" placeholder="" animated="true">
+                    <ion-label class="ion-margin">{{ 'teams.filter_name' | translate }}</ion-label>
+                </ion-searchbar>
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="teamPlace" placeholder="" animated="true">
+                    <ion-label class="ion-margin">{{ 'teams.filter_place' | translate }}</ion-label>
+                </ion-searchbar>
+            </ion-list>
+        </ion-accordion>
+    </ion-accordion-group>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>{{ 'teams.all' | translate }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content *ngIf="teams && teams.length > 0; else noTeams">
+            <ion-item lines="none" *ngFor="let team of teams" [routerLink]="['/athletes']" [state]="{ data: { team }}">
+                <ion-label>{{ team.name }} </ion-label>
+                <ion-label>{{ (team.alternateName ? team.alternateName : '') }} </ion-label>
+                <ion-button [routerLink]="['/athletes']" expand="block" fill="clear">
+                    {{ 'athlete.all' | translate}}
+                </ion-button>
+            </ion-item>
+        </ion-card-content>
+
+        <ng-template #noTeams>
+            <ion-card-header>
+                <ion-card-subtitle>{{ 'teams.no_teams' | translate }}</ion-card-subtitle>
+            </ion-card-header>
+        </ng-template>
+    </ion-card>
+
+</ion-content>

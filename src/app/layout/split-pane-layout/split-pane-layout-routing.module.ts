@@ -5,6 +5,7 @@ import { AthleteComponent } from 'src/app/athletes/athlete/athlete.component';
 import { EventListComponent } from 'src/app/events/event-list/event-list.component';
 import { EventComponent } from 'src/app/events/event/event.component';
 import { AuthGuard } from 'src/app/shared/guard/auth.guard';
+import { TeamsComponent } from 'src/app/teams/teams.component';
 
 const routes: Routes = [
   // TODO: AuthGuard where needed
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'athlete/:id',
     component: AthleteComponent
+  },
+  {
+    path: 'teams',
+    component: TeamsComponent
   },
   {
     path: 'folder/:id',

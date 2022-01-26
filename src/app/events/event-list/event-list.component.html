@@ -38,11 +38,9 @@
         </ion-card-content>
 
         <ng-template #noEvent>
-            <ion-card-content>
-                <ion-item lines="none">
-                    <ion-label>{{ 'event.no_event' | translate }} </ion-label>
-                </ion-item>
-            </ion-card-content>
+            <ion-card-header>
+                <ion-card-subtitle>{{ 'event.no_event' | translate }}</ion-card-subtitle>
+            </ion-card-header>
         </ng-template>
     </ion-card>
 

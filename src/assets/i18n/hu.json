@@ -43,5 +43,16 @@
         "no_athlete": "Nincs megjeleníthető versenyző az adatbázisban",
         "error": "Nem megjeleníthető a versenyző",
         "error_no_achievement": "Nincs megjelíthető eredmény"
+    },
+    "teams": {
+        "filter_name": "Egyesület neve",
+        "filter_place": "Település",
+        "no_teams": "Nincs megjeleníthető egyesület az adatbázisban",
+        "all": "Egyesületek"
+    },
+    "gender": {
+        "male": "Férfi",
+        "female": "Nő",
+        "all": "Összes"
     }
 }

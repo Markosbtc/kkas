@@ -10,7 +10,7 @@ export class SplitPaneLayoutPage implements OnInit {
     { title: 'home.HOMEPAGE', url: '/home', icon: 'home' },
     { title: 'home.EVENTS', url: '/events', icon: 'play' },
     { title: 'home.COMPETITORS', url: '/athletes', icon: 'people' },
-    { title: 'home.TEAMS', url: '/folder/Archived', icon: 'bookmarks' },
+    { title: 'home.TEAMS', url: '/teams', icon: 'bookmarks' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 

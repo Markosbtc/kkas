@@ -1,18 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { IonAccordionGroup } from '@ionic/angular';
 import { Athlete } from 'src/app/shared/models/athlete';
 import { Gender } from 'src/app/shared/models/person';
+import { SportsTeam } from 'src/app/shared/models/sportsTeam';
 
 @Component({
   selector: 'app-athlete-list',
   templateUrl: './athlete-list.component.html',
   styleUrls: ['./athlete-list.component.scss'],
 })
-export class AthleteListComponent implements OnInit {
+export class AthleteListComponent implements OnInit, AfterViewInit {
   athletes: Athlete[] = [];
+  team: SportsTeam;
+  athleteName: string;
+  teamName: string;
+  year: number;
+
+  @ViewChild(IonAccordionGroup) accordionGroup: IonAccordionGroup;
 
   constructor() { }
 
   ngOnInit() {
+    // --
     this.athletes.push(
       {
         id: "athletes uinque id",
@@ -61,6 +70,16 @@ export class AthleteListComponent implements OnInit {
         //achievements?: Achievement[]
       }
     );
+    // --
+
+  }
+
+  ngAfterViewInit(): void {
+    if (history.state.data) {
+      this.team = history.state.data.team;
+      this.accordionGroup.value = "filter";
+      this.teamName = this.team.name;
+    }    
   }
 
 }

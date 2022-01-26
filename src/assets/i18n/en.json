@@ -43,5 +43,16 @@
         "no_athlete": "No athletes found in the database",
         "error": "There was an error displaying the athlete",
         "error_no_achievement": "There are no achievements to display"
+    },
+    "teams": {
+        "filter_name": "Name",
+        "filter_place": "City",
+        "no_teams": "No registered teams found in the database",
+        "all": "Sport Teams"
+    },
+    "gender": {
+        "male": "Male",
+        "female": "Female",
+        "all": "All"
     }
 }

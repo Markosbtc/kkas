@@ -1,28 +1,32 @@
 <app-header [title]="'home.COMPETITORS'"></app-header>
 <ion-content [fullscreen]="true">
 
-    <ion-accordion-group>
+    <ion-accordion-group expand="inset">
         <ion-accordion value="filter" toggle-icon="filter">
             <ion-item slot="header">
                 <ion-label>{{ 'shared.filter' | translate}}</ion-label>
             </ion-item>
 
             <ion-list slot="content">
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="athleteName" placeholder="" animated="true">
+                    <ion-label class="ion-margin">{{ 'athlete.filter_name' | translate }}</ion-label>
+                </ion-searchbar>
+
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="year" placeholder="" animated="true">
+                    <ion-label class="ion-margin">{{ 'athlete.filter_age' | translate }}</ion-label>
+                </ion-searchbar>
+
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="teamName" placeholder="" animated="true">
+                    <ion-label class="ion-margin">{{ 'athlete.filter_team' | translate }}</ion-label>
+                </ion-searchbar>
+
                 <ion-item>
-                    <ion-label>{{ 'athlete.filter_name' | translate }}</ion-label>
-                    <ion-input></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label>{{ 'athlete.filter_age' | translate }}</ion-label>
-                    <ion-input></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label>{{ 'athlete.filter_team' | translate }}</ion-label>
-                    <ion-input></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label>{{ 'athlete.filter_gender' | translate }}</ion-label>
-                    <ion-input></ion-input>
+                    <ion-label class="ion-margin">{{ 'athlete.filter_gender' | translate }}</ion-label>
+                    <ion-select interface="popover">
+                        <ion-select-option value="all">{{ 'gender.all' | translate }}</ion-select-option>
+                        <ion-select-option value="male">{{ 'gender.male' | translate }}</ion-select-option>
+                        <ion-select-option value="female">{{ 'gender.female' | translate }}</ion-select-option>
+                    </ion-select>
                 </ion-item>
             </ion-list>
         </ion-accordion>
@@ -40,11 +44,9 @@
         </ion-card-content>
 
         <ng-template #noAthlete>
-            <ion-card-content>
-                <ion-item lines="none">
-                    <ion-label>{{ 'athlete.no_athlete' | translate }} </ion-label>
-                </ion-item>
-            </ion-card-content>
+            <ion-card-header>
+                <ion-card-subtitle>{{ 'athlete.no_athlete' | translate }}</ion-card-subtitle>
+            </ion-card-header>
         </ng-template>
     </ion-card>
 
