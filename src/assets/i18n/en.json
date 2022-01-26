@@ -31,6 +31,7 @@
     },
     "athlete": {
         "filter_name": "Name",
+        "filter_age": "Birth Year",
         "filter_team": "Sports Team",
         "filter_gender": "Gender",
         "filter_placement": "Placement",

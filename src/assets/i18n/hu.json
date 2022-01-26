@@ -31,6 +31,7 @@
     },
     "athlete": {
         "filter_name": "Versenyző neve",
+        "filter_age": "Születési év",
         "filter_team": "Tagszervezet",
         "filter_gender": "Versenyző neme",
         "filter_placement": "Elért helyezés",

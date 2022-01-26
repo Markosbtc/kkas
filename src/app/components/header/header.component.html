@@ -1,12 +1,14 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-menu-toggle autoHide="false">
+            <ion-menu-toggle autoHide="false" *ngIf="!withBack; else back">
                 <ion-button (click)="toggleMenu()">
                     <ion-icon slot="icon-only" name="menu"></ion-icon>
                 </ion-button>
             </ion-menu-toggle>
-            <ion-back-button *ngIf="withBack" defaultHref="home"></ion-back-button> <!-- FIXME: nem a legszebb így -->
+            <ng-template #back>
+                <ion-back-button defaultHref="home"></ion-back-button>
+            </ng-template>
         </ion-buttons>
 
         <ion-item lines="none">
