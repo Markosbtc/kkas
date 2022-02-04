@@ -15,6 +15,7 @@ export class EventComponent implements OnInit {
   id: string;
   title: string;
   event: Event;
+  eventTeam: string;
 
   constructor(
     private route: ActivatedRoute,

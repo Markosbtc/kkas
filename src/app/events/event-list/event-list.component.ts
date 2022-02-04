@@ -8,6 +8,9 @@ import { Event, EventCategory, EventStatus } from 'src/app/shared/models/event';
 })
 export class EventListComponent implements OnInit {
   events: Event[] = [];
+  eventName: string;
+  eventPlace: string;
+  eventYear; //TODO: type? Date/string/number?
 
   constructor() { }
 

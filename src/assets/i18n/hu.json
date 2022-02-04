@@ -20,7 +20,14 @@
         "filter_event_name": "Esemény neve",
         "filter_year": "Megrendezés éve",
         "filter_place": "Helyszín",
+        "filter_type": "Verseny típusa",
+        "filter_boat": "Hajó",
+        "filter_team": "Tagszervezet",
+        "filter_gender": "Versenyző neme",
+        "filter_age": "Korosztály",
+        "filter_distance": "Táv",
         "all": "Összes",
+        "all_races": "Összes futam",
         "no_event": "Nincs megjeleníthető esemény az adatbázisban"
     },
     "event_status_type": {

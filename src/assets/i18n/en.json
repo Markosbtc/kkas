@@ -17,10 +17,17 @@
     },
     "event": {
         "result": "Result",
-        "filter_event_name": "Name of event",
+        "filter_event_name": "Name of Event",
         "filter_year": "Year of Organization",
         "filter_place": "Place of the Event",
+        "filter_type": "Type of the Event",
+        "filter_boat": "Boat",
+        "filter_team": "Sports Team",
+        "filter_gender": "Gender",
+        "filter_age": "Category",
+        "filter_distance": "Distance",
         "all": "Events",
+        "all_races": "Races",
         "no_event": "No events found in the database"
     },
     "event_status_type": {

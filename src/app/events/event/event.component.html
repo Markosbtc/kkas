@@ -1,9 +1,55 @@
 <app-header [title]="title" [withBack]="true"></app-header>
 <ion-content [fullscreen]="true">
 
+    <ion-accordion-group expand="inset">
+        <ion-accordion value="filter" toggle-icon="filter">
+            <ion-item slot="header">
+                <ion-label>{{ 'shared.filter' | translate}}</ion-label>
+            </ion-item>
+
+            <ion-list slot="content">
+                <ion-item>
+                    <ion-label class="ion-margin">{{ 'event.filter_boat' | translate }}</ion-label>
+                    <ion-select interface="popover">
+                        <ion-select-option value="all">{{ 'gender.all' | translate }}</ion-select-option>
+                        <ion-select-option value="male">{{ 'gender.male' | translate }}</ion-select-option>
+                        <ion-select-option value="female">{{ 'gender.female' | translate }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label class="ion-margin">{{ 'event.filter_age' | translate }}</ion-label>
+                    <ion-select interface="popover">
+                        <ion-select-option value="all">{{ 'gender.all' | translate }}</ion-select-option>
+                        <ion-select-option value="male">{{ 'gender.male' | translate }}</ion-select-option>
+                        <ion-select-option value="female">{{ 'gender.female' | translate }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label class="ion-margin">{{ 'event.filter_distance' | translate }}</ion-label>
+                    <ion-select interface="popover">
+                        <ion-select-option value="all">{{ 'gender.all' | translate }}</ion-select-option>
+                        <ion-select-option value="male">{{ 'gender.male' | translate }}</ion-select-option>
+                        <ion-select-option value="female">{{ 'gender.female' | translate }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label class="ion-margin">{{ 'event.filter_gender' | translate }}</ion-label>
+                    <ion-select interface="popover">
+                        <ion-select-option value="all">{{ 'gender.all' | translate }}</ion-select-option>
+                        <ion-select-option value="male">{{ 'gender.male' | translate }}</ion-select-option>
+                        <ion-select-option value="female">{{ 'gender.female' | translate }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="eventTeam" placeholder="" animated="true">
+                    <ion-label class="ion-margin">{{ 'event.filter_team' | translate }}</ion-label>
+                </ion-searchbar>
+            </ion-list>
+        </ion-accordion>
+    </ion-accordion-group>
+
     <ion-card *ngIf="event && event.races">
         <ion-card-header>
-            <ion-card-title>{{ 'event.all' | translate }}</ion-card-title>
+            <ion-card-title>{{ 'event.all_races' | translate }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
             <ion-item lines="none" *ngFor="let race of event.races">
