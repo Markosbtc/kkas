@@ -20,6 +20,20 @@
                     </ion-select-option>
                 </ion-select>
             </ion-button>
+
+            <!-- FIXME: nicer language changer button -->
+            <!-- <ion-fab-button show="true" size="small" slot="end" color="secondary">
+                <ion-icon name="language"></ion-icon>
+            </ion-fab-button>
+
+            <ion-fab-button show="true" size="small" slot="end" color="secondary">
+                <ion-icon name="language"></ion-icon>
+                <ion-select selectedText=" " interface="popover" (ionChange)="switchLang($event)">
+                    <ion-select-option *ngFor="let language of translate.getLangs()" [value]="language">{{ language }}
+                    </ion-select-option>
+                </ion-select>
+            </ion-fab-button> -->
+
         </ion-item>
 
     </ion-toolbar>
