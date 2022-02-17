@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Event, EventCategory, EventStatus } from 'src/app/shared/models/event';
+import { Event } from 'src/app/shared/models/event';
 import { Gender } from 'src/app/shared/models/person';
-import { AgeGroup, Boat, Distance, RaceT } from 'src/app/shared/models/race';
+import { AgeGroup, Boat, Distance, Race, RaceT } from 'src/app/shared/models/race';
 import { ResultStatus } from 'src/app/shared/models/result';
 import { Athlete } from 'src/app/shared/models/athlete';
+import { ModalController } from '@ionic/angular';
+import { ResultComponent } from '../result/result.component';
 
 @Component({
   selector: 'app-event',
@@ -13,39 +15,25 @@ import { Athlete } from 'src/app/shared/models/athlete';
 })
 export class EventComponent implements OnInit {
   id: string;
-  title: string;
+  title: string = "";
   event: Event;
   eventTeam: string;
 
   constructor(
     private route: ActivatedRoute,
+    public modalController: ModalController
   ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
-    this.title = this.id; //TODO: get event by id and assign event name to title
 
-    // --
-    this.event = {
-      id: 'eventId',
-      name: 'Otvoreno prvenstvo Srbije',
-      alternateName: 'string',
-      description: 'description lorem ipsunn asd asa',
-      location: 'Ada Ciganlija',
-      url: 'urlofevent',
-      startDate: new Date(),
-      endDate: new Date(new Date().setDate(new Date().getDate() + 1)),
-      eventStatus: EventStatus.EventStatusType.scheduled,
-      organizer: {
-        name: 'KSS',
-        address: 'Ada Cigalnija 13'
-      },
-      /* participation?: {
-        teams: SportsTeam[],
-        athletes: Athlete[],
-      }, */
-      eventCategory: EventCategory.EventCategoryType.national,
-      races: [
+    if (history.state.data) {
+      this.event = history.state.data.event;
+      this.title = history.state.data.event.name;
+
+
+      // -- FIXME: delete this part
+      this.event.races = [
         {
           id: 'race id string',
           eventId: 'eventId',
@@ -64,6 +52,12 @@ export class EventComponent implements OnInit {
               created: new Date(),
               modified: new Date(),
               competitor: {
+                name: {
+                  familyName: 'string',
+                  givenName: 'string',
+                  //fullName?: string
+                },
+                gender: 'male',
                 /* height?: number,
                 weight?: number,
                 coach?: Coach[], */
@@ -89,10 +83,35 @@ export class EventComponent implements OnInit {
            finishReferee?: Referee[],
            referee?: Referee[], */
         }
-      ],
-    }
+      ]
+      // --
 
-    // -- 
+    } else {
+      // TODO: this.event = valamiService.getEventById(this.id);
+      // TODO: get event by id and assign event name to title
+    }
   }
+
+  async presentModal(race: Race) {
+    const modal = await this.modalController.create({
+      component: ResultComponent,
+      componentProps: { race: race },
+      // presentingElement?: HTMLElement,
+      // showBackdrop?: boolean,
+      // backdropDismiss?: boolean,
+      cssClass: 'modal'
+      // animated?: boolean,
+      // swipeToClose?: boolean,
+
+      // mode?: 'ios' | 'md',
+      // keyboardClose?: boolean,
+      // id?: string,
+
+      // enterAnimation?: AnimationBuilder,
+      // leaveAnimation?: AnimationBuilder
+    });
+    return await modal.present();
+  }
+
 
 }

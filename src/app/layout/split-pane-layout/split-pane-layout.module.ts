@@ -14,6 +14,7 @@ import { EventComponent } from 'src/app/events/event/event.component';
 import { AthleteListComponent } from 'src/app/athletes/athlete-list/athlete-list.component';
 import { AthleteComponent } from 'src/app/athletes/athlete/athlete.component';
 import { TeamsComponent } from 'src/app/teams/teams.component';
+import { ResultComponent } from 'src/app/events/result/result.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { TeamsComponent } from 'src/app/teams/teams.component';
     EventComponent,
     AthleteListComponent,
     AthleteComponent,
-    TeamsComponent
+    TeamsComponent,
+    ResultComponent
   ]
 })
 export class SplitPaneLayoutPageModule { }

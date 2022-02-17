@@ -61,5 +61,17 @@
         "male": "Férfi",
         "female": "Nő",
         "all": "Összes"
-    }
+    },
+    "result": {
+        "result": "Eredmény",
+        "team": "Tagszervezet",
+        "competitor": "Versenyző",
+        "lane": "Pálya"
+    },
+    "qualification": "Elődöntő",
+    "semifinal": "Középdöntő",
+    "final": "Döntő",
+    "final A": "A Döntő",
+    "final B": "B Döntő",
+    "final C": "C Döntő"
 }

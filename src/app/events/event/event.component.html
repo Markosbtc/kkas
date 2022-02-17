@@ -52,9 +52,9 @@
             <ion-card-title>{{ 'event.all_races' | translate }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-            <ion-item lines="none" *ngFor="let race of event.races">
-                <ion-label> {{ race.number + '. ' + race.boat + ' ' + race.gender + ' ' + race.age + ' ' + race.distance + 'm ' + ( race.progressingScheme? race.progressingScheme : '') }} </ion-label>
-                <ion-button [routerLink]="['/event', event.id]" expand="block" fill="clear">
+            <ion-item lines="none" *ngFor="let race of event.races" [routerLink]="['.']">
+                <ion-label (click)="presentModal(race)"> {{ race.number + '. ' + race.boat + ' ' + race.gender + ' ' + race.age + ' ' + race.distance + 'm ' | titlecase}} </ion-label>
+                <ion-button expand="block" fill="clear" (click)="presentModal(race)">
                     {{ 'event.result' | translate}}
                 </ion-button>
             </ion-item>

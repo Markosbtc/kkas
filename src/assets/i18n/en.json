@@ -61,5 +61,18 @@
         "male": "Male",
         "female": "Female",
         "all": "All"
-    }
+    },
+    "result": {
+        "result": "Time",
+        "team": "Team",
+        "competitor": "Competitor",
+        "lane": "Lane"
+    },
+    "qualification": "Qualification",
+    "semifinal": "Semifinal",
+    "final": "Final",
+    "final A": "Final A",
+    "final B": "Final B",
+    "final C": "Final C"
+
 }

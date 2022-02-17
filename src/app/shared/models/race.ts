@@ -15,10 +15,11 @@ export interface Race {
     day?: Date,
     results?: Result[],
     note?: string,
-    progressingScheme?: any, //TODO:
+    progressingScheme?: string, //TODO: first 3 to FA ...
     startReferee?: Referee[],
     finishReferee?: Referee[],
     referee?: Referee[],
+    connectedRaces?: string[]
 }
 
 export namespace Distance {
@@ -45,11 +46,14 @@ export namespace AgeGroup {
 
 //TODO: 
 export namespace RaceT {
-    export type RaceType = 'qualification' | 'semifinal' | 'final';
+    export type RaceType = 'qualification' | 'semifinal' | 'final' | 'final A' | 'final B' | 'final C';
     export const RaceType = {
         qualification: 'qualification' as RaceType,
         semifinal: 'semifinal' as RaceType,
-        final: 'final' as RaceType
+        final: 'final' as RaceType,
+        finalA: 'final A' as RaceType,
+        finalB: 'final B' as RaceType,
+        finalC: 'final C' as RaceType
     };
 }
 

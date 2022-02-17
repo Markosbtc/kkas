@@ -16,10 +16,14 @@
                 <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="eventPlace" placeholder="" animated="true">
                     <ion-label class="ion-margin">{{ 'event.filter_place' | translate }}</ion-label>
                 </ion-searchbar>
-                <!-- verseny típusa := országos...
-                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="eventType" placeholder="" animated="true">
+                <ion-item>
                     <ion-label class="ion-margin">{{ 'event.filter_type' | translate }}</ion-label>
-                </ion-searchbar> -->
+                    <ion-select interface="popover">
+                        <ion-select-option value="all">{{ 'gender.all' | translate }}</ion-select-option>
+                        <ion-select-option value="male">{{ 'gender.male' | translate }}</ion-select-option>
+                        <ion-select-option value="female">{{ 'gender.female' | translate }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
             </ion-list>
         </ion-accordion>
     </ion-accordion-group>
@@ -29,9 +33,9 @@
             <ion-card-title>{{ 'event.all' | translate }}</ion-card-title>
         </ion-card-header>
         <ion-card-content *ngIf="events && events.length > 0; else noEvent">
-            <ion-item lines="none" *ngFor="let event of events" [routerLink]="['/event', event.id]">
+            <ion-item lines="none" *ngFor="let event of events" [routerLink]="['/event', event.id]" [state]="{ data: { event }}">
                 <ion-label>{{ event.name + ' ' + (event.alternateName ? event.alternateName : '') + ' - ' + event.location + ' - ' + (event.startDate | date) + ' - ' + (event.endDate | date ) }} </ion-label>
-                <ion-button [routerLink]="['/event', event.id]" expand="block" fill="clear">
+                <ion-button [routerLink]="['/event', event.id]" expand="block" fill="clear" [state]="{ data: { event }}">
                     {{ 'shared.open' | translate}}
                 </ion-button>
             </ion-item>

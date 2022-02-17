@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ResultComponent } from './events/result/result.component'; //
 import { SplitPaneLayoutPage } from './layout/split-pane-layout/split-pane-layout';
 
 const routes: Routes = [
@@ -27,7 +28,13 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterPageModule)
-  }
+  },
+  //FIXME: delete this: --
+  {
+    path: 'res',
+    component: ResultComponent
+  },
+  //--
 
 ];
 
