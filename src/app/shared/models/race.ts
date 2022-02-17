@@ -14,6 +14,7 @@ export interface Race {
     time: string,
     day?: Date,
     results?: Result[],
+    resultStatus: ResultStatus.ResultStatusType,
     note?: string,
     progressingScheme?: string, //TODO: first 3 to FA ...
     startReferee?: Referee[],
@@ -64,6 +65,15 @@ export namespace Boat {
     export const BoatType = {
         k1: 'k1' as BoatType,
         k2: 'k2' as BoatType,
+    };
+}
+
+export namespace ResultStatus {
+    export type ResultStatusType = 'startlist' | 'official' | 'unofficial';
+    export const ResultStatusType = {
+        startlist: 'startlist' as ResultStatusType,
+        official: 'official' as ResultStatusType,
+        unofficial: 'unofficial' as ResultStatusType,
     };
 }
 

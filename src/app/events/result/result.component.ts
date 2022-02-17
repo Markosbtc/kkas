@@ -3,8 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { Athlete } from 'src/app/shared/models/athlete';
 import { Event } from 'src/app/shared/models/event';
 import { Gender } from 'src/app/shared/models/person';
-import { AgeGroup, Boat, Distance, Race, RaceT } from 'src/app/shared/models/race';
-import { ResultStatus } from 'src/app/shared/models/result';
+import { AgeGroup, Boat, Distance, Race, RaceT, ResultStatus } from 'src/app/shared/models/race';
 
 @Component({
   selector: 'app-result',
@@ -14,7 +13,7 @@ import { ResultStatus } from 'src/app/shared/models/result';
 export class ResultComponent implements OnInit {
   @Input() race: Race;
 
-
+  racenb: number;
   event: Event;
 
   constructor(
@@ -35,6 +34,7 @@ export class ResultComponent implements OnInit {
       type: RaceT.RaceType.final,
       time: '11:55',
       //day: new Date(),
+      resultStatus: ResultStatus.ResultStatusType.official,
       results: [
         {
           id: 'result id',
@@ -59,7 +59,6 @@ export class ResultComponent implements OnInit {
             },
             // achievements?: Achievement[]
           } as Athlete,
-          resultStatus: ResultStatus.ResultStatusType.official,
           lane: 3,
           rank: 1,
           performance: '3:35',
@@ -82,7 +81,6 @@ export class ResultComponent implements OnInit {
               alternateName: 'TSC',
             },
           } as Athlete,
-          resultStatus: ResultStatus.ResultStatusType.official,
           lane: 5,
           rank: 2,
           performance: '3:37',
@@ -98,8 +96,8 @@ export class ResultComponent implements OnInit {
     console.log(this.race);
     //--
 
+    this.racenb = this.race.number;
     this.getEvent()
-
 
   }
 
@@ -109,6 +107,19 @@ export class ResultComponent implements OnInit {
 
   close() {
     this.modalController.dismiss();
+  }
+
+  nextRace() {
+
+  }
+
+  previousRace() {
+
+  }
+
+  searchRace(){
+    console.log(this.racenb);
+    
   }
 
 }

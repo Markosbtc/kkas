@@ -66,13 +66,21 @@
         "result": "Time",
         "team": "Team",
         "competitor": "Competitor",
-        "lane": "Lane"
+        "lane": "Lane",
+        "connected_races": "Linked races",
+        "referee": "Referee",
+        "start_referee": "Start Referee",
+        "finish_referee": "Finish referee",
+        "note": "Note"
     },
     "qualification": "Qualification",
     "semifinal": "Semifinal",
     "final": "Final",
     "final A": "Final A",
     "final B": "Final B",
-    "final C": "Final C"
+    "final C": "Final C",
+    "startlist": "Startlist",
+    "official": "Official",
+    "unofficial": "Unofficial"
 
 }

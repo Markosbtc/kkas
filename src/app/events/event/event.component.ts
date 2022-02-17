@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Event } from 'src/app/shared/models/event';
 import { Gender } from 'src/app/shared/models/person';
-import { AgeGroup, Boat, Distance, Race, RaceT } from 'src/app/shared/models/race';
-import { ResultStatus } from 'src/app/shared/models/result';
+import { AgeGroup, Boat, Distance, Race, RaceT, ResultStatus } from 'src/app/shared/models/race';
 import { Athlete } from 'src/app/shared/models/athlete';
 import { ModalController } from '@ionic/angular';
 import { ResultComponent } from '../result/result.component';
@@ -45,6 +44,7 @@ export class EventComponent implements OnInit {
           type: RaceT.RaceType.final,
           time: '11:55',
           //day: new Date(),
+          resultStatus: ResultStatus.ResultStatusType.official,
           results: [
             {
               id: 'result id',
@@ -69,7 +69,6 @@ export class EventComponent implements OnInit {
                 },
                 // achievements?: Achievement[]
               } as Athlete,
-              resultStatus: ResultStatus.ResultStatusType.official,
               lane: 3,
               rank: 1,
               performance: '3:35',

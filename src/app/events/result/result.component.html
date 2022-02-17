@@ -4,10 +4,10 @@
         <ion-fab-button color="dark" size="small" (click)="close()">
             <ion-icon name="close"></ion-icon>
         </ion-fab-button>
-        <ion-fab-button color="dark" size="small" (click)="g()">
+        <ion-fab-button color="dark" size="small" (click)="nextRace()">
             <ion-icon name="caret-forward"></ion-icon>
         </ion-fab-button>
-        <ion-fab-button color="dark" size="small" (click)="g()">
+        <ion-fab-button color="dark" size="small" (click)="previousRace()">
             <ion-icon name="caret-back"></ion-icon>
         </ion-fab-button>
     </ion-fab-list>
@@ -15,12 +15,19 @@
 
 <ion-card>
     <ion-card-header>
-        <ion-card-title>{{ event?.name + ' ' + (event?.alternateName ? event?.alternateName : '') | titlecase }}</ion-card-title>
-        <ion-card-subtitle>{{ event?.location + ', ' + (event?.startDate | date) + ' - ' + (event?.endDate | date ) }}</ion-card-subtitle>
+        <ion-card-title>
+            <ion-input align="center" [(ngModel)]="racenb" type="number" (keyup.enter)="searchRace()"></ion-input>
+            <ng-container *ngIf="event">
+                {{ event?.name + ' ' + (event?.alternateName ? event?.alternateName : '') | titlecase }}
+            </ng-container>
+        </ion-card-title>
+        <ion-card-subtitle *ngIf="event">{{ event?.location + ', ' + (event?.startDate | date) + ' - ' + (event?.endDate | date ) }}
+        </ion-card-subtitle>
     </ion-card-header>
     <ion-card-header>
         <ion-card-title>{{ race.boat + ' ' + race.gender + ' ' + race.age + ' ' + race.distance + 'm ' + ( race.type? race.type : '') + ' (' + race.time + ')' | titlecase }}</ion-card-title>
         <ion-card-subtitle>{{ (race.type? race.type : ' ') | translate }}</ion-card-subtitle>
+        <ion-card-subtitle>{{ (race.resultStatus? race.resultStatus : ' ') | translate }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content *ngIf="race; else noData">
         <ion-grid>
@@ -58,6 +65,35 @@
                     <ion-label>{{ r.performance }} </ion-label>
                 </ion-col>
             </ion-row>
+            <ion-row>
+                <ion-col size="12"></ion-col>
+            </ion-row>
+            <ion-row *ngIf="race.progressingScheme">
+                <ion-col size="12" class="ion-text-center"> {{ race.progressingScheme }} </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-center" *ngIf="race.connectedRaces">
+                <ion-col> {{'result.connected_races' | translate }}: </ion-col>
+                <ion-col *ngFor="let race of race.connectedRaces">
+                    <a href="."> {{ race }} </a>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="race.note">
+                <ion-col> {{ 'result.note' | translate }} </ion-col>
+                <ion-col> {{ race.note }} </ion-col>
+            </ion-row>
+            <ion-row *ngIf="race.referee">
+                <ion-col> {{ 'result.referee' | translate }} </ion-col>
+                <ion-col *ngFor="let ref of race.referee"> {{ ref.name.familyName + ' ' + ref.name.givenName }} </ion-col>
+            </ion-row>
+            <ion-row *ngIf="race.startReferee">
+                <ion-col> {{ 'result.start_referee' | translate }} </ion-col>
+                <ion-col *ngFor="let ref of race.startReferee"> {{ ref.name.familyName + ' ' + ref.name.givenName }} </ion-col>
+            </ion-row>
+            <ion-row *ngIf="race.finishReferee">
+                <ion-col> {{ 'result.finish_referee' | translate }} </ion-col>
+                <ion-col *ngFor="let ref of race.finishReferee"> {{ ref.name.familyName + ' ' + ref.name.givenName }} </ion-col>
+            </ion-row>
+
         </ion-grid>
     </ion-card-content>
 

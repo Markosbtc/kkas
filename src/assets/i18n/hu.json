@@ -66,12 +66,20 @@
         "result": "Eredmény",
         "team": "Tagszervezet",
         "competitor": "Versenyző",
-        "lane": "Pálya"
+        "lane": "Pálya",
+        "connected_races": "Kapcsolódó futamok",
+        "referee": "Bíró",
+        "start_referee": "Indítóbíró",
+        "finish_referee": "Célbíró",
+        "note": "Megjegyzés"
     },
     "qualification": "Elődöntő",
     "semifinal": "Középdöntő",
     "final": "Döntő",
     "final A": "A Döntő",
     "final B": "B Döntő",
-    "final C": "C Döntő"
+    "final C": "C Döntő",
+    "startlist": "Rajtlista",
+    "official": "Hivatalos",
+    "unofficial": "Nem-hivatalos"
 }
