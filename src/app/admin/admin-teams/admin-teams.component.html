@@ -11,36 +11,28 @@
                 <ion-item lines="none">
                     <ion-label position="floating">{{ 'form.label_name' | translate }}</ion-label>
                     <ion-input formControlName="name" type="text" placeholder="{{ 'form.placeholder_name' | translate }}" required></ion-input>
-                    <span *ngIf="isSubmitted && errorControl.name.errors?.required">
-                      <ion-text color="danger">
+                    <ion-note slot="error" *ngIf="isSubmitted && errorControl.name.errors?.required">
                         {{ 'form.err_name_required' | translate}}
-                      </ion-text>
-                    </span>
+                    </ion-note>
                 </ion-item>
 
                 <ion-item lines="none">
                     <ion-label position="floating">{{ 'form.label_alternatename' | translate }}</ion-label>
                     <ion-input formControlName="alternateName" type="text" placeholder="{{ 'form.placeholder_alternatename' | translate }}" required></ion-input>
-                    <span *ngIf="isSubmitted && errorControl.alternateName.errors?.required">
-                      <ion-text color="danger">
+                    <ion-note slot="error" *ngIf="isSubmitted && errorControl.alternateName.errors?.required">
                         {{ 'form.err_alternatename_required' | translate}}
-                      </ion-text>
-                    </span>
-                    <span *ngIf="isSubmitted && (errorControl.alternateName.errors?.minlength || errorControl.alternateName.errors?.maxlength)">
-                      <ion-text color="danger">
+                    </ion-note>
+                    <ion-note slot="error" *ngIf="isSubmitted && (errorControl.alternateName.errors?.minlength || errorControl.alternateName.errors?.maxlength)">
                         {{ 'form.err_alternatename_length' | translate}}
-                      </ion-text>
-                  </span>
+                    </ion-note>
                 </ion-item>
 
                 <ion-item lines="none">
                     <ion-label position="floating">{{ 'form.label_address' | translate }}</ion-label>
                     <ion-input formControlName="address" type="text" placeholder="{{ 'form.placeholder_address' | translate }}" required></ion-input>
-                    <span *ngIf="isSubmitted && errorControl.address.errors?.required">
-                        <ion-text color="danger">
-                          {{ 'form.err_address_required' | translate}}
-                        </ion-text>
-                    </span>
+                    <ion-note slot="error" *ngIf="isSubmitted && errorControl.address.errors?.required">
+                        {{ 'form.err_address_required' | translate}}
+                    </ion-note>
                 </ion-item>
 
                 <ng-container formArrayName="email">
@@ -53,11 +45,9 @@
                     <ng-container *ngFor="let e of emails.controls; let indexOfEmail=index" [formGroupName]="indexOfEmail">
                         <ion-item>
                             <ion-input formControlName="email" type="email" placeholder="{{ 'form.placeholder_email' | translate }}"></ion-input>
-                            <span class="ion-padding" *ngIf="isSubmitted && e.get('email').errors?.pattern">
-                                <ion-text color="danger">
-                                  {{ 'form.err_email_pattern' | translate}}
-                                </ion-text>
-                            </span>
+                            <ion-note slot="error" *ngIf="isSubmitted && e.get('email').errors?.pattern">
+                                {{ 'form.err_email_pattern' | translate}}
+                            </ion-note>
                             <ion-button class="ion-margin" (click)="removeEmail(indexOfEmail)" *ngIf="emails.controls.length > 1">
                                 <ion-icon slot="icon-only" name="close-circle"></ion-icon>
                             </ion-button>
@@ -96,11 +86,9 @@
                             <ion-button class="ion-margin" (click)="removeTelephone(i)" *ngIf="phones.controls.length > 1">
                                 <ion-icon slot="icon-only" name="close-circle"></ion-icon>
                             </ion-button>
-                            <span class="ion-padding" *ngIf="isSubmitted && e.get('telephone').errors?.pattern">
-                              <ion-text color="danger">
+                            <ion-note slot="error" *ngIf="isSubmitted && e.get('telephone').errors?.pattern">
                                 {{ 'form.err_telephone_pattern' | translate}}
-                              </ion-text>
-                            </span>
+                            </ion-note>
                         </ion-item>
                     </ng-container>
                 </ng-container>
@@ -123,20 +111,16 @@
                                     <ion-item lines="none">
                                         <ion-label position="floating">{{ 'form.label_familyName' | translate }}</ion-label>
                                         <ion-input formControlName="familyName" type="text" placeholder="{{ 'form.placeholder_familyName' | translate }}" required></ion-input>
-                                        <span *ngIf="isSubmitted && teamForm.get('captain.name.familyName').hasError('required')">
-                                            <ion-text color="danger">
-                                              {{ 'form.err_name_required' | translate}}
-                                            </ion-text>
-                                        </span>
+                                        <ion-note slot="error" *ngIf="isSubmitted && teamForm.get('captain.name.familyName').hasError('required')">
+                                            {{ 'form.err_name_required' | translate}}
+                                        </ion-note>
                                     </ion-item>
                                     <ion-item lines="none">
                                         <ion-label position="floating">{{ 'form.label_givenName' | translate }}</ion-label>
                                         <ion-input formControlName="givenName" type="text" placeholder="{{ 'form.placeholder_givenName' | translate }}" required></ion-input>
-                                        <span *ngIf="isSubmitted && teamForm.get('captain.name.givenName').hasError('required')">
-                                            <ion-text color="danger">
-                                              {{ 'form.err_name_required' | translate}}
-                                            </ion-text>
-                                        </span>
+                                        <ion-note slot="error" *ngIf="isSubmitted && teamForm.get('captain.name.givenName').hasError('required')">
+                                            {{ 'form.err_name_required' | translate}}
+                                        </ion-note>
                                     </ion-item>
                                 </ion-item-group>
                                 <!-- TODO: image file upload -->
@@ -165,11 +149,9 @@
                                             </ion-datetime>
                                         </ng-template>
                                     </ion-popover>
-                                    <span *ngIf="isSubmitted && teamForm.get('captain.birthDate').hasError('required')">
-                                        <ion-text color="danger">
-                                          {{ 'form.err_date_required' | translate}}
-                                        </ion-text>
-                                    </span>
+                                    <ion-note slot="error" *ngIf="isSubmitted && teamForm.get('captain.birthDate').hasError('required')">
+                                        {{ 'form.err_date_required' | translate}}
+                                    </ion-note>
                                 </ion-item>
                             </ng-container>
                         </ion-list>
@@ -185,20 +167,16 @@
                                     <ion-item lines="none">
                                         <ion-label position="floating">{{ 'form.label_familyName' | translate }}</ion-label>
                                         <ion-input formControlName="familyName" type="text" placeholder="{{ 'form.placeholder_familyName' | translate }}" required></ion-input>
-                                        <span *ngIf="isSubmitted && teamForm.get('president.name.familyName').hasError('required')">
-                                            <ion-text color="danger">
-                                              {{ 'form.err_name_required' | translate}}
-                                            </ion-text>
-                                        </span>
+                                        <ion-note slot="error" *ngIf="isSubmitted && teamForm.get('president.name.familyName').hasError('required')">
+                                            {{ 'form.err_name_required' | translate}}
+                                        </ion-note>
                                     </ion-item>
                                     <ion-item lines="none">
                                         <ion-label position="floating">{{ 'form.label_givenName' | translate }}</ion-label>
                                         <ion-input formControlName="givenName" type="text" placeholder="{{ 'form.placeholder_givenName' | translate }}" required></ion-input>
-                                        <span *ngIf="isSubmitted && teamForm.get('president.name.givenName').hasError('required')">
-                                            <ion-text color="danger">
-                                              {{ 'form.err_name_required' | translate}}
-                                            </ion-text>
-                                        </span>
+                                        <ion-note slot="error" *ngIf="isSubmitted && teamForm.get('president.name.givenName').hasError('required')">
+                                            {{ 'form.err_name_required' | translate}}
+                                        </ion-note>
                                     </ion-item>
                                 </ion-item-group>
                                 <!-- TODO: image file upload -->
@@ -227,11 +205,9 @@
                                             </ion-datetime>
                                         </ng-template>
                                     </ion-popover>
-                                    <span *ngIf="isSubmitted && teamForm.get('president.birthDate').hasError('required')">
-                                        <ion-text color="danger">
-                                          {{ 'form.err_date_required' | translate}}
-                                        </ion-text>
-                                    </span>
+                                    <ion-note slot="error" *ngIf="isSubmitted && teamForm.get('president.birthDate').hasError('required')">
+                                        {{ 'form.err_date_required' | translate}}
+                                    </ion-note>
                                 </ion-item>
                             </ng-container>
                         </ion-list>
@@ -252,20 +228,16 @@
                             <ion-item lines="none">
                                 <ion-label position="floating">{{ 'form.label_familyName' | translate }}</ion-label>
                                 <ion-input formControlName="familyName" type="text" placeholder="{{ 'form.placeholder_familyName' | translate }}" required></ion-input>
-                                <span *ngIf="isSubmitted && e.get('name.familyName').errors?.required">
-                                    <ion-text color="danger">
-                                      {{ 'form.err_name_required' | translate}}
-                                    </ion-text>
-                                </span>
+                                <ion-note slot="error" *ngIf="isSubmitted && e.get('name.familyName').errors?.required">
+                                    {{ 'form.err_name_required' | translate}}
+                                </ion-note>
                             </ion-item>
                             <ion-item lines="none">
                                 <ion-label position="floating">{{ 'form.label_givenName' | translate }}</ion-label>
                                 <ion-input formControlName="givenName" type="text" placeholder="{{ 'form.placeholder_givenName' | translate }}" required></ion-input>
-                                <span *ngIf="isSubmitted && e.get('name.givenName').hasError('required')">
-                                    <ion-text color="danger">
-                                      {{ 'form.err_name_required' | translate}}
-                                    </ion-text>
-                                </span>
+                                <ion-note slot="error" *ngIf="isSubmitted && e.get('name.givenName').hasError('required')">
+                                    {{ 'form.err_name_required' | translate}}
+                                </ion-note>
                             </ion-item>
                         </ion-item-group>
                         <!-- TODO: image file upload -->
@@ -295,20 +267,16 @@
                                     </ion-datetime>
                                 </ng-template>
                             </ion-popover>
-                            <span *ngIf="isSubmitted && e.get('birthDate').hasError('required')">
-                                <ion-text color="danger">
-                                  {{ 'form.err_date_required' | translate}}
-                                </ion-text>
-                            </span>
+                            <ion-note slot="error" *ngIf="isSubmitted && e.get('birthDate').hasError('required')">
+                                {{ 'form.err_date_required' | translate}}
+                            </ion-note>
                         </ion-item>
                         <ion-item lines="none">
                             <ion-label position="floating">{{ 'form.label_licenceId' | translate }}</ion-label>
                             <ion-input formControlName="licenceId" type="text" placeholder="{{ 'form.placeholder_licence_id' | translate }}" required></ion-input>
-                            <span *ngIf="isSubmitted && e.get('licenceId').errors?.required">
-                              <ion-text color="danger">
+                            <ion-note slot="error" *ngIf="isSubmitted && e.get('licenceId').errors?.required">
                                 {{ 'form.err_licence_id' | translate}}
-                              </ion-text>
-                            </span>
+                            </ion-note>
                         </ion-item>
                         <ion-item button="true" [id]="coachIndex+1*33" lines="none">
                             <ion-label>{{ 'form.label_licenceValidFrom' | translate }}</ion-label>
@@ -319,11 +287,9 @@
                                     </ion-datetime>
                                 </ng-template>
                             </ion-popover>
-                            <span *ngIf="isSubmitted && e.get('licenceValidFrom').hasError('required')">
-                                <ion-text color="danger">
-                                  {{ 'form.err_date_required' | translate}}
-                                </ion-text>
-                            </span>
+                            <ion-note slot="error" *ngIf="isSubmitted && e.get('licenceValidFrom').hasError('required')">
+                                {{ 'form.err_date_required' | translate}}
+                            </ion-note>
                         </ion-item>
                         <ion-item button="true" [id]="coachIndex+1*41" lines="none">
                             <ion-label>{{ 'form.label_licenceValidTo' | translate }}</ion-label>
@@ -344,11 +310,9 @@
                                 <ion-select-option value="B">{{ 'B' | translate }}</ion-select-option>
                                 <!-- TODO: licence levels? -->
                             </ion-select>
-                            <span *ngIf="isSubmitted && e.get('licenceLevel').hasError('required')">
-                                <ion-text color="danger">
-                                  {{ 'form.err_licenceLevel' | translate}}
-                                </ion-text>
-                            </span>
+                            <ion-note slot="error" *ngIf="isSubmitted && e.get('licenceLevel').hasError('required')">
+                                {{ 'form.err_licenceLevel' | translate}}
+                            </ion-note>
                         </ion-item>
                         <ion-item lines="none">
                             <ion-label position="floating">{{ 'form.label_roleName' | translate }}</ion-label>
