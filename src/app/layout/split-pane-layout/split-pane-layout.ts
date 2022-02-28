@@ -12,7 +12,12 @@ export class SplitPaneLayoutPage implements OnInit {
     { title: 'home.COMPETITORS', url: '/athletes', icon: 'people' },
     { title: 'home.TEAMS', url: '/teams', icon: 'bookmarks' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  public adminPages = [
+    { title: 'home.MYTEAM', url: '/admin/teams', icon: 'bookmarks' },
+    { title: 'home.COMPETITORS', url: '/admin/atheletes', icon: 'people' },
+  ];
+
+  isAdmin: boolean = true; //TODO: get role of user
 
   constructor() { }
 

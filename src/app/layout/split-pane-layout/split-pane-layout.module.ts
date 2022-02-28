@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -15,6 +15,8 @@ import { AthleteListComponent } from 'src/app/athletes/athlete-list/athlete-list
 import { AthleteComponent } from 'src/app/athletes/athlete/athlete.component';
 import { TeamsComponent } from 'src/app/teams/teams.component';
 import { ResultComponent } from 'src/app/events/result/result.component';
+import { AdminTeamsComponent } from 'src/app/admin/admin-teams/admin-teams.component';
+import { AdminAthletesComponent } from 'src/app/admin/admin-athletes/admin-athletes.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,8 @@ import { ResultComponent } from 'src/app/events/result/result.component';
     IonicModule,
     SplitPaneLayoutPageRoutingModule,
     ComponentsModule,
-    TranslateModule
+    TranslateModule,
+    ReactiveFormsModule
   ],
   declarations: [
     SplitPaneLayoutPage,
@@ -32,7 +35,9 @@ import { ResultComponent } from 'src/app/events/result/result.component';
     AthleteListComponent,
     AthleteComponent,
     TeamsComponent,
-    ResultComponent
+    ResultComponent,
+    AdminTeamsComponent,
+    AdminAthletesComponent
   ]
 })
 export class SplitPaneLayoutPageModule { }
