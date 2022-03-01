@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { Constants } from 'src/app/shared/constants/constants';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -17,24 +20,38 @@ export class RegisterPage implements OnInit {
   constructor(
     public authService: AuthService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private loadingController: LoadingController,
+    private alertController: AlertController,
+    public translate: TranslateService
   ) { }
 
   ngOnInit() {
-    this.initForm()
+    this.initForm();
   }
 
-  register(firstName: string, lastName: string, email: string, password: string, password2: string) {
+  async register(firstName: string, lastName: string, email: string, password: string, password2: string) {
     if (password === password2) {
+      const loading = await this.loadingController.create();
+      await loading.present();
+
       this.authService.emailSignUp(email, password)
-        .then((res) => {
+        .then(async (res) => {
           // Do something here
           // this.router.navigate(['verify-email']);
-          this.router.navigate(['login']);
-
-        }).catch((error) => {
-          window.alert(error.message)
-        })
+          // TODO: create user in firebase
+          await loading.dismiss();
+          this.router.navigate(['login'], { replaceUrl: true });
+        }).catch(async (error) => {
+          await loading.dismiss();
+          console.error(error.message);
+          const alert = await this.alertController.create({
+            header: this.translate.instant('auth.err_register'),
+            message: this.translate.instant('auth.try_again'),
+            buttons: ['OK']
+          });
+          await alert.present();
+        });
     }
   }
 
@@ -42,8 +59,8 @@ export class RegisterPage implements OnInit {
     this.registerForm = this.formBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      password: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.pattern(Constants.EMAIL_PATTERN)]],
+      password: ['', [Validators.required, Validators.pattern(Constants.PASSWORD_PATTERN)]],
       password2: ['', [Validators.required]]
     }, { validators: [ValidatePassword.comparePasswords] });
   }

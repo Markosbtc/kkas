@@ -1,57 +1,65 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Log In</ion-title>
+        <ion-title> {{ 'auth.login' | translate}} </ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
-        <ion-item lines="none">
-            <ion-label position="floating">Email</ion-label>
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="ion-padding">
+        <ion-item fill="outline" class="ion-margin-bottom">
+            <ion-label position="floating">
+                {{ 'form.label_email' | translate }}
+            </ion-label>
             <ion-input type="text" formControlName="email" required></ion-input>
+            <ion-note slot="error" *ngIf="isSubmitted && loginForm.hasError('required', 'email')">
+                {{ 'form.err_email_required' | translate }}
+            </ion-note>
+            <ion-note slot="error" *ngIf="isSubmitted && loginForm.hasError('pattern', 'email')">
+                {{'form.err_email_pattern' | translate }}
+            </ion-note>
         </ion-item>
-        <span class="ion-padding" *ngIf="isSubmitted && loginForm.hasError('required', 'email')">
-			<ion-text color="danger">
-				Email is required.
-			</ion-text>
-		</span>
-        <span class="ion-padding" *ngIf="isSubmitted && loginForm.hasError('pattern', 'email')">
-			<ion-text color="danger">
-				<!-- {{'form.err_format_error' | translate }} -->
-				Not an e-mail
-			</ion-text>
-		</span>
 
-        <ion-item lines="none">
-            <ion-label position="floating">Password</ion-label>
+        <ion-item fill="outline" class="ion-margin-bottom">
+            <ion-label position="floating">
+                {{ 'form.label_password' | translate }}
+            </ion-label>
             <ion-input type="password" formControlName="password" required></ion-input>
         </ion-item>
-        <span class="error ion-padding" *ngIf="isSubmitted && loginForm.hasError('required', 'password')">
-			<ion-text color="danger">
-				Password is required.
-			</ion-text>
-		</span>
+        <ion-note slot="error" *ngIf="isSubmitted && loginForm.hasError('required', 'password')">
+            {{ 'form.err_password_required' | translate }}
+        </ion-note>
 
         <ion-row>
             <ion-col>
-                <ion-button type="submit" expand="block">Login</ion-button>
-            </ion-col>
-        </ion-row>
-
-        <ion-row>
-            <ion-col>
-                <ion-label>Forgot Password? </ion-label>
-                <ion-button [routerLink]="['/forgot-password']" expand="block">
-                    Reset Password
+                <ion-button type="submit" expand="block">
+                    {{ "auth.login" | translate }}
                 </ion-button>
             </ion-col>
         </ion-row>
 
         <ion-row>
             <ion-col>
-                <ion-label>No account yet? </ion-label>
+                <ion-button (click)="authService.GoogleAuth()" color="danger" expand="block">
+                    {{ 'auth.login_google' | translate }}
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+            <ion-col>
+                <ion-label>{{ 'auth.forgot_password' | translate }} </ion-label>
+                <ion-button [routerLink]="['/forgot-password']" expand="block">
+                    {{ 'auth.reset_password' | translate }}
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-label>{{ 'auth.no_account_yet' | translate }} </ion-label>
                 <ion-button [routerLink]="['/register']" expand="block">
-                    Register
+                    {{ "auth.register" | translate }}
                 </ion-button>
             </ion-col>
         </ion-row>

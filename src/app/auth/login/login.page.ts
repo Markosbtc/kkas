@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { Constants } from 'src/app/shared/constants/constants';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -16,36 +19,51 @@ export class LoginPage implements OnInit {
   constructor(
     public authService: AuthService,
     public router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private loadingController: LoadingController,
+    private alertController: AlertController,
+    public translate: TranslateService
   ) { }
 
   ngOnInit() {
-    this.initForm()
+    this.initForm();
   }
 
-  logIn(email: string, password: string) {
+  async logIn(email: string, password: string) {
+    const loading = await this.loadingController.create();
+    await loading.present();
+
     this.authService.emailLogin(email, password)
-      .then((res) => {
+      .then(async (res) => {
         // console.log(res);
 
         localStorage.setItem('user', JSON.stringify(res));
         JSON.parse(localStorage.getItem('user'));
-        this.router.navigate(['home']);
+        await loading.dismiss();
+        this.router.navigate(['home'], { replaceUrl: true });
         /* if (this.authService.isEmailVerified) {
           this.router.navigate(['home']);
         } else {
           window.alert('Email is not verified')
           return false;
         } */
-      }).catch((error) => {
-        window.alert(error.message)
+
+      }).catch(async (error) => {
+        await loading.dismiss();
+        console.error(error.message);
+        const alert = await this.alertController.create({
+          header: this.translate.instant('auth.err_login'),
+          message: this.translate.instant('auth.try_again'),
+          buttons: ['OK']
+        });
+        await alert.present();
       })
   }
 
   initForm(): void {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      password: ['', [Validators.required]]
+      email: ['', [Validators.required, Validators.pattern(Constants.EMAIL_PATTERN)]],
+      password: ['', [Validators.required, Validators.pattern(Constants.PASSWORD_PATTERN)]]
     });
   }
 

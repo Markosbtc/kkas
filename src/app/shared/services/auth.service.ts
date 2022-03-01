@@ -64,7 +64,7 @@ export class AuthService {
   async logout() {
     return await signOut(this.auth).then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['login']);
+      this.router.navigateByUrl('login', { replaceUrl: true });
     })
   }
 
@@ -81,14 +81,9 @@ export class AuthService {
     // ...
   }
 
+  // sends reset password email
   async resetPassword(email): Promise<any> {
-
-    // sends reset password email
-    await sendPasswordResetEmail(this.auth, email).then(() => {
-      window.alert('Password reset email sent, check your inbox.');
-    }).catch((error) => {
-      window.alert(error)
-    });
+    return await sendPasswordResetEmail(this.auth, email);
   }
 
   async GoogleAuth() {
@@ -96,7 +91,7 @@ export class AuthService {
       const additionalInfo = getAdditionalUserInfo(res);
       console.log(res);
       console.log(additionalInfo);
-      this.router.navigate(['home']);
+      this.router.navigate(['home'], { replaceUrl: true });
 
       //TODO: create user in db
       if (additionalInfo?.isNewUser) {
