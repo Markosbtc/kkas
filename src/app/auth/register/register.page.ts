@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Constants } from 'src/app/shared/constants/constants';
+import { User } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class RegisterPage implements OnInit {
 
   registerForm: FormGroup;
   isSubmitted = false;
+  user: User;
 
 
   constructor(
@@ -30,29 +32,28 @@ export class RegisterPage implements OnInit {
     this.initForm();
   }
 
-  async register(firstName: string, lastName: string, email: string, password: string, password2: string) {
-    if (password === password2) {
-      const loading = await this.loadingController.create();
-      await loading.present();
+  async register(email: string, password: string) {
+    const loading = await this.loadingController.create();
+    await loading.present();
 
-      this.authService.emailSignUp(email, password)
-        .then(async (res) => {
-          // Do something here
-          // this.router.navigate(['verify-email']);
-          // TODO: create user in firebase
-          await loading.dismiss();
-          this.router.navigate(['login'], { replaceUrl: true });
-        }).catch(async (error) => {
-          await loading.dismiss();
-          console.error(error.message);
-          const alert = await this.alertController.create({
-            header: this.translate.instant('auth.err_register'),
-            message: this.translate.instant('auth.try_again'),
-            buttons: ['OK']
-          });
-          await alert.present();
+    this.authService.emailSignUp(email, password, this.user)
+      .then(async (res) => {
+        await loading.dismiss();
+        this.router.navigate(['login'], { replaceUrl: true });
+      }).catch(async (error) => {
+        await loading.dismiss();
+        // console.error(error);
+        let msg = this.translate.instant('auth.try_again');
+        if (error.code == 'auth/email-already-in-use') {
+          msg = this.translate.instant('auth.email_used');
+        }
+        const alert = await this.alertController.create({
+          header: this.translate.instant('auth.err_register'),
+          message: msg,
+          buttons: ['OK']
         });
-    }
+        await alert.present();
+      });
   }
 
   initForm(): void {
@@ -61,19 +62,27 @@ export class RegisterPage implements OnInit {
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern(Constants.EMAIL_PATTERN)]],
       password: ['', [Validators.required, Validators.pattern(Constants.PASSWORD_PATTERN)]],
-      password2: ['', [Validators.required]]
+      repeatPassword: ['', [Validators.required]],
+      role: ['', [Validators.required]],
+      team: ['', [Validators.required]]
     }, { validators: [ValidatePassword.comparePasswords] });
   }
 
   submitForm(): void {
     this.isSubmitted = true;
     if (this.registerForm.valid) {
+      this.user = {
+        name: {
+          familyName: this.registerForm.get('lastName').value,
+          givenName: this.registerForm.get('firstName').value,
+          fullName: this.registerForm.get('firstName').value + ' ' + this.registerForm.get('lastName').value,
+        },
+        role: this.registerForm.get('role').value,
+        team: this.registerForm.get('team').value
+      }
       this.register(
-        this.registerForm.get('firstName').value,
-        this.registerForm.get('lastName').value,
         this.registerForm.get('email').value,
         this.registerForm.get('password').value,
-        this.registerForm.get('password2').value
       );
     }
   }
@@ -83,8 +92,13 @@ export class RegisterPage implements OnInit {
 class ValidatePassword {
   static comparePasswords(group: AbstractControl): ValidationErrors | null {
     const password = group.get('password').value;
-    const passwordConfirmation = group.get('password2').value;
+    const passwordConfirmation = group.get('repeatPassword').value;
 
-    return (password === passwordConfirmation) ? null : { noMatch: true };
+    if (password === passwordConfirmation) {
+      return null
+    } else {
+      group.get('repeatPassword').setErrors({ noMatch: true });
+      return { noMatch: true };
+    }
   }
 }

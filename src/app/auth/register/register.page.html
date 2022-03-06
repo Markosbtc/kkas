@@ -23,6 +23,22 @@
         </ion-item>
 
         <ion-item fill="outline" class="ion-margin-bottom">
+            <ion-label position="floating">{{ 'form.label_role' | translate }}</ion-label>
+            <ion-input type="text" formControlName="role" required></ion-input>
+            <ion-note slot="error" *ngIf="isSubmitted && registerForm.hasError('required', 'role')">
+                {{ 'form.err_role_required' | translate }}
+            </ion-note>
+        </ion-item>
+
+        <ion-item fill="outline" class="ion-margin-bottom">
+            <ion-label position="floating">{{ 'form.label_team' | translate }}</ion-label>
+            <ion-input type="text" formControlName="team" required></ion-input>
+            <ion-note slot="error" *ngIf="isSubmitted && registerForm.hasError('required', 'team')">
+                {{ 'form.err_team_required' | translate }}
+            </ion-note>
+        </ion-item>
+
+        <ion-item fill="outline" class="ion-margin-bottom">
             <ion-label position="floating">{{ 'form.label_email' | translate }}</ion-label>
             <ion-input type="email" formControlName="email" required></ion-input>
             <ion-note slot="error" *ngIf="isSubmitted && registerForm.hasError('required', 'email')">
@@ -46,8 +62,8 @@
 
         <ion-item fill="outline" class="ion-margin-bottom">
             <ion-label position="floating">{{ 'form.label_repeat_password' | translate }}</ion-label>
-            <ion-input type="password" formControlName="password2" required></ion-input>
-            <ion-note slot="error" *ngIf="registerForm.hasError('noMatch') && !(registerForm.get('password').pristine)">
+            <ion-input type="password" formControlName="repeatPassword" required></ion-input>
+            <ion-note slot="error" *ngIf="registerForm.hasError('noMatch', 'repeatPassword') && !(registerForm.get('password').pristine)">
                 {{ 'form.err_password_match' | translate }}
             </ion-note>
         </ion-item>

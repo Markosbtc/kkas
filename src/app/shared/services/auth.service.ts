@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { EMPTY, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   Auth, createUserWithEmailAndPassword, GoogleAuthProvider,
@@ -8,6 +8,7 @@ import {
 } from '@angular/fire/auth';
 import { traceUntilFirst } from '@angular/fire/performance';
 import { Router } from '@angular/router';
+import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
 
 
 @Injectable({
@@ -22,16 +23,17 @@ export class AuthService {
 
   constructor(
     private auth: Auth,
+    private firestore: Firestore,
     private router: Router
   ) {
 
     this.user$ = authState(this.auth);
-    this.userDisposable = authState(this.auth).pipe(
+    /* this.userDisposable = authState(this.auth).pipe(
       traceUntilFirst('auth'),
       map(u => !!u)
     ).subscribe(isLoggedIn => {
       // console.log('constructor isloggedin', isLoggedIn);
-    });
+    }); */
 
     this.user$.subscribe(user => {
       if (user) {
@@ -44,6 +46,15 @@ export class AuthService {
       }
     });
 
+  }
+
+  getUserProfile() {
+    const user = this.auth.currentUser;
+    if (user) {
+      const userDocRef = doc(this.firestore, `user/${user.uid}`);
+      return docData(userDocRef);
+    }
+    return EMPTY;
   }
 
   get isLoggedIn(): boolean {
@@ -68,17 +79,36 @@ export class AuthService {
     })
   }
 
-  async emailLogin(email: string, password: string): Promise<any> {
-    return await signInWithEmailAndPassword(this.auth, email, password);
+  async emailLogin(email: string, password: string) {
+    try {
+      const response = await signInWithEmailAndPassword(this.auth, email, password);
+      if (response?.user) {
+        localStorage.setItem('user', JSON.stringify(response.user));
+        return response.user;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      throw (error);
+    }
   }
 
-  async emailSignUp(email: string, password: string): Promise<void> {
-    const credential = await createUserWithEmailAndPassword(this.auth, email, password);
-    await updateProfile(credential.user, { displayName: credential.user.displayName });
-    await sendEmailVerification(credential.user);
+  async emailSignUp(email: string, password: string, userData) {
+    try {
+      const credential = await createUserWithEmailAndPassword(this.auth, email, password);
+      const user = credential.user;
+      await sendEmailVerification(user);
+      await updateProfile(user, { displayName: userData.fullName });
+      const userDocRef = doc(this.firestore, `user/${user.uid}`);
+      await setDoc(userDocRef, {
+        userData
+      });
+      localStorage.setItem('user', JSON.stringify(credential.user));
+      return credential.user;
+    } catch (error) {
+      throw (error);
+    }
 
-    //TODO: create user in db
-    // ...
   }
 
   // sends reset password email
@@ -98,28 +128,8 @@ export class AuthService {
         // ...
       }
 
-
-      // this.SetUserData(result.user);
     });
   }
-
-
-  /* Setting up user data when sign in with username/password, 
-  sign up with username/password and sign in with social auth  
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  /*  SetUserData(user) {
-     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-     const userData: User = {
-       uid: user.uid,
-       email: user.email,
-       displayName: user.displayName,
-       photoURL: user.photoURL,
-       emailVerified: user.emailVerified
-     }
-     return userRef.set(userData, {
-       merge: true
-     })
-   } */
 
   ngOnDestroy(): void {
     if (this.userDisposable) {

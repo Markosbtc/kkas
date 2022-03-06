@@ -13,11 +13,6 @@ export interface Person {
     deathDate?: Date,
 }
 
-//TODO:
-export interface User extends Person {
-    role: string
-}
-
 export namespace Gender {
     export type GenderType = 'male' | 'female';
     export const GenderType = {

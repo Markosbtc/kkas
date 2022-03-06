@@ -37,8 +37,6 @@ export class LoginPage implements OnInit {
       .then(async (res) => {
         // console.log(res);
 
-        localStorage.setItem('user', JSON.stringify(res));
-        JSON.parse(localStorage.getItem('user'));
         await loading.dismiss();
         this.router.navigate(['home'], { replaceUrl: true });
         /* if (this.authService.isEmailVerified) {
@@ -50,10 +48,16 @@ export class LoginPage implements OnInit {
 
       }).catch(async (error) => {
         await loading.dismiss();
-        console.error(error.message);
+        // console.error(error);
+        let msg = this.translate.instant('auth.try_again');
+        if (error.code == 'auth/user-not-found') {
+          msg = this.translate.instant('auth.user_not_found');
+        } else if (error.code == 'auth/wrong-password') {
+          msg = this.translate.instant('auth.wrong_password');
+        }
         const alert = await this.alertController.create({
           header: this.translate.instant('auth.err_login'),
-          message: this.translate.instant('auth.try_again'),
+          message: msg,
           buttons: ['OK']
         });
         await alert.present();

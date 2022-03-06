@@ -1,12 +1,12 @@
 import { Person } from "./person";
 
-export interface Referee extends Person{
-licenceAcquiredDate: Date,
-level?: string,
-licenceValidFrom: Date,
-licenceValidTo: Date,
-discipline: Discipline.DisciplineType,
-note?: string,
+export interface Referee extends Person {
+    licenceAcquiredDate: Date,
+    level?: string,
+    licenceValidFrom: Date,
+    licenceValidTo: Date,
+    discipline: Discipline.DisciplineType,
+    note?: string,
 }
 
 export namespace Discipline {
