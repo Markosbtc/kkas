@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
+import { AuthHeaderComponent } from './auth-header/auth-header.component';
 
 
 
@@ -15,10 +16,12 @@ import { FormsModule } from '@angular/forms';
     TranslateModule
   ],
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    AuthHeaderComponent
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    AuthHeaderComponent
   ]
 })
 export class ComponentsModule { }

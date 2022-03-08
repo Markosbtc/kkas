@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-button (click)="langPopover.present($event)">
+                <ion-icon slot="icon-only" name="language"></ion-icon>
+            </ion-button>
+            <ion-button (click)="menuPopover.present($event)">
+                <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+        <ion-popover [dismissOnSelect]="true" [arrow]="false" #langPopover>
+            <ng-template>
+                <ion-content>
+                    <ion-list lines="none">
+                        <ion-item [button]="true" *ngFor="let language of translate.getLangs()" (click)="switchLang(language)">
+                            <ion-label>{{ language }}</ion-label>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ng-template>
+        </ion-popover>
+
+        <ion-popover [dismissOnSelect]="true" [arrow]="false" #menuPopover>
+            <ng-template>
+                <ion-content>
+                    <ion-list lines="none">
+                        <ion-item>
+                            <ion-label>{{ 'shared.dark_mode' | translate }}</ion-label>
+                            <ion-toggle slot="end" [(ngModel)]="darkMode" (ionChange)="toggleDarkMode()"></ion-toggle>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ng-template>
+        </ion-popover>
+
+        <ion-item lines="none">
+            <ion-title>{{ title | translate }}</ion-title>
+        </ion-item>
+
+    </ion-toolbar>
+</ion-header>

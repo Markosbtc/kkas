@@ -1,8 +1,4 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title> {{ 'auth.login' | translate}} </ion-title>
-    </ion-toolbar>
-</ion-header>
+<app-auth-header [title]="'auth.login'"></app-auth-header>
 
 <ion-content>
     <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="ion-padding">
