@@ -13,7 +13,8 @@
     "shared": {
         "filter": "Szűrők",
         "open": "Megtekintés",
-        "error": "Hiba történt"
+        "error": "Hiba történt",
+        "dark_mode": "Sötét mód"
     },
     "form": {
         "label_name": "Csapatnév",
@@ -39,6 +40,9 @@
         "label_note": "Megjegyzés",
         "label_password": "Jelszó",
         "label_repeat_password": "Jelszó újra",
+        "label_role": "Válasszon szerepet",
+        "label_team": "Válasszon Csapatot",
+        "label_no_team": "Új csapatot regisztrálok",
         "placeholder_email": "email@cim.com",
         "placeholder_url": "weboldal.com",
         "placeholder_telephone": "+381621111111",
@@ -67,7 +71,9 @@
         "err_telephone_pattern": "Nem megfelelő telefonszám",
         "err_date_required": "Kérem válasszon dátumot",
         "err_licence_id": "Kérem adja meg az engedély sorszámát",
-        "err_licenceLevel": "Kérem adja meg az engedély szintjét"
+        "err_licenceLevel": "Kérem adja meg az engedély szintjét",
+        "err_role_required": "Kérem válasszon szerepet",
+        "err_team_required": "Kérem válasszon csapatot"
     },
     "event": {
         "result": "Eredmény",
@@ -116,6 +122,11 @@
         "female": "Nő",
         "all": "Összes"
     },
+    "role": {
+        "user": "Csapat képviselő",
+        "admin": "Admin",
+        "referee": "Bíró"
+    },
     "result": {
         "result": "Eredmény",
         "team": "Tagszervezet",
@@ -134,6 +145,7 @@
     },
     "auth": {
         "login": "Belépés",
+        "logout": "Kijelentkezés",
         "register": "Regisztáció",
         "sing_in": "Regisztáció",
         "send": "Küldés",

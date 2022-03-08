@@ -57,6 +57,21 @@ export class AuthService {
     return EMPTY;
   }
 
+  /* getUserRole() {
+    this.auth.currentUser.getIdTokenResult().then((res) => {
+      console.log(res);
+      if (res.claims.role) {
+        // do stuff
+      }
+    }).catch((error) => {
+      console.error(error);
+    })
+  }
+
+  async grantRole(email: string, role: string){
+    const user = await //??
+  } */
+
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     // return (user !== null && user.emailVerified !== false) ? true : false;
@@ -75,7 +90,7 @@ export class AuthService {
   async logout() {
     return await signOut(this.auth).then(() => {
       localStorage.removeItem('user');
-      this.router.navigateByUrl('login', { replaceUrl: true });
+      this.router.navigateByUrl('home', { replaceUrl: true });
     })
   }
 

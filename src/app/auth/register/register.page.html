@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-    <form [formGroup]="registerForm" (ngSubmit)="submitForm()" class="ion-padding">
+    <form [formGroup]="registerForm" (ngSubmit)="submitForm()" class="ion-margin">
         <ion-item fill="outline" class="ion-margin-bottom">
             <ion-label position="floating">{{ 'form.label_givenName' | translate }}</ion-label>
             <ion-input type="text" formControlName="firstName" required></ion-input>
@@ -24,7 +24,10 @@
 
         <ion-item fill="outline" class="ion-margin-bottom">
             <ion-label position="floating">{{ 'form.label_role' | translate }}</ion-label>
-            <ion-input type="text" formControlName="role" required></ion-input>
+            <ion-select formControlName="role" interface="popover">
+                <ion-select-option value="user">{{ 'role.user' | translate }}</ion-select-option>
+                <ion-select-option value="referee">{{ 'role.referee' | translate }}</ion-select-option>
+            </ion-select>
             <ion-note slot="error" *ngIf="isSubmitted && registerForm.hasError('required', 'role')">
                 {{ 'form.err_role_required' | translate }}
             </ion-note>
@@ -32,7 +35,11 @@
 
         <ion-item fill="outline" class="ion-margin-bottom">
             <ion-label position="floating">{{ 'form.label_team' | translate }}</ion-label>
-            <ion-input type="text" formControlName="team" required></ion-input>
+            <ion-select formControlName="team" interface="popover">
+                <ion-select-option value="0">{{ 'form.label_no_team' | translate }}</ion-select-option>
+                <!-- TODO: -->
+                <ion-select-option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</ion-select-option>
+            </ion-select>
             <ion-note slot="error" *ngIf="isSubmitted && registerForm.hasError('required', 'team')">
                 {{ 'form.err_team_required' | translate }}
             </ion-note>
@@ -67,6 +74,9 @@
                 {{ 'form.err_password_match' | translate }}
             </ion-note>
         </ion-item>
+        <ion-button (click)="asd()" expand="block" shape="round">
+            Click me
+        </ion-button>
 
         <ion-row>
             <ion-col>

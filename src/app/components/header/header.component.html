@@ -11,29 +11,50 @@
             </ng-template>
         </ion-buttons>
 
+        <ion-buttons slot="end">
+            <ion-button (click)="langPopover.present($event)">
+                <ion-icon slot="icon-only" name="language"></ion-icon>
+            </ion-button>
+            <ion-button (click)="menuPopover.present($event)">
+                <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+        <ion-popover [dismissOnSelect]="true" [arrow]="false" #langPopover>
+            <ng-template>
+                <ion-content>
+                    <ion-list lines="none">
+                        <ion-item [button]="true" *ngFor="let language of translate.getLangs()" (click)="switchLang(language)">
+                            <ion-label>{{ language }}</ion-label>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ng-template>
+        </ion-popover>
+
+        <ion-popover [arrow]="false" #menuPopover>
+            <ng-template>
+                <ion-content>
+                    <ion-list lines="none">
+                        <ion-item [button]="true" (click)="logout(); menuPopover.dismiss()" *ngIf="user">
+                            <ion-icon name="log-out" slot="end"></ion-icon>
+                            <ion-label>{{ 'auth.logout' | translate }}</ion-label>
+                        </ion-item>
+                        <ion-item [button]="true" (click)="login()" *ngIf="!user">
+                            <ion-icon name="log-in" slot="end"></ion-icon>
+                            <ion-label>{{ 'auth.login' | translate }}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>{{ 'shared.dark_mode' | translate }}</ion-label>
+                            <ion-toggle slot="end" [(ngModel)]="darkMode" (ionChange)="toggleDarkMode()"></ion-toggle>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ng-template>
+        </ion-popover>
+
         <ion-item lines="none">
             <ion-title>{{ title | translate }}</ion-title>
-            <ion-button shape="round" slot="end" color="tertiary">
-                <ion-icon slot="icon-only" name="language-outline"></ion-icon>
-                <ion-select selectedText=" " interface="popover" (ionChange)="switchLang($event)">
-                    <ion-select-option *ngFor="let language of translate.getLangs()" [value]="language">{{ language }}
-                    </ion-select-option>
-                </ion-select>
-            </ion-button>
-
-            <!-- FIXME: nicer language changer button -->
-            <!-- <ion-fab-button show="true" size="small" slot="end" color="secondary">
-                <ion-icon name="language"></ion-icon>
-            </ion-fab-button>
-
-            <ion-fab-button show="true" size="small" slot="end" color="secondary">
-                <ion-icon name="language"></ion-icon>
-                <ion-select selectedText=" " interface="popover" (ionChange)="switchLang($event)">
-                    <ion-select-option *ngFor="let language of translate.getLangs()" [value]="language">{{ language }}
-                    </ion-select-option>
-                </ion-select>
-            </ion-fab-button> -->
-
         </ion-item>
 
     </ion-toolbar>

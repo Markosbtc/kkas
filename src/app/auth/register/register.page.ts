@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Constants } from 'src/app/shared/constants/constants';
+import { SportsTeam } from 'src/app/shared/models/sportsTeam';
 import { User } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -17,6 +18,7 @@ export class RegisterPage implements OnInit {
   registerForm: FormGroup;
   isSubmitted = false;
   user: User;
+  teams: SportsTeam[] = [];
 
 
   constructor(
@@ -30,6 +32,7 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    // TODO: getTeams()..
   }
 
   async register(email: string, password: string) {
@@ -63,8 +66,8 @@ export class RegisterPage implements OnInit {
       email: ['', [Validators.required, Validators.pattern(Constants.EMAIL_PATTERN)]],
       password: ['', [Validators.required, Validators.pattern(Constants.PASSWORD_PATTERN)]],
       repeatPassword: ['', [Validators.required]],
-      role: ['', [Validators.required]],
-      team: ['', [Validators.required]]
+      role: ['user', [Validators.required]],
+      team: ['0', [Validators.required]]
     }, { validators: [ValidatePassword.comparePasswords] });
   }
 
@@ -85,6 +88,11 @@ export class RegisterPage implements OnInit {
         this.registerForm.get('password').value,
       );
     }
+  }
+
+  asd() {
+    console.log(this.registerForm.value);
+
   }
 
 }

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SIZE_TO_MEDIA } from '@ionic/core/dist/collection/utils/media'
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { LanguageStorageService } from 'src/app/shared/services/language-storage.service';
 
 @Component({
@@ -11,10 +13,14 @@ import { LanguageStorageService } from 'src/app/shared/services/language-storage
 export class HeaderComponent implements OnInit {
   @Input() title: string;
   @Input() withBack: boolean = false;
+  darkMode: boolean = false;
+  user = null;
 
   constructor(
     public translate: TranslateService,
-    private languageStorage: LanguageStorageService
+    private languageStorage: LanguageStorageService,
+    private authService: AuthService,
+    private router: Router
   ) {
     this.translate.addLangs(['hu', 'sr', 'en']);
     if (this.languageStorage.getLanguage()) {
@@ -22,7 +28,12 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  // TODO: does not work perfectly on first load
+  ngOnInit() {
+    this.authService.getUserProfile().subscribe((res) => {
+      this.user = res;
+    });
+  }
 
   toggleMenu() {
     const splitPane = document.querySelector('ion-split-pane');
@@ -30,9 +41,24 @@ export class HeaderComponent implements OnInit {
       splitPane.classList.toggle('split-pane-visible')
   }
 
-  switchLang(ev: any): void {
-    this.translate.use(ev.detail.value);
-    this.languageStorage.setLanguage(ev.detail.value);
+  toggleDarkMode() {
+    // TODO: 
+    console.log(this.darkMode);
+  }
+
+  switchLang(lang: any): void {
+    this.translate.use(lang);
+    this.languageStorage.setLanguage(lang);
+  }
+
+  // TODO: header options button does not refresh ?== this.user does not refresh?
+  logout() {
+    this.authService.logout();
+    this.user = null;
+  }
+
+  login() {
+    this.router.navigateByUrl('login');
   }
 
 }
