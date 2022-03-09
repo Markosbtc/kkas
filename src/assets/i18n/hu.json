@@ -14,6 +14,7 @@
         "filter": "Szűrők",
         "open": "Megtekintés",
         "error": "Hiba történt",
+        "success": "Sikeres művelet",
         "dark_mode": "Sötét mód"
     },
     "form": {
@@ -72,6 +73,7 @@
         "err_date_required": "Kérem válasszon dátumot",
         "err_licence_id": "Kérem adja meg az engedély sorszámát",
         "err_licenceLevel": "Kérem adja meg az engedély szintjét",
+        "err_gender_required": "Kérem válasszon nemet",
         "err_role_required": "Kérem válasszon szerepet",
         "err_team_required": "Kérem válasszon csapatot"
     },

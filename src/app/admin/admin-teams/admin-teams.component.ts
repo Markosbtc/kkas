@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Coach } from 'src/app/shared/models/coach';
-import { Gender } from 'src/app/shared/models/person';
 import { SportsTeam } from 'src/app/shared/models/sportsTeam';
 import { format, parseISO } from 'date-fns';
-import { IonAccordionGroup } from '@ionic/angular';
+import { IonAccordionGroup, ToastController } from '@ionic/angular';
 import { Constants } from 'src/app/shared/constants/constants';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { TeamService } from 'src/app/shared/services/team.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-admin-teams',
@@ -22,15 +23,32 @@ export class AdminTeamsComponent implements OnInit {
 
   @ViewChild(IonAccordionGroup) accordionGroup: IonAccordionGroup;
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private teamService: TeamService,
+    private toastController: ToastController,
+    private translate: TranslateService
+  ) { }
 
   ngOnInit() {
-    //TODO: check if logged user has role: registered user 
-    //                -> then check if user is a member of SportTeam.captain|president|coaches
-    //                    -> then team == SportTeam
-
-    this.myteam = true;
     this.initForm();
+    this.authService.getUserProfile().subscribe((res) => {
+      if (res) {
+        const team = res.userData.team;
+        console.log(res);
+        console.log(team);
+        if (team === '0') {
+          this.myteam = true;
+        } else {
+          this.myteam = false;
+          // TODO: get && display current team stats
+        }
+      } else {
+        this.myteam = false;
+        console.log('no user');
+      }
+    });
   }
 
   initForm() {
@@ -51,7 +69,7 @@ export class AdminTeamsComponent implements OnInit {
         image: [''], // TODO: file upload
         email: [''],
         url: [''],
-        gender: [''],
+        gender: ['', [Validators.required]],
         birthDate: ['', [Validators.required]],
         deathDate: []
       }),
@@ -138,7 +156,7 @@ export class AdminTeamsComponent implements OnInit {
       deathDate: [],
       licenceId: ['', [Validators.required]],
       licenceValidFrom: ['', [Validators.required]],
-      licenceValidTo: [''],
+      licenceValidTo: [],
       licenceLevel: ['', [Validators.required]],
       roleName: [''],
       note: [''],
@@ -159,22 +177,18 @@ export class AdminTeamsComponent implements OnInit {
   //FIXME: for testing 
   asd() {
     console.log(this.teamForm.value);
+    console.log(this.teamForm.get('captain.birthDate').hasError('required'));
   }
 
-  registerTeam() { //TODO:
-    this.myteam = true;
+  registerTeam() {
+    this.myteam = false;
     this.initForm();
   }
 
-  getDate(e) {
-    let date = new Date(e.target.value).toISOString().substring(0, 10);
-    this.teamForm.get('dob').setValue(date, {
-      onlyself: true
-    })
-  }
-
   formatDate(value: string): string {
-    return format(parseISO(value), 'dd MMM yyyy');;
+    // import { Timestamp } from "@angular/fire/firestore"; 
+    // Timestamp.fromDate(new Date("December 10, 1815"))
+    return format(parseISO(value), 'dd MMM yyyy');
   }
 
   get errorControl() {
@@ -182,66 +196,65 @@ export class AdminTeamsComponent implements OnInit {
   }
 
   submitForm() {
-    //TODO: save team, then fill in the team field for the trainers
     this.isSubmitted = true;
-    if (!this.teamForm.valid) {
+    if (this.teamForm.valid) {
+      const teamToUpload: SportsTeam = this.makeTeamFromForm(this.teamForm);
+
+      this.teamService.addSportsTeam(teamToUpload).then((res) => {
+        // TODO: pass image refs 
+        this.teamService.getSportsTeamSnapshot(res).then((docSnap) => {
+          if (docSnap.exists()) {
+            const updateTeam = docSnap.data();
+            updateTeam.coaches?.forEach(coach => {
+              coach.team = docSnap.ref;
+            });
+            this.teamService.updateSportsTeam(docSnap.ref, updateTeam).then(() => {
+              this.presentToast(this.translate.instant('shared.success'));
+              this.teamForm.reset();
+              // TODO: displayTeam = true or sth like that
+            }).catch((err) => {
+              // console.error(err);
+              this.presentToast(this.translate.instant('shared.error', true));
+            });
+          } else {
+            console.log("No such document!");
+          }
+        }).catch((err) => {
+          // console.error(err);
+          this.presentToast(this.translate.instant('shared.error', true));
+        });
+      }).catch((err) => {
+        // console.error(err);
+        this.presentToast(this.translate.instant('shared.error', true));
+      });
+    } else {
       console.log('Please provide all the required values!', this.teamForm.status);
+      console.log(this.teamForm);
+
       // open accordions
       this.accordionGroup.value = ["captain", "president"];
       return false;
-    } else {
-      // TODO: submit form
-      // TODO: pass image refs 
-      // TODO: fullnames = family+given
-      console.log(this.teamForm.value)
     }
   }
 
-  exampleteam: SportsTeam = {
-    id: "string",
-    name: "TeamName",
-    alternateName: "Team second Name",         //opt
-    address: "address 12/bb",
-    email: ["asd@a.com", "b@b.com"],  //opt
-    url: ["exampleURl"],              //opt
-    telephone: ["0629898525232"],
-    //logo: any,                      //opt
-    captain: {
-      name: {
-        familyName: "Example",
-        givenName: "Captain",
-      },
-      gender: Gender.GenderType.MALE,
-      birthDate: new Date(),
-    },
-    president: {
-      name: {
-        familyName: "President",
-        givenName: "El",
-      },
-      gender: Gender.GenderType.FEMALE,
-      birthDate: new Date(),
-    },
-    coaches: [
-      {
-        name: {
-          familyName: "Coach",
-          givenName: "Mr",
-        },
-        gender: Gender.GenderType.MALE,
-        birthDate: new Date(),
-        licenceId: "licenceId",
-        licenceValidFrom: new Date(),
-        licenceValidTo: new Date(),
-        licenceLevel: "licenceLevel",
-        note: "note",
-        roleName: "roleName",
-        // team: SportsTeam
-      } as Coach
-    ],
-    // athletes?: Athlete[],            //skip here, xonfigure this in admin-athletes component
+  makeTeamFromForm(teamForm: FormGroup): SportsTeam {
+    const team: SportsTeam = teamForm.value;
+    team.captain.name.fullName = team.captain.name.familyName + ' ' + team.captain.name.givenName;
+    team.president.name.fullName = team.president.name.familyName + ' ' + team.president.name.givenName;
+    team.coaches?.forEach(coach => {
+      coach.name.fullName = coach.name.familyName + ' ' + coach.name.givenName;
+    });
+
+    return team;
   }
 
-
+  async presentToast(message: string, error?: boolean) {
+    const toast = await this.toastController.create({
+      message,
+      color: error ? 'danger' : 'primary',
+      duration: 1500
+    });
+    toast.present();
+  }
 
 }
