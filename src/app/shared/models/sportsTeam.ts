@@ -6,7 +6,11 @@ export interface Organization {
     id?: string,
     name: string,
     alternateName?: string,
-    address: string,
+    address: {
+        zip: string,
+        city: string,
+        address: string
+    },
     email?: string[],
     url?: string[],
     telephone?: string[]

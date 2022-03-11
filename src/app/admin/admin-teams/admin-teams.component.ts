@@ -36,8 +36,8 @@ export class AdminTeamsComponent implements OnInit {
     this.authService.getUserProfile().subscribe((res) => {
       if (res) {
         const team = res.userData.team;
-        console.log(res);
-        console.log(team);
+        // console.log(res);
+        // console.log(team);
         if (team === '0') {
           this.myteam = true;
         } else {
@@ -55,7 +55,11 @@ export class AdminTeamsComponent implements OnInit {
     this.teamForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       alternateName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
-      address: ['', [Validators.required]],
+      address: this.formBuilder.group({
+        zip: ['', [Validators.required]],
+        city: ['', [Validators.required]],
+        address: ['', [Validators.required]]
+      }),
       email: this.formBuilder.array([]),
       url: this.formBuilder.array([]),
       telephone: this.formBuilder.array([]),
@@ -174,6 +178,10 @@ export class AdminTeamsComponent implements OnInit {
     return this.teamForm.controls.coaches as FormArray;
   }
 
+  get errorControl() {
+    return this.teamForm.controls;
+  }
+
   //FIXME: for testing 
   asd() {
     console.log(this.teamForm.value);
@@ -191,9 +199,6 @@ export class AdminTeamsComponent implements OnInit {
     return format(parseISO(value), 'dd MMM yyyy');
   }
 
-  get errorControl() {
-    return this.teamForm.controls;
-  }
 
   submitForm() {
     this.isSubmitted = true;
@@ -204,13 +209,14 @@ export class AdminTeamsComponent implements OnInit {
         // TODO: pass image refs 
         this.teamService.getSportsTeamSnapshot(res).then((docSnap) => {
           if (docSnap.exists()) {
+            // set coach.team
             const updateTeam = docSnap.data();
             updateTeam.coaches?.forEach(coach => {
               coach.team = docSnap.ref;
             });
             this.teamService.updateSportsTeam(docSnap.ref, updateTeam).then(() => {
               this.presentToast(this.translate.instant('shared.success'));
-              this.teamForm.reset();
+              this.initForm();
               // TODO: displayTeam = true or sth like that
             }).catch((err) => {
               // console.error(err);

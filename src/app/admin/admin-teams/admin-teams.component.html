@@ -27,13 +27,37 @@
                     </ion-note>
                 </ion-item>
 
-                <ion-item lines="none">
-                    <ion-label position="floating">{{ 'form.label_address' | translate }}</ion-label>
-                    <ion-input formControlName="address" type="text" placeholder="{{ 'form.placeholder_address' | translate }}" required></ion-input>
-                    <ion-note slot="error" *ngIf="isSubmitted && errorControl.address.errors?.required">
-                        {{ 'form.err_address_required' | translate}}
-                    </ion-note>
-                </ion-item>
+                <ion-item-divider>
+                    <ion-label> {{ 'form.label_address' | translate }} </ion-label>
+                </ion-item-divider>
+
+                <ion-item-group formGroupName="address">
+                    <ion-item lines="none">
+                        <ion-label position="floating">{{ 'form.label_address_zip' | translate }}</ion-label>
+                        <ion-input formControlName="zip" type="text" placeholder="{{ 'form.placeholder_address_zip' | translate }}" required></ion-input>
+                        <ion-note slot="error" *ngIf="isSubmitted && teamForm.get('address.zip').hasError('required')">
+                            {{ 'form.err_address_zip_required' | translate}}
+                        </ion-note>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label position="floating">{{ 'form.label_address_city' | translate }}</ion-label>
+                        <ion-input formControlName="city" type="text" placeholder="{{ 'form.placeholder_address_city' | translate }}" required></ion-input>
+                        <ion-note slot="error" *ngIf="isSubmitted && teamForm.get('address.city').hasError('required')">
+                            {{ 'form.err_address_city_required' | translate}}
+                        </ion-note>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label position="floating">{{ 'form.label_address' | translate }}</ion-label>
+                        <ion-input formControlName="address" type="text" placeholder="{{ 'form.placeholder_address' | translate }}" required></ion-input>
+                        <ion-note slot="error" *ngIf="isSubmitted && teamForm.get('address.address').hasError('required')">
+                            {{ 'form.err_address_required' | translate}}
+                        </ion-note>
+                    </ion-item>
+                </ion-item-group>
+
+                <ion-item-divider>
+                    <ion-label> {{ 'form.label_contacts' | translate }} </ion-label>
+                </ion-item-divider>
 
                 <ng-container formArrayName="email">
                     <ion-item lines="none">
@@ -330,7 +354,7 @@
                             <ion-input formControlName="note" type="text" placeholder="{{ 'form.placeholder_note' | translate }}"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-button slot="end" class="ion-margin-bottom" (click)="removeCoach(coachIndex)" *ngIf="coaches.controls.length > 1" color="dark">
+                            <ion-button slot="end" class="ion-margin-bottom" (click)="removeCoach(coachIndex)" *ngIf="coaches.controls.length > 0" color="dark">
                                 <ion-icon slot="icon-only" name="person-remove"></ion-icon>
                             </ion-button>
                         </ion-item>
