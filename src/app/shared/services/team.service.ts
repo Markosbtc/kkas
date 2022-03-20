@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collectionData, collection, Firestore, deleteDoc, doc, docData, updateDoc, getDoc } from '@angular/fire/firestore';
-import { DocumentData, DocumentReference, DocumentSnapshot } from 'rxfire/firestore/interfaces';
+import { DocumentData, DocumentReference } from 'rxfire/firestore/interfaces';
 import { Observable } from 'rxjs';
 import { SportsTeam } from '../models/sportsTeam';
 
@@ -14,12 +14,12 @@ export class TeamService {
 
   getSportTeams(): Observable<SportsTeam[]> {
     const teamRef = collection(this.firestore, 'teams');
-    return collectionData(teamRef, /* { idField: 'id' } */) as Observable<SportsTeam[]>;
+    return collectionData(teamRef, { idField: 'id' }) as Observable<SportsTeam[]>;
   }
 
   getSportsTeamById(id: string): Observable<SportsTeam> {
     const teamRef = doc(this.firestore, `teams/${id}`);
-    return docData(teamRef) as Observable<SportsTeam>;
+    return docData(teamRef, { idField: 'id' }) as Observable<SportsTeam>;
   }
 
   getSportsTeamSnapshot(teamRef: DocumentReference<any>) {

@@ -15,9 +15,12 @@
         "open": "Megtekintés",
         "error": "Hiba történt",
         "success": "Sikeres művelet",
-        "dark_mode": "Sötét mód"
+        "dark_mode": "Sötét mód",
+        "err_required": "Kérem töltse ki a megfelelő mezőket"
     },
     "form": {
+        "submit": "Felvétel",
+        "save": "Mentés",
         "label_name": "Csapatnév",
         "label_alternatename": "Csapatnév rövidítése",
         "label_address": "Cím",
@@ -35,6 +38,8 @@
         "label_familyName": "Vezetéknév",
         "label_givenName": "Keresztnév",
         "label_gender": "Nem",
+        "label_height": "Magasság",
+        "label_weight": "Testsúly",
         "label_birthdate": "Születési dátum",
         "label_licenceId": "Engedély száma",
         "label_licenceValidFrom": "Engedély érvényességének kezdete",
@@ -149,8 +154,13 @@
     },
     "admin": {
         "team": "Egyesület",
+        "athlete": "Versenyző",
         "no_team": "Nincs regisztrált egyesület a bejelentkezett felhasználóhoz",
-        "register_team": "Egyesület felvétele"
+        "no_athlete": "Nincs regisztrált sportoló ehhez az egyesülethez",
+        "register_team": "Egyesület felvétele",
+        "edit_team": "Adatok szerkeztése",
+        "register_athlete": "Sportoló felvétele",
+        "update_athlete": "Mentés"
     },
     "auth": {
         "login": "Belépés",

@@ -43,29 +43,7 @@ export class AthleteListComponent implements OnInit, AfterViewInit {
           id: "id of team",
           name: "Tisin Cvet",
           alternateName: "TSC",
-          address: "string",
-          //email?: string[],
-          //url?: string[],
-          //telephone?: string[],
-          //logo?: any,
-          captain: {
-            name: {
-              familyName: "string",
-              givenName: "string",
-            },
-            gender: Gender.GenderType.FEMALE,
-            birthDate: new Date(),
-          },
-          president: {
-            name: {
-              familyName: "string",
-              givenName: "string",
-            },
-            gender: Gender.GenderType.FEMALE,
-            birthDate: new Date(),
-          },
-          //coaches?: Coach[],
-          //athletes?: Athlete[]
+          city: 'Beograd',
         },
         //achievements?: Achievement[]
       }

@@ -27,7 +27,11 @@ export class EventListComponent implements OnInit {
       eventStatus: EventStatus.EventStatusType.scheduled,
       organizer: {
         name: 'KSS',
-        address: 'Ada Cigalnija 13'
+        address: {
+          zip: '3030',
+          city: 'Beograd',
+          address: 'Ada Cigalnija 13'
+        }
       },
       /* participation?: {
         teams: SportsTeam[],

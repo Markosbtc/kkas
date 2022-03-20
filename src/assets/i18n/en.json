@@ -15,9 +15,12 @@
         "open": "Open",
         "error": "Error",
         "success": "Success",
-        "dark_mode": "Dark Mode"
+        "dark_mode": "Dark Mode",
+        "err_required": "Please fill in the required fields"
     },
     "form": {
+        "submit": "Submit",
+        "save": "Save",
         "label_name": "Name",
         "label_alternatename": "Alternate Name",
         "label_address": "Address",
@@ -35,6 +38,8 @@
         "label_familyName": "Family Name",
         "label_givenName": "First Name",
         "label_gender": "Gender",
+        "label_height": "Height",
+        "label_weight": "Weight",
         "label_birthdate": "Date of Birth",
         "label_licenceId": "Licence ID#",
         "label_licenceValidFrom": "Licence Valid From",
@@ -149,8 +154,13 @@
     },
     "admin": {
         "team": "Team",
+        "athlete": "Athlete",
         "no_team": "No Sports Team is registered to this user",
-        "register_team": "Register a Sport Team"
+        "no_athlete": "No Athlete is registered to this team",
+        "register_team": "Register a Sport Team",
+        "edit_team": "Edit Team Info",
+        "register_athlete": "Register an Athlete",
+        "update_athlete": "Update"
     },
     "auth": {
         "login": "Login",

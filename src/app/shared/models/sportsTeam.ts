@@ -23,3 +23,11 @@ export interface SportsTeam extends Organization {
     coaches?: Coach[],
     athletes?: Athlete[],
 }
+
+export interface SportsTeamRef {
+    name: string,
+    alternateName?: string,
+    city?: string,
+    ref?: any,
+    id?: string
+}

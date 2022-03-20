@@ -8,7 +8,8 @@ import {
 } from '@angular/fire/auth';
 import { traceUntilFirst } from '@angular/fire/performance';
 import { Router } from '@angular/router';
-import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
+import { doc, docData, Firestore, setDoc, updateDoc } from '@angular/fire/firestore';
+import { User as MyUser } from 'src/app/shared/models/user';
 
 
 @Injectable({
@@ -55,6 +56,12 @@ export class AuthService {
       return docData(userDocRef);
     }
     return EMPTY;
+  }
+
+  updateUserProfile(data: any) {
+    const user = this.auth.currentUser;
+    const userDocRef = doc(this.firestore, `user/${user.uid}`);
+    return updateDoc(userDocRef, { 'team': data });
   }
 
   /* getUserRole() {
@@ -108,15 +115,15 @@ export class AuthService {
     }
   }
 
-  async emailSignUp(email: string, password: string, userData) {
+  async emailSignUp(email: string, password: string, userData: MyUser) {
     try {
       const credential = await createUserWithEmailAndPassword(this.auth, email, password);
       const user = credential.user;
       await sendEmailVerification(user);
-      await updateProfile(user, { displayName: userData.fullName });
+      await updateProfile(user, { displayName: userData.name.fullName });
       const userDocRef = doc(this.firestore, `user/${user.uid}`);
       await setDoc(userDocRef, {
-        userData
+        ...userData
       });
       localStorage.setItem('user', JSON.stringify(credential.user));
       return credential.user;

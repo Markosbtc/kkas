@@ -1,4 +1,4 @@
-import { SportsTeam } from "./sportsTeam";
+import { SportsTeamRef } from "./sportsTeam"
 
 export interface User {
     name: {
@@ -7,5 +7,5 @@ export interface User {
         fullName?: string
     },
     role: string,
-    team: any //SportsTeam
+    team: SportsTeamRef
 }
