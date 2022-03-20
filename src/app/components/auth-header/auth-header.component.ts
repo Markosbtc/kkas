@@ -24,8 +24,7 @@ export class AuthHeaderComponent implements OnInit {
   ngOnInit() { }
 
   toggleDarkMode() {
-    // TODO: 
-    console.log(this.darkMode);
+    document.body.classList.toggle('dark', this.darkMode);
   }
 
   switchLang(lang: any): void {
