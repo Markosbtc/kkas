@@ -20,7 +20,7 @@
 
         <ion-item fill="outline" class="ion-margin-bottom">
             <ion-label position="floating">{{ 'form.label_role' | translate }}</ion-label>
-            <ion-select formControlName="role" interface="popover">
+            <ion-select formControlName="role" interface="popover" (ionChange)="roleChanged($event)">
                 <ion-select-option value="user">{{ 'role.user' | translate }}</ion-select-option>
                 <ion-select-option value="referee">{{ 'role.referee' | translate }}</ion-select-option>
             </ion-select>
@@ -29,12 +29,13 @@
             </ion-note>
         </ion-item>
 
-        <ion-item fill="outline" class="ion-margin-bottom">
+        <ion-item fill="outline" class="ion-margin-bottom" *ngIf="registerForm.get('role').value === 'user'">
             <ion-label position="floating">{{ 'form.label_team' | translate }}</ion-label>
             <ion-select formControlName="team" interface="popover">
                 <ion-select-option value="0">{{ 'form.label_no_team' | translate }}</ion-select-option>
-                <!-- TODO: -->
-                <ion-select-option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</ion-select-option>
+                <ion-select-option *ngFor="let team of teams" [value]="{name: team.name, alternateName: team.alternateName, city: team.address?.city, id: team.id}">
+                    {{ team.name + ' - ' + team.address?.city }}
+                </ion-select-option>
             </ion-select>
             <ion-note slot="error" *ngIf="isSubmitted && registerForm.hasError('required', 'team')">
                 {{ 'form.err_team_required' | translate }}
@@ -70,11 +71,6 @@
                 {{ 'form.err_password_match' | translate }}
             </ion-note>
         </ion-item>
-
-        <!-- FIXME: -->
-        <ion-button (click)="asd()" expand="block" shape="round">
-            Click me
-        </ion-button>
 
         <ion-row>
             <ion-col>

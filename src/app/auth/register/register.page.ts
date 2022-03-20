@@ -7,6 +7,7 @@ import { Constants } from 'src/app/shared/constants/constants';
 import { SportsTeam } from 'src/app/shared/models/sportsTeam';
 import { User } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { TeamService } from 'src/app/shared/services/team.service';
 
 @Component({
   selector: 'app-register',
@@ -23,6 +24,7 @@ export class RegisterPage implements OnInit {
 
   constructor(
     public authService: AuthService,
+    public teamService: TeamService,
     private router: Router,
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
@@ -32,7 +34,7 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    // TODO: getTeams()..
+    this.getTeams();
   }
 
   async register(email: string, password: string) {
@@ -42,6 +44,8 @@ export class RegisterPage implements OnInit {
     this.authService.emailSignUp(email, password, this.user)
       .then(async (res) => {
         await loading.dismiss();
+        this.initForm();
+        this.isSubmitted = false;
         this.router.navigate(['login'], { replaceUrl: true });
       }).catch(async (error) => {
         await loading.dismiss();
@@ -71,6 +75,22 @@ export class RegisterPage implements OnInit {
     }, { validators: [ValidatePassword.comparePasswords] });
   }
 
+  roleChanged(event: any) {
+    if (event.detail.value === 'user') {
+      this.registerForm.addControl("team", this.formBuilder.control('0', [Validators.required]));
+    } else if (event.detail.value === 'referee') {
+      this.registerForm.removeControl("team");
+    }
+  }
+
+  getTeams() {
+    this.teamService.getSportTeams().subscribe((res) => {
+      this.teams = res;
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
   submitForm(): void {
     this.isSubmitted = true;
     if (this.registerForm.valid) {
@@ -88,11 +108,6 @@ export class RegisterPage implements OnInit {
         this.registerForm.get('password').value,
       );
     }
-  }
-
-  asd() {
-    console.log(this.registerForm.value);
-
   }
 
 }
