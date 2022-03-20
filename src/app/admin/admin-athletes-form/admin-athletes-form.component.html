@@ -1,0 +1,111 @@
+<app-header [title]="'admin.athlete'"></app-header>
+<ion-content [fullscreen]="true">
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>{{ 'admin.athlete' | translate }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <form [formGroup]="athleteForm" (ngSubmit)="submitForm()">
+                <ion-item-group formGroupName="name">
+                    <ion-item lines="none">
+                        <ion-label position="floating">{{ 'form.label_familyName' | translate }}</ion-label>
+                        <ion-input formControlName="familyName" type="text" placeholder="{{ 'form.placeholder_familyName' | translate }}" required></ion-input>
+                        <ion-note slot="error" *ngIf="isSubmitted && athleteForm.get('name.familyName').hasError('required')">
+                            {{ 'form.err_familyName_required' | translate}}
+                        </ion-note>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label position="floating">{{ 'form.label_givenName' | translate }}</ion-label>
+                        <ion-input formControlName="givenName" type="text" placeholder="{{ 'form.placeholder_givenName' | translate }}" required></ion-input>
+                        <ion-note slot="error" *ngIf="isSubmitted && athleteForm.get('name.givenName').hasError('required')">
+                            {{ 'form.err_givenName_required' | translate}}
+                        </ion-note>
+                    </ion-item>
+                </ion-item-group>
+                <!-- TODO: image file upload -->
+                <ion-item lines="none">
+                    <ion-label position="floating">{{ 'form.label_email' | translate }}</ion-label>
+                    <ion-input formControlName="email" type="email" placeholder="{{ 'form.placeholder_email' | translate }}"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label position="floating">{{ 'form.label_url' | translate }}</ion-label>
+                    <ion-input formControlName="url" type="text" placeholder="{{ 'form.placeholder_url' | translate }}">
+                    </ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label position="floating">{{ 'form.label_gender' | translate }}</ion-label>
+                    <ion-select formControlName="gender" interface="popover" placeholder="{{ 'form.placeholder_gender' | translate}}" required>
+                        <ion-select-option value="male">{{ 'gender.male' | translate }}</ion-select-option>
+                        <ion-select-option value="female">{{ 'gender.female' | translate }}</ion-select-option>
+                    </ion-select>
+                    <ion-note slot="error" *ngIf="isSubmitted && athleteForm.get('gender').hasError('required')">
+                        {{ 'form.err_gender_required' | translate}}
+                    </ion-note>
+                </ion-item>
+                <ion-item button="true" id="open-date-inp" lines="none">
+                    <ion-label>{{ 'form.label_birthdate' | translate }}</ion-label>
+                    <ion-text slot="end">{{ birthdate.value? formatDate(birthdate.value) : '' }}</ion-text>
+                    <ion-popover trigger="open-date-inp" show-backdrop="false" side="top" arrow="false" class="date-popover">
+                        <ng-template>
+                            <ion-datetime #popoverDatetime presentation="date" formControlName="birthDate" (ionChange)="popoverDatetime.confirm(true);">
+                            </ion-datetime>
+                        </ng-template>
+                    </ion-popover>
+                    <ion-note slot="end" color="danger" *ngIf="isSubmitted && birthdate.hasError('required')">
+                        {{ 'form.err_date_required' | translate}}
+                    </ion-note>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label position="floating">{{ 'form.label_height' | translate }}</ion-label>
+                    <ion-input formControlName="height" type="number"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label position="floating">{{ 'form.label_weight' | translate }}</ion-label>
+                    <ion-input formControlName="weight" type="number"></ion-input>
+                </ion-item>
+
+                <ng-container formArrayName="coaches">
+                    <ion-item>
+                        <ion-label>{{ 'form.label_coaches' | translate }}</ion-label>
+                        <ion-button class="ion-margin" (click)="setNewCoach()" color="dark">
+                            <ion-icon slot="icon-only" name="person-add"></ion-icon>
+                        </ion-button>
+                    </ion-item>
+                    <ng-container *ngFor="let e of coaches.controls; let coachIndex=index" [formGroupName]="coachIndex">
+                        <ion-item lines="none">
+                            <ion-label position="floating"></ion-label>
+                            <ion-select formControlName="coach" interface="popover" placeholder="{{ 'form.placeholder_picker' | translate}}">
+                                <ion-select-option *ngFor="let c of dbCoaches" [value]="{name: c.name, id: c.id, team: c.team}">
+                                    {{ (c.name?.fullName ? c.name?.fullName : (c.name?.givenName + c.name?.familyName)) + ' ' + (c.team?.alternateName? ( '- ' + c.team?.alternateName) : '') }}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-button slot="end" class="ion-margin-bottom" (click)="removeCoach(coachIndex)" *ngIf="coaches.controls.length > 0" color="dark">
+                                <ion-icon slot="icon-only" name="person-remove"></ion-icon>
+                            </ion-button>
+                        </ion-item>
+                    </ng-container>
+                </ng-container>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-button type="submit" color="secondary" expand="block">
+                            {{ id ? ('form.save' | translate) : ('form.submit' | translate) }}
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </form>
+
+        </ion-card-content>
+
+    </ion-card>
+
+    <!-- FIXME: -->
+    <ion-button (click)="asd()" expand="block" fill="clear" shape="round">
+        Click me
+    </ion-button>
+    <!-- -- -->
+
+</ion-content>
