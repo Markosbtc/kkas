@@ -26,7 +26,7 @@ export class AdminAthletesComponent implements OnInit {
 
   ngOnInit() {
     this.getAthletes();
-    this.getCoaches();
+    // this.getCoaches();
   }
 
   getCoaches() {

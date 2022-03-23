@@ -8,11 +8,12 @@
             </ion-item>
 
             <ion-list slot="content">
-                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="teamName" placeholder="" animated="true">
-                    <ion-label class="ion-margin">{{ 'teams.filter_name' | translate }}</ion-label>
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" placeholder="" animated="true" [(ngModel)]="teamNameF" (ionChange)="filterIncludes('name', teamNameF)" (ionClear)="removeFilter('name')">
+                    <ion-label class="filter-label ion-margin">{{ 'teams.filter_name' | translate }}</ion-label>
                 </ion-searchbar>
-                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="teamPlace" placeholder="" animated="true">
-                    <ion-label class="ion-margin">{{ 'teams.filter_place' | translate }}</ion-label>
+                <!-- TODO: -->
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" placeholder="" animated="true" [(ngModel)]="teamPlaceF">
+                    <ion-label class="filter-label ion-margin">{{ 'teams.filter_place' | translate }}</ion-label>
                 </ion-searchbar>
             </ion-list>
         </ion-accordion>
@@ -20,13 +21,16 @@
 
     <ion-card>
         <ion-card-header>
-            <ion-card-title>{{ 'teams.all' | translate }}</ion-card-title>
+            <ion-item lines="none">
+                <ion-card-title> {{ 'teams.all' | translate }} </ion-card-title>
+                <ion-badge slot="end" color="tertiary" mode="ios"> {{ filteredTeams?.length }} </ion-badge>
+            </ion-item>
         </ion-card-header>
         <ion-card-content *ngIf="teams && teams.length > 0; else noTeams">
-            <ion-item lines="none" *ngFor="let team of teams" [routerLink]="['/athletes']" [state]="{ data: { team }}">
+            <ion-item lines="none" *ngFor="let team of filteredTeams" [routerLink]="['/athletes']" [state]="{ teamId: team.id, teamName: team.name }">
                 <ion-label>{{ team.name }} </ion-label>
                 <ion-label>{{ (team.alternateName ? team.alternateName : '') }} </ion-label>
-                <ion-button [routerLink]="['/athletes']" expand="block" fill="clear" [state]="{ data: { team }}">
+                <ion-button [routerLink]="['/athletes']" expand="block" fill="clear" [state]="{ teamId: team.id, teamName: team.name }">
                     {{ 'athlete.all' | translate}}
                 </ion-button>
             </ion-item>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Gender } from '../shared/models/person';
 import { SportsTeam } from '../shared/models/sportsTeam';
+import { TeamService } from '../shared/services/team.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-teams',
@@ -9,42 +10,48 @@ import { SportsTeam } from '../shared/models/sportsTeam';
 })
 export class TeamsComponent implements OnInit {
   teams: SportsTeam[] = [];
-  teamName: string;
-  teamPlace: string;
+  filteredTeams: SportsTeam[] = [];
+  teamNameF: string;
+  teamPlaceF: string;
+  filters = {}
 
-  constructor() { }
+  constructor(
+    private teamService: TeamService
+  ) { }
 
   ngOnInit() {
-    this.teams.push(
-      {
-        id: "random team id",
-        name: "Tisin Cvet",
-        alternateName: "TSC",
-        address: "address",
-        //email?: string[],
-        //url?: string[],
-        //telephone?: string[],
-        //logo?: any,
-        captain: {
-          name: {
-            familyName: "string",
-            givenName: "string",
-          },
-          gender: Gender.GenderType.FEMALE,
-          birthDate: new Date(),
-        },
-        president: {
-          name: {
-            familyName: "string",
-            givenName: "string",
-          },
-          gender: Gender.GenderType.FEMALE,
-          birthDate: new Date(),
-        },
-        //coaches?: Coach[],
-        //athletes?: Athlete[],
-      }
-    )
+    this.getTeams();
+  }
+
+  getTeams() {
+    this.teamService.getSportTeams().subscribe((teams) => {
+      this.teams = teams;
+      this.applyFilters();
+    });
+  }
+
+  applyFilters() {
+    this.filteredTeams = _.filter(this.teams, _.conforms(this.filters));
+  }
+
+  removeFilter(property: string) {
+    delete this.filters[property];
+    this[property] = null;
+    this.applyFilters();
+  }
+
+  filterIncludes(property: string, rule: any) {
+    this.filters[property] = val => _.toLower(val).includes(_.toLower(rule));
+    this.applyFilters();
+  }
+
+
+  // FIXME:
+  asd() {
+    /* console.log(this.filters);
+    console.log('filterred teams: ', this.filteredTeams); */
+
+
   }
 
 }
