@@ -10,38 +10,35 @@
             <ion-list slot="content">
                 <ion-item>
                     <ion-label class="ion-margin">{{ 'event.filter_boat' | translate }}</ion-label>
-                    <ion-select interface="popover">
+                    <ion-select interface="popover" [(ngModel)]="boatF">
                         <ion-select-option value="all">{{ 'gender.all' | translate }}</ion-select-option>
-                        <ion-select-option value="male">{{ 'gender.male' | translate }}</ion-select-option>
-                        <ion-select-option value="female">{{ 'gender.female' | translate }}</ion-select-option>
+                        <ion-select-option *ngFor="let boat of boats">{{ boat }}</ion-select-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>
                     <ion-label class="ion-margin">{{ 'event.filter_age' | translate }}</ion-label>
-                    <ion-select interface="popover">
+                    <ion-select interface="popover" [(ngModel)]="ageGroupF">
                         <ion-select-option value="all">{{ 'gender.all' | translate }}</ion-select-option>
-                        <ion-select-option value="male">{{ 'gender.male' | translate }}</ion-select-option>
-                        <ion-select-option value="female">{{ 'gender.female' | translate }}</ion-select-option>
+                        <ion-select-option *ngFor="let age of ageGroups">{{ age | translate }}</ion-select-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>
                     <ion-label class="ion-margin">{{ 'event.filter_distance' | translate }}</ion-label>
-                    <ion-select interface="popover">
+                    <ion-select interface="popover" [(ngModel)]="distanceF">
                         <ion-select-option value="all">{{ 'gender.all' | translate }}</ion-select-option>
-                        <ion-select-option value="male">{{ 'gender.male' | translate }}</ion-select-option>
-                        <ion-select-option value="female">{{ 'gender.female' | translate }}</ion-select-option>
+                        <ion-select-option *ngFor="let dist of distances">{{ dist + 'm' }}</ion-select-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>
                     <ion-label class="ion-margin">{{ 'event.filter_gender' | translate }}</ion-label>
-                    <ion-select interface="popover">
+                    <ion-select interface="popover" [(ngModel)]="genderF">
                         <ion-select-option value="all">{{ 'gender.all' | translate }}</ion-select-option>
                         <ion-select-option value="male">{{ 'gender.male' | translate }}</ion-select-option>
                         <ion-select-option value="female">{{ 'gender.female' | translate }}</ion-select-option>
                     </ion-select>
                 </ion-item>
-                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="eventTeam" placeholder="" animated="true">
-                    <ion-label class="ion-margin">{{ 'event.filter_team' | translate }}</ion-label>
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" placeholder="" animated="true" [(ngModel)]="eventTeamF">
+                    <ion-label class="filter-label ion-margin ion-padding">{{ 'event.filter_team' | translate }}</ion-label>
                 </ion-searchbar>
             </ion-list>
         </ion-accordion>
@@ -52,7 +49,7 @@
             <ion-card-title>{{ 'event.all_races' | translate }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-            <ion-item lines="none" *ngFor="let race of event.races" [routerLink]="null">
+            <ion-item lines="none" *ngFor="let race of event.races" button="true">
                 <ion-label (click)="presentModal(race)"> {{ race.number + '. ' + race.boat + ' ' + race.gender + ' ' + race.age + ' ' + race.distance + 'm ' | titlecase}} </ion-label>
                 <ion-button expand="block" fill="clear" (click)="presentModal(race)">
                     {{ 'event.result' | translate}}

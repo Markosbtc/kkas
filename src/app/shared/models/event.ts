@@ -39,4 +39,9 @@ export namespace EventCategory {
         international: 'international' as EventCategoryType,
         vajdasagi: 'vajdasagi' as EventCategoryType,
     }
+    export const EVENTS = [
+        'national',
+        'international',
+        'vajdasagi'
+    ]
 }

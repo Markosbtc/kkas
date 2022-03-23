@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { IonAccordionGroup } from '@ionic/angular';
 import { Athlete } from 'src/app/shared/models/athlete';
-import { Gender } from 'src/app/shared/models/person';
 import { SportsTeam } from 'src/app/shared/models/sportsTeam';
+import { AthleteService } from 'src/app/shared/services/athlete.service';
+import { TeamService } from 'src/app/shared/services/team.service';
 
 @Component({
   selector: 'app-athlete-list',
@@ -10,54 +11,57 @@ import { SportsTeam } from 'src/app/shared/models/sportsTeam';
   styleUrls: ['./athlete-list.component.scss'],
 })
 export class AthleteListComponent implements OnInit, AfterViewInit {
-  athletes: Athlete[] = [];
+  teamId: string;
   team: SportsTeam;
-  athleteName: string;
-  teamName: string;
-  year: number;
+  athletes: Athlete[] = [];
+
+  athleteNameF: string;
+  yearF: number;
+  teamNameF: string;
 
   @ViewChild(IonAccordionGroup) accordionGroup: IonAccordionGroup;
 
-  constructor() { }
+  constructor(
+    private athleteService: AthleteService,
+    private teamService: TeamService,
+  ) { }
 
   ngOnInit() {
-    // --
-    this.athletes.push(
-      {
-        id: "athletes uinque id",
-        name: {
-          familyName: "Subotic",
-          givenName: "Marko",
-          fullName: "Subotic Marko"
-        },
-        //image?: any,
-        //email?: string,
-        //url?: string,
-        gender: Gender.GenderType.MALE,
-        birthDate: new Date(),
-        //deathDate?: Date,
-        //height?: number,
-        //weight?: number,
-        //coach?: Coach[],
-        memberOf: {
-          id: "id of team",
-          name: "Tisin Cvet",
-          alternateName: "TSC",
-          city: 'Beograd',
-        },
-        //achievements?: Achievement[]
-      }
-    );
-    // --
 
   }
 
+  getAthletes() {
+    this.athleteService.getAthletes().subscribe((res) => {
+      this.athletes = res;
+      console.log(res);
+    });
+  }
+
   ngAfterViewInit(): void {
-    if (history.state.data) {
-      this.team = history.state.data.team;
-      this.accordionGroup.value = "filter";
-      this.teamName = this.team.name;
-    }    
+    if (history.state.teamId) {
+      this.teamId = history.state.teamId;
+      this.athleteService.getAthletesByTeamId(this.teamId).subscribe((res) => {
+        this.athletes = res;
+      });
+      if (history.state.teamName) {
+        this.teamNameF = history.state.teamName;
+        this.accordionGroup.value = "filter";
+      } else {
+        this.teamService.getSportsTeamById(this.teamId).subscribe((res) => {
+          this.team = res;
+          this.teamNameF = res.name;
+          this.accordionGroup.value = "filter";
+        });
+      }
+    } else {
+      this.getAthletes();
+    }
+  }
+
+  clearTeamName() {
+    if (this.teamId) {
+      this.getAthletes();
+    }
   }
 
 }

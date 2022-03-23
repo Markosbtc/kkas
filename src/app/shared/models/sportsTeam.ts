@@ -1,4 +1,3 @@
-import { Athlete } from "./athlete";
 import { Coach } from "./coach";
 import { Person } from "./person";
 
@@ -21,7 +20,6 @@ export interface SportsTeam extends Organization {
     captain: Person,
     president: Person,
     coaches?: Coach[],
-    athletes?: Athlete[],
 }
 
 export interface SportsTeamRef {

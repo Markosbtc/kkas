@@ -8,13 +8,13 @@
             </ion-item>
             <ion-list slot="content">
                 <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="eventName" placeholder="" animated="true">
-                    <ion-label class="ion-margin">{{ 'event.filter_event_name' | translate }}</ion-label>
+                    <ion-label class="filter-label ion-margin">{{ 'event.filter_event_name' | translate }}</ion-label>
                 </ion-searchbar>
                 <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="eventYear" placeholder="" animated="true">
-                    <ion-label class="ion-margin">{{ 'event.filter_year' | translate }}</ion-label>
+                    <ion-label class="filter-label ion-margin">{{ 'event.filter_year' | translate }}</ion-label>
                 </ion-searchbar>
                 <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="eventPlace" placeholder="" animated="true">
-                    <ion-label class="ion-margin">{{ 'event.filter_place' | translate }}</ion-label>
+                    <ion-label class="filter-label ion-margin">{{ 'event.filter_place' | translate }}</ion-label>
                 </ion-searchbar>
                 <ion-item>
                     <ion-label class="ion-margin">{{ 'event.filter_type' | translate }}</ion-label>
@@ -33,9 +33,9 @@
             <ion-card-title>{{ 'event.all' | translate }}</ion-card-title>
         </ion-card-header>
         <ion-card-content *ngIf="events && events.length > 0; else noEvent">
-            <ion-item lines="none" *ngFor="let event of events" [routerLink]="['/event', event.id]" [state]="{ data: { event }}">
+            <ion-item lines="none" *ngFor="let event of events" [routerLink]="['/event', event.id]">
                 <ion-label>{{ event.name + ' ' + (event.alternateName ? event.alternateName : '') + ' - ' + event.location + ' - ' + (event.startDate | date) + ' - ' + (event.endDate | date ) }} </ion-label>
-                <ion-button [routerLink]="['/event', event.id]" expand="block" fill="clear" [state]="{ data: { event }}">
+                <ion-button [routerLink]="['/event', event.id]" expand="block" fill="clear">
                     {{ 'shared.open' | translate}}
                 </ion-button>
             </ion-item>

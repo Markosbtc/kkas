@@ -32,6 +32,7 @@ export namespace Distance {
         2000: 2000 as DistanceType,
         5000: 5000 as DistanceType,
     };
+    export const DISTANCES = [200, 500, 1000, 2000, 5000];
 }
 
 export namespace AgeGroup {
@@ -43,6 +44,13 @@ export namespace AgeGroup {
         U23: 'U23' as AgeGroupType,
         senior: 'senior' as AgeGroupType,
     };
+    export const AGE_GROUPS = [
+        'pionir',
+        'kadet',
+        'junior',
+        'U23',
+        'senior'
+    ]
 }
 
 //TODO: 
@@ -56,6 +64,14 @@ export namespace RaceT {
         finalB: 'final B' as RaceType,
         finalC: 'final C' as RaceType
     };
+    export const RACE_TYPES = [
+        'qualification',
+        'semifinal',
+        'final',
+        'final A',
+        'final B',
+        'final C'
+    ]
 }
 
 
@@ -66,6 +82,16 @@ export namespace Boat {
         k1: 'k1' as BoatType,
         k2: 'k2' as BoatType,
     };
+    export const BOAT_TYPES = [
+        'K1',
+        'K2',
+        'K4',
+        'MK1',
+        'MK2',
+        'MK4',
+        'C1',
+        'C2'
+    ];
 }
 
 export namespace ResultStatus {

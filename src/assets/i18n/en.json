@@ -111,6 +111,12 @@
         "cancelled": "Competition will not take place (suspended, cancelled)"
     },
     "athlete": {
+        "label_birthDate": "Date of Birth",
+        "label_email": "E-mail address",
+        "label_gender": "Gender",
+        "label_height": "Height",
+        "label_weight": "Weight",
+        "label_website": "Website",
         "filter_name": "Name",
         "filter_age": "Birth Year",
         "filter_team": "Sports Team",
@@ -192,6 +198,10 @@
     "final C": "Final C",
     "startlist": "Startlist",
     "official": "Official",
-    "unofficial": "Unofficial"
-
+    "unofficial": "Unofficial",
+    "pionir": "Pioneer",
+    "kadet": "Cadet",
+    "junior": "Junior",
+    "U23": "U23",
+    "senior": "Senior"
 }

@@ -111,6 +111,12 @@
         "cancelled": "Competition will not take place (suspended, cancelled)"
     },
     "athlete": {
+        "label_birthDate": "Születési dátum",
+        "label_email": "E-mail cím",
+        "label_gender": "Nem",
+        "label_height": "Magasság",
+        "label_weight": "Testsúly",
+        "label_website": "Weboldal",
         "filter_name": "Versenyző neve",
         "filter_age": "Születési év",
         "filter_team": "Tagszervezet",
@@ -192,5 +198,10 @@
     "final C": "C Döntő",
     "startlist": "Rajtlista",
     "official": "Hivatalos",
-    "unofficial": "Nem-hivatalos"
+    "unofficial": "Nem-hivatalos",
+    "pionir": "Kölyök",
+    "kadet": "Serdülő",
+    "junior": "Ifijusági",
+    "U23": "U23",
+    "senior": "Felnőtt"
 }
