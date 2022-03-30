@@ -72,26 +72,26 @@
             </ion-note>
         </ion-item>
 
-        <ion-row>
-            <ion-col>
-                <ion-button type="submit" color="danger" expand="block">
+        <ion-row class="ion-margin">
+            <ion-col sizeLg="6" offsetLg="3" sizeMd="6" offsetMd="3">
+                <ion-button type="submit" expand="block">
                     {{ 'auth.register' | translate }}
                 </ion-button>
             </ion-col>
         </ion-row>
 
-        <ion-row>
-            <ion-col>
+        <!--  <ion-row>
+            <ion-col sizeLg="6" offsetLg="3" sizeMd="6" offsetMd="3">
                 <ion-button (click)="authService.GoogleAuth()" color="danger" expand="block">
                     {{ 'auth.login_google' | translate }}
                 </ion-button>
             </ion-col>
-        </ion-row>
+        </ion-row> -->
 
-        <ion-row>
-            <ion-col>
+        <ion-row class="ion-text-center ion-margin">
+            <ion-col sizeLg="6" offsetLg="3" sizeMd="6" offsetMd="3">
                 <ion-label> {{ 'auth.already_have_account' | translate }} </ion-label>
-                <ion-button [routerLink]="['/login']" expand="block">
+                <ion-button [routerLink]="['/login']" expand="block" color="secondary">
                     {{ 'auth.login' | translate }}
                 </ion-button>
             </ion-col>

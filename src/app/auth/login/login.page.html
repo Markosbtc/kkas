@@ -25,36 +25,36 @@
             {{ 'form.err_password_required' | translate }}
         </ion-note>
 
-        <ion-row>
-            <ion-col>
+        <ion-row class="ion-margin">
+            <ion-col sizeLg="6" offsetLg="3" sizeMd="6" offsetMd="3">
                 <ion-button type="submit" expand="block">
                     {{ "auth.login" | translate }}
                 </ion-button>
             </ion-col>
         </ion-row>
 
-        <ion-row>
-            <ion-col>
+        <!-- <ion-row class="ion-margin">
+            <ion-col sizeLg="6" offsetLg="3" sizeMd="6" offsetMd="3">
                 <ion-button (click)="authService.GoogleAuth()" color="danger" expand="block">
                     {{ 'auth.login_google' | translate }}
                 </ion-button>
             </ion-col>
         </ion-row>
+ -->
 
-
-        <ion-row>
-            <ion-col>
+        <ion-row class="ion-text-center ion-margin">
+            <ion-col sizeLg="6" offsetLg="3" sizeMd="6" offsetMd="3">
                 <ion-label>{{ 'auth.forgot_password' | translate }} </ion-label>
-                <ion-button [routerLink]="['/forgot-password']" expand="block">
+                <ion-button [routerLink]="['/forgot-password']" expand="block" color="tertiary">
                     {{ 'auth.reset_password' | translate }}
                 </ion-button>
             </ion-col>
         </ion-row>
 
-        <ion-row>
-            <ion-col>
+        <ion-row class="ion-text-center ion-margin">
+            <ion-col sizeLg="6" offsetLg="3" sizeMd="6" offsetMd="3">
                 <ion-label>{{ 'auth.no_account_yet' | translate }} </ion-label>
-                <ion-button [routerLink]="['/register']" expand="block">
+                <ion-button [routerLink]="['/register']" expand="block" color="secondary">
                     {{ "auth.register" | translate }}
                 </ion-button>
             </ion-col>
