@@ -11,7 +11,7 @@
                 <ion-label>{{ athlete.name.familyName + ' ' + athlete.name.givenName + ' (' + (athlete.birthDate | date: 'y') + ')' }} </ion-label>
                 <ion-label>{{ athlete.memberOf.name + ' ' + (athlete.memberOf.alternateName? '(' + athlete.memberOf.alternateName + ')' : '' ) }} </ion-label>
             </ion-item>
-            <ion-button (click)="registerAthlete()" expand="block" shape="round">
+            <ion-button (click)="registerAthlete()" expand="block">
                 {{ 'admin.register_athlete' | translate }}
             </ion-button>
         </ion-card-content>
@@ -21,7 +21,7 @@
                 <ion-card-subtitle>{{ 'admin.no_athlete' | translate }}</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
-                <ion-button (click)="registerAthlete()" expand="block" shape="round">
+                <ion-button (click)="registerAthlete()" expand="block">
                     {{ 'admin.register_athlete' | translate }}
                 </ion-button>
             </ion-card-content>

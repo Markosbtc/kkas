@@ -2,15 +2,142 @@
 <ion-content [fullscreen]="true">
 
     <ion-card>
-        <ion-card-header>
-            <ion-card-title>{{ 'admin.team' | translate }}</ion-card-title>
+        <ion-card-header *ngIf="!myteam && team; else noTeam" class="ion-padding ion-margin">
+            <ion-avatar>
+                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                <!-- TODO: src = team.logo -->
+            </ion-avatar>
+            <ion-card-title>{{ team?.name + (team?.alternateName? ' - ' + team?.alternateName : '')}}</ion-card-title>
+            <ion-card-subtitle>{{ team?.address?.city }}</ion-card-subtitle>
         </ion-card-header>
-        <ion-card-content *ngIf="!myteam; else noTeam">
-            <!-- TODO: display team info -->
-            <ion-item>
-                <ion-label> {{ team?.name }} </ion-label>
+        <ion-card-content *ngIf="!myteam && team">
+            <ion-item *ngIf="team.address" lines="none">
+                <ion-label> {{ 'teams.label_address' | translate }} </ion-label>
+                <ion-label> {{ team.address.zip }} </ion-label>
+                <ion-label> {{ team.address.city }} </ion-label>
+                <ion-label> {{ team.address.address }} </ion-label>
             </ion-item>
-            <ion-button expand="block" shape="round" [routerLink]="['/admin/team']" [queryParams]="{ id: team?.id }">
+            <ion-item-divider>
+                <ion-label> {{ 'teams.label_contacts' | translate }} </ion-label>
+            </ion-item-divider>
+            <ion-item-group *ngIf="team.email.length > 0">
+                <ion-item lines="none">
+                    <ion-label> {{ 'teams.label_emails' | translate }} </ion-label>
+                    <ion-label *ngFor="let email of team.email"> {{ email }} </ion-label>
+                </ion-item>
+            </ion-item-group>
+            <ion-item-group *ngIf="team.url.length > 0">
+                <ion-item lines="none">
+                    <ion-label> {{ 'teams.label_urls' | translate }} </ion-label>
+                    <ion-label *ngFor="let url of team.url"> {{ url }} </ion-label>
+                </ion-item>
+            </ion-item-group>
+            <ion-item-group *ngIf="team.telephone.length > 0">
+                <ion-item lines="none">
+                    <ion-label> {{ 'teams.label_telephone' | translate }} </ion-label>
+                    <ion-label *ngFor="let phone of team.telephone"> {{ phone }} </ion-label>
+                </ion-item>
+            </ion-item-group>
+            <ion-item-group *ngIf="team.captain">
+                <ion-item-divider>
+                    <ion-label> {{ 'teams.label_captain' | translate }} </ion-label>
+                </ion-item-divider>
+                <ion-item lines="none">
+                    <ion-label> {{ 'teams.label_name' | translate }} </ion-label>
+                    <ion-label> {{ team.captain.name.fullName? team.captain.name.fullName : team.captain.name.familyName + ' ' + team.captain.name.givenName }} </ion-label>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label> {{ 'teams.label_birthDate' | translate }} </ion-label>
+                    <ion-label> {{ team.captain.birthDate | date }} </ion-label>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label> {{ 'teams.label_gender' | translate }} </ion-label>
+                    <ion-label> {{ 'gender.' + team.captain.gender | translate }} </ion-label>
+                </ion-item>
+                <ion-item *ngIf="team.captain.email" lines="none">
+                    <ion-label> {{ 'teams.label_email' | translate }} </ion-label>
+                    <ion-label> {{ team.captain.email }} </ion-label>
+                </ion-item>
+                <ion-item *ngIf="team.captain.url" lines="none">
+                    <ion-label> {{ 'teams.label_website' | translate }} </ion-label>
+                    <ion-label> {{ team.captain.url }} </ion-label>
+                </ion-item>
+            </ion-item-group>
+            <ion-item-group *ngIf="team.president">
+                <ion-item-divider>
+                    <ion-label> {{ 'teams.label_president' | translate }} </ion-label>
+                </ion-item-divider>
+                <ion-item lines="none">
+                    <ion-label> {{ 'teams.label_name' | translate }} </ion-label>
+                    <ion-label> {{ team.president.name.fullName? team.president.name.fullName : team.president.name.familyName + ' ' + team.president.name.givenName }} </ion-label>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label> {{ 'teams.label_birthDate' | translate }} </ion-label>
+                    <ion-label> {{ team.president.birthDate | date }} </ion-label>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label> {{ 'teams.label_gender' | translate }} </ion-label>
+                    <ion-label> {{ 'gender.' + team.president.gender | translate }} </ion-label>
+                </ion-item>
+                <ion-item *ngIf="team.president.email" lines="none">
+                    <ion-label> {{ 'teams.label_email' | translate }} </ion-label>
+                    <ion-label> {{ team.president.email }} </ion-label>
+                </ion-item>
+                <ion-item *ngIf="team.president.url" lines="none">
+                    <ion-label> {{ 'teams.label_website' | translate }} </ion-label>
+                    <ion-label> {{ team.president.url }} </ion-label>
+                </ion-item>
+            </ion-item-group>
+            <ion-item-group *ngIf="team.coaches.length > 0">
+                <ion-item-divider>
+                    <ion-label> {{ 'teams.label_coaches' | translate }} </ion-label>
+                </ion-item-divider>
+                <ion-item-group *ngFor="let coach of team.coaches">
+                    <ion-item lines="none">
+                        <ion-label> {{ 'teams.label_name' | translate }} </ion-label>
+                        <ion-label> {{ coach.name.fullName? coach.name.fullName : coach.name.familyName + ' ' + coach.name.givenName }} </ion-label>
+                        <ion-label *ngIf="coach.roleName"> {{ coach.roleName }} </ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label> {{ 'teams.label_birthDate' | translate }} </ion-label>
+                        <ion-label> {{ coach.birthDate | date }} </ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label> {{ 'teams.label_gender' | translate }} </ion-label>
+                        <ion-label> {{ 'gender.' + coach.gender | translate }} </ion-label>
+                    </ion-item>
+                    <ion-item *ngIf="coach.email" lines="none">
+                        <ion-label> {{ 'teams.label_email' | translate }} </ion-label>
+                        <ion-label> {{ coach.email }} </ion-label>
+                    </ion-item>
+                    <ion-item *ngIf="coach.url" lines="none">
+                        <ion-label> {{ 'teams.label_website' | translate }} </ion-label>
+                        <ion-label> {{ coach.url }} </ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label> {{ 'teams.label_licenceId' | translate }} </ion-label>
+                        <ion-label> {{ coach.licenceId }} </ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label> {{ 'teams.label_licenceLevel' | translate }} </ion-label>
+                        <ion-label> {{ coach.licenceLevel }} </ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label> {{ 'teams.label_licenceValidFrom' | translate }} </ion-label>
+                        <ion-label> {{ coach.licenceValidFrom | date }} </ion-label>
+                    </ion-item>
+                    <ion-item *ngIf="coach.licenceValidTo" lines="none">
+                        <ion-label> {{ 'teams.label_licenceValidTo' | translate }} </ion-label>
+                        <ion-label> {{ coach.licenceValidTo | date }} </ion-label>
+                    </ion-item>
+                    <ion-item *ngIf="coach.note" lines="none">
+                        <ion-label> {{ 'teams.label_note' | translate }} </ion-label>
+                        <ion-label> {{ coach.note }} </ion-label>
+                    </ion-item>
+                </ion-item-group>
+            </ion-item-group>
+
+            <ion-button expand="block" [routerLink]="['/admin/team']" [queryParams]="{ id: team?.id }">
                 {{ 'admin.edit_team' | translate }}
             </ion-button>
         </ion-card-content>
@@ -20,7 +147,7 @@
                 <ion-card-subtitle>{{ 'admin.no_team' | translate }}</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
-                <ion-button (click)="registerTeam()" expand="block" shape="round">
+                <ion-button (click)="registerTeam()" expand="block">
                     {{ 'admin.register_team' | translate }}
                 </ion-button>
             </ion-card-content>

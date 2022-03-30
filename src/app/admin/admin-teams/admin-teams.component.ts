@@ -26,10 +26,9 @@ export class AdminTeamsComponent implements OnInit {
         if (team === '0') {
           this.myteam = true;
         } else {
-          this.myteam = false;
-          // TODO: display current team stats
           this.teamService.getSportsTeamById(team.id).subscribe((res) => {
             this.team = res;
+            this.myteam = false;
             console.log(this.team);
           });
         }
