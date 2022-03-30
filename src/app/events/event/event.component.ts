@@ -18,6 +18,7 @@ export class EventComponent implements OnInit {
   event: Event;
 
   eventTeamF: string;
+  athleteF: string;
   boatF: string;
   ageGroupF: string;
   distanceF: string;

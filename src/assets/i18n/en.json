@@ -97,6 +97,7 @@
         "filter_type": "Type of the Event",
         "filter_boat": "Boat",
         "filter_team": "Sports Team",
+        "filter_athlete": "Athlete",
         "filter_gender": "Gender",
         "filter_age": "Category",
         "filter_distance": "Distance",

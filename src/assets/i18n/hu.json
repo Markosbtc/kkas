@@ -97,6 +97,7 @@
         "filter_type": "Verseny típusa",
         "filter_boat": "Hajó",
         "filter_team": "Tagszervezet",
+        "filter_athlete": "Versenyző",
         "filter_gender": "Versenyző neme",
         "filter_age": "Korosztály",
         "filter_distance": "Táv",

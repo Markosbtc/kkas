@@ -38,7 +38,10 @@
                     </ion-select>
                 </ion-item>
                 <ion-searchbar type="text" inputmode="text" showCancelButton="focus" placeholder="" animated="true" [(ngModel)]="eventTeamF">
-                    <ion-label class="filter-label ion-margin ion-padding">{{ 'event.filter_team' | translate }}</ion-label>
+                    <ion-label class="filter-label ion-margin-horizontal ion-padding-horizontal">{{ 'event.filter_team' | translate }}</ion-label>
+                </ion-searchbar>
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" placeholder="" animated="true" [(ngModel)]="athleteF">
+                    <ion-label class="filter-label ion-margin-horizontal ion-padding-horizontal">{{ 'event.filter_athlete' | translate }}</ion-label>
                 </ion-searchbar>
             </ion-list>
         </ion-accordion>
