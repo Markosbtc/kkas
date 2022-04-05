@@ -20,10 +20,10 @@
                 {{ 'form.label_password' | translate }}
             </ion-label>
             <ion-input type="password" formControlName="password" required></ion-input>
+            <ion-note slot="error" *ngIf="isSubmitted && loginForm.hasError('required', 'password')">
+                {{ 'form.err_password_required' | translate }}
+            </ion-note>
         </ion-item>
-        <ion-note slot="error" *ngIf="isSubmitted && loginForm.hasError('required', 'password')">
-            {{ 'form.err_password_required' | translate }}
-        </ion-note>
 
         <ion-row class="ion-margin">
             <ion-col sizeLg="6" offsetLg="3" sizeMd="6" offsetMd="3">
