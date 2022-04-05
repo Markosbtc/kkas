@@ -24,8 +24,8 @@ const routes: Routes = [
   { path: 'teams',                component: TeamsComponent                                                                           },
   { path: 'admin/teams',          component: AdminTeamsComponent,          ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ },
   { path: 'admin/team',           component: AdminTeamsFormComponent,      ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ },
-  { path: 'admin/athletes',       component: AdminAthletesComponent,       /* FIXME: canActivate: [AuthGuard] role: user */           },
-  { path: 'admin/athlete',        component: AdminAthletesFormComponent,   /* FIXME: canActivate: [AuthGuard] role: user */           }
+  { path: 'admin/athletes',       component: AdminAthletesComponent,       ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ },
+  { path: 'admin/athlete',        component: AdminAthletesFormComponent,   ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ }
 ];
 
 @NgModule({
