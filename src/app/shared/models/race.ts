@@ -12,7 +12,7 @@ export interface Race {
     age: AgeGroup.AgeGroupType,
     type?: RaceT.RaceType,
     time: string,
-    day?: Date,
+    day?: string | Date,
     // results?: Result[],
     resultStatus: ResultStatus.ResultStatusType,
     note?: string,

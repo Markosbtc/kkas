@@ -1,10 +1,10 @@
 import { Person } from "./person";
 
 export interface Referee extends Person {
-    licenceAcquiredDate: Date,
+    licenceAcquiredDate: Date | string,
     level?: string,
-    licenceValidFrom: Date,
-    licenceValidTo: Date,
+    licenceValidFrom: Date | string,
+    licenceValidTo: Date | string,
     discipline: Discipline.DisciplineType,
     note?: string,
 }

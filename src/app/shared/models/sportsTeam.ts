@@ -5,14 +5,16 @@ export interface Organization {
     id?: string,
     name: string,
     alternateName?: string,
-    address: {
-        zip: string,
-        city: string,
-        address: string
-    },
+    address: Address,
     email?: string[],
     url?: string[],
     telephone?: string[]
+}
+
+export interface Address {
+    zip: string,
+    city: string,
+    address: string
 }
 
 export interface SportsTeam extends Organization {

@@ -9,8 +9,8 @@ export interface Person {
     email?: string,
     url?: string,
     gender: Gender.GenderType,
-    birthDate: Date,
-    deathDate?: Date,
+    birthDate: Date | string,
+    deathDate?: Date | string,
 }
 
 export namespace Gender {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Achievement } from 'src/app/shared/models/achievement';
 import { Athlete } from 'src/app/shared/models/athlete';
 import { EventCategory } from 'src/app/shared/models/event';
 import { Boat, Distance, RaceT } from 'src/app/shared/models/race';
@@ -14,6 +15,8 @@ export class AthleteComponent implements OnInit {
   title: string;
   id: string;
   athlete: Athlete;
+  achievements: Achievement[] = []; // TODO: achievement service, get achievements by athlete.id 
+
   boats = Boat.BOAT_TYPES;
   distances = Distance.DISTANCES;
   raceTypes = RaceT.RACE_TYPES;

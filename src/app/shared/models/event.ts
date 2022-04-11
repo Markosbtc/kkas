@@ -1,16 +1,16 @@
 import { Athlete } from "./athlete";
 import { Race } from "./race";
-import { Organization, SportsTeam } from "./sportsTeam"
+import { Address, Organization, SportsTeam } from "./sportsTeam"
 
 export interface Event {
     id?: string,
     name: string,
     alternateName?: string,
     description?: string,
-    location?: string,
+    location?: Address,
     url?: string,
-    startDate: Date,
-    endDate: Date,
+    startDate: Date | string,
+    endDate: Date | string,
     eventStatus: EventStatus.EventStatusType,
     organizer: SportsTeam | Organization,
     /* participation?: {
