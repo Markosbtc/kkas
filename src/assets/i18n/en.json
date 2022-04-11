@@ -103,7 +103,8 @@
         "filter_distance": "Distance",
         "all": "Events",
         "all_races": "Races",
-        "no_event": "No events found in the database"
+        "no_event": "No events found in the database",
+        "no_races": "No races found in the database"
     },
     "event_status_type": {
         "scheduled": "Competition is scheduled.",
@@ -175,7 +176,8 @@
         "referee": "Referee",
         "start_referee": "Start Referee",
         "finish_referee": "Finish referee",
-        "note": "Note"
+        "note": "Note",
+        "err_race_number": "No race with this race number"
     },
     "admin": {
         "team": "Team",

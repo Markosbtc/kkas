@@ -103,7 +103,8 @@
         "filter_distance": "Táv",
         "all": "Összes",
         "all_races": "Összes futam",
-        "no_event": "Nincs megjeleníthető esemény az adatbázisban"
+        "no_event": "Nincs megjeleníthető esemény az adatbázisban",
+        "no_races": "Nincs megjeleníthető futam az adatbázisban"
     },
     "event_status_type": {
         "scheduled": "Competition is scheduled.",
@@ -175,7 +176,8 @@
         "referee": "Bíró",
         "start_referee": "Indítóbíró",
         "finish_referee": "Célbíró",
-        "note": "Megjegyzés"
+        "note": "Megjegyzés",
+        "err_race_number": "Nincs ilyen sorszámú futam"
     },
     "admin": {
         "team": "Egyesület",

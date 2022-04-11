@@ -1,9 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { Athlete } from 'src/app/shared/models/athlete';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { IonFab, ModalController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Event } from 'src/app/shared/models/event';
-import { Gender } from 'src/app/shared/models/person';
-import { AgeGroup, Boat, Distance, Race, RaceT, ResultStatus } from 'src/app/shared/models/race';
+import { Race } from 'src/app/shared/models/race';
+import { Result } from 'src/app/shared/models/result';
+import { EventService } from 'src/app/shared/services/event.service';
+import { RaceService } from 'src/app/shared/services/race.service';
+import { ResultService } from 'src/app/shared/services/result.service';
 
 @Component({
   selector: 'app-result',
@@ -11,98 +14,48 @@ import { AgeGroup, Boat, Distance, Race, RaceT, ResultStatus } from 'src/app/sha
   styleUrls: ['./result.component.scss'],
 })
 export class ResultComponent implements OnInit {
-  @Input() race: Race;
+  @Input() raceId: string;
+  @ViewChild('ifab') fab: IonFab;
 
+  race: Race;
+  results: Result[] = [];
   racenb: number;
   event: Event;
 
   constructor(
-    //private eventService: Eventservice,
+    private resultService: ResultService,
+    private eventService: EventService,
+    private raceService: RaceService,
+    private translate: TranslateService,
+    private toastController: ToastController,
     private modalController: ModalController
   ) { }
 
   ngOnInit() {
-    //FIXME: delete: --
-    this.race = {
-      id: 'race id string',
-      eventId: 'eventId',
-      number: 1,
-      distance: Distance.DistanceType[1000],
-      boat: Boat.BoatType.k1,
-      gender: Gender.GenderType.MALE,
-      age: AgeGroup.AgeGroupType.senior,
-      type: RaceT.RaceType.final,
-      time: '11:55',
-      //day: new Date(),
-      resultStatus: ResultStatus.ResultStatusType.official,
-      results: [
-        {
-          id: 'result id',
-          raceId: 'race id string',
-          created: new Date(),
-          modified: new Date(),
-          competitor: {
-            name: {
-              familyName: 'Subotic',
-              givenName: 'Marko',
-              //fullName?: string
-            },
-            gender: Gender.GenderType.MALE,
-            /* height?: number,
-            weight?: number,
-            coach?: Coach[], */
-            memberOf: {
-              name: 'KRK Tisin Cvet',
-              alternateName: 'TSC',
-              /* captain: Person,
-              president: Person, */
-            },
-            // achievements?: Achievement[]
-          } as Athlete,
-          lane: 3,
-          rank: 1,
-          performance: '3:35',
-          points: 10,
-          //disqualificationReason?: string,
-        },
-        {
-          id: 'result id 2',
-          raceId: 'race id string',
-          created: new Date(),
-          modified: new Date(),
-          competitor: {
-            name: {
-              familyName: 'Teszt',
-              givenName: 'Elek',
-            },
-            gender: Gender.GenderType.MALE,
-            memberOf: {
-              name: 'KRK Tisin Cvet',
-              alternateName: 'TSC',
-            },
-          } as Athlete,
-          lane: 5,
-          rank: 2,
-          performance: '3:37',
-          points: 8,
-        }
-      ],
-      progressingScheme: 'First 3 to FA, rest out',
-      /*  note?: string,
-       startReferee?: Referee[],
-       finishReferee?: Referee[],
-       referee?: Referee[], */
+    if (this.raceId) {
+      this.getRace();
+      this.getResults();
     }
-    console.log(this.race);
-    //--
+  }
 
-    this.racenb = this.race.number;
-    this.getEvent()
-
+  getRace() {
+    this.raceService.getRaceById(this.raceId).subscribe((res) => {
+      this.race = res;
+      this.racenb = res.number;
+      this.getEvent();
+    });
   }
 
   getEvent() {
-    //TODO: this.event = this.eventService.getEventById(this.race.eventId);
+    this.eventService.getEventById(this.race.eventId).subscribe((resp) => {
+      this.event = resp;
+    });
+  }
+
+  getResults() {
+    this.resultService.getResultsByRaceId(this.raceId).subscribe((response) => {
+      this.results = response;
+    });
   }
 
   close() {
@@ -110,16 +63,36 @@ export class ResultComponent implements OnInit {
   }
 
   nextRace() {
-
+    this.racenb += 1;
+    this.searchRace();
   }
 
   previousRace() {
-
+    this.racenb -= 1;
+    this.searchRace();
   }
 
-  searchRace(){
-    console.log(this.racenb);
-    
+  searchRace() {
+    this.raceService.getRaceByEventIdAndRaceNumber(this.event.id, this.racenb).subscribe((res) => {
+      if (res.length > 0) {
+        this.raceId = res[0].id;
+        this.getRace();
+        this.getResults();
+      } else {
+        this.presentToast(this.translate.instant('result.err_race_number'));
+        this.racenb = this.race.number;
+      }
+      this.fab.activated = true;
+    });
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      color: 'danger',
+      duration: 1500
+    });
+    toast.present();
   }
 
 }

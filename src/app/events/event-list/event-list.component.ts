@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Event, EventCategory, EventStatus } from 'src/app/shared/models/event';
+import { EventService } from 'src/app/shared/services/event.service';
 
 @Component({
   selector: 'app-event-list',
@@ -8,38 +9,24 @@ import { Event, EventCategory, EventStatus } from 'src/app/shared/models/event';
 })
 export class EventListComponent implements OnInit {
   events: Event[] = [];
+
+  // filters:
   eventName: string;
   eventPlace: string;
   eventYear; //TODO: type? Date/string/number?
 
-  constructor() { }
+  constructor(
+    private eventService: EventService
+  ) { }
 
   ngOnInit() {
-    this.events.push({
-      id: 'eventId',
-      name: 'Otvoreno prvenstvo Srbije',
-      alternateName: 'string',
-      description: 'description lorem ipsunn asd asa',
-      location: 'Ada Ciganlija',
-      url: 'urlofevent',
-      startDate: new Date(),
-      endDate: new Date(new Date().setDate(new Date().getDate() + 1)),
-      eventStatus: EventStatus.EventStatusType.scheduled,
-      organizer: {
-        name: 'KSS',
-        address: {
-          zip: '3030',
-          city: 'Beograd',
-          address: 'Ada Cigalnija 13'
-        }
-      },
-      /* participation?: {
-        teams: SportsTeam[],
-        athletes: Athlete[],
-      }, */
-      eventCategory: EventCategory.EventCategoryType.national,
-      //races?: Race[],
-    })
+    this.getEvents();
+  }
+
+  getEvents() {
+    this.eventService.getEvents().subscribe((res) => {
+      this.events = res;
+    });
   }
 
 }

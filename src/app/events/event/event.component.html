@@ -47,18 +47,24 @@
         </ion-accordion>
     </ion-accordion-group>
 
-    <ion-card *ngIf="event && event.races">
+    <ion-card>
         <ion-card-header>
             <ion-card-title>{{ 'event.all_races' | translate }}</ion-card-title>
         </ion-card-header>
-        <ion-card-content>
-            <ion-item lines="none" *ngFor="let race of event.races" button="true">
-                <ion-label (click)="presentModal(race)"> {{ race.number + '. ' + race.boat + ' ' + race.gender + ' ' + race.age + ' ' + race.distance + 'm ' | titlecase}} </ion-label>
-                <ion-button expand="block" fill="clear" (click)="presentModal(race)">
+        <ion-card-content *ngIf="races.length > 0; else noRaces">
+            <ion-item lines="none" *ngFor="let race of races" button="true">
+                <ion-label (click)="presentModal(race.id)"> {{ race.number + '. ' + (race.boat | uppercase)+ ' ' + ('gender.' + race.gender | translate) + ' ' + (race.age | translate) + ' ' + (race.distance + 'm ') + ( race.type ? ' - ' + (race.type | translate) : '') }} </ion-label>
+                <ion-button expand="block" fill="clear" (click)="presentModal(race.id)">
                     {{ 'event.result' | translate}}
                 </ion-button>
             </ion-item>
         </ion-card-content>
+
+        <ng-template #noRaces>
+            <ion-card-header>
+                <ion-card-subtitle>{{ 'event.no_races' | translate }}</ion-card-subtitle>
+            </ion-card-header>
+        </ng-template>
     </ion-card>
 
 </ion-content>

@@ -34,7 +34,7 @@
         </ion-card-header>
         <ion-card-content *ngIf="events && events.length > 0; else noEvent">
             <ion-item lines="none" *ngFor="let event of events" [routerLink]="['/event', event.id]">
-                <ion-label>{{ event.name + ' ' + (event.alternateName ? event.alternateName : '') + ' - ' + event.location + ' - ' + (event.startDate | date) + ' - ' + (event.endDate | date ) }} </ion-label>
+                <ion-label>{{ event.name + ' ' + (event.alternateName ? '(' + event.alternateName + ')' : '') + ' - ' + event.location.city + ' - ' + (event.startDate | date: 'yyyy.MM.dd') + ' - ' + (event.endDate | date: 'MM.dd' ) }} </ion-label>
                 <ion-button [routerLink]="['/event', event.id]" expand="block" fill="clear">
                     {{ 'shared.open' | translate}}
                 </ion-button>
