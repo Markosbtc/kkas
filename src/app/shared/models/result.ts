@@ -7,10 +7,8 @@ export interface Result {
     modified?: Date,
     competitor: Athlete,
     lane: number,
-    rank: number,
+    rank: number | string, // helyezés vagy 'dsq' | 'dnf' ...
     performance?: string,
     points?: number,
     disqualificationReason?: string,
 }
-
-

@@ -1,4 +1,3 @@
-import { Achievement } from "./achievement";
 import { CoachRef } from "./coach";
 import { Person } from "./person";
 import { SportsTeamRef } from "./sportsTeam";
@@ -8,5 +7,5 @@ export interface Athlete extends Person {
     weight?: number,
     coaches?: CoachRef[],
     memberOf: SportsTeamRef,
-    achievements?: Achievement[]
+    // achievements?: Achievement[]
 }

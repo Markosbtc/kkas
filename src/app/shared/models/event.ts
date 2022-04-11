@@ -13,12 +13,12 @@ export interface Event {
     endDate: Date,
     eventStatus: EventStatus.EventStatusType,
     organizer: SportsTeam | Organization,
-    participation?: {
+    /* participation?: {
         teams: SportsTeam[],
         athletes: Athlete[],
-    },
+    }, */
     eventCategory: EventCategory.EventCategoryType,
-    races?: Race[],
+    // races?: Race[],
 }
 
 export namespace EventStatus {

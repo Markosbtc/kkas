@@ -13,7 +13,7 @@ export interface Race {
     type?: RaceT.RaceType,
     time: string,
     day?: Date,
-    results?: Result[],
+    // results?: Result[],
     resultStatus: ResultStatus.ResultStatusType,
     note?: string,
     progressingScheme?: string, //TODO: first 3 to FA ...
