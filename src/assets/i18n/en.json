@@ -8,7 +8,9 @@
         "HOMEPAGE": "Homepage",
         "current": "Ongoing Event",
         "next": "Upcoming Events",
-        "MYTEAM": "Team Info"
+        "MYTEAM": "Team Info",
+        "no_current_events": "No Event is happening right now",
+        "no_upcoming_events": "No Upcoming Events in the database"
     },
     "shared": {
         "filter": "Filter",

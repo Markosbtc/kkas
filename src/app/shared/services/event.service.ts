@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collectionData, collection, Firestore, deleteDoc, doc, docData, updateDoc, getDoc } from '@angular/fire/firestore';
+import { addDoc, collectionData, collection, Firestore, deleteDoc, doc, docData, updateDoc, getDoc, query, where } from '@angular/fire/firestore';
 import { DocumentData, DocumentReference } from 'rxfire/firestore/interfaces';
 import { Observable } from 'rxjs';
 import { Event } from '../models/event';
@@ -24,6 +24,16 @@ export class EventService {
 
   getEventSnapshot(eventRef: DocumentReference<any>) {
     return getDoc(eventRef);
+  }
+
+  getCurrentEvent(): Observable<Event[]> {
+    const q = query(collection(this.firestore, 'events'), where("endDate", ">=", new Date(new Date().setHours(0, 0, 0, 0)).toISOString()));
+    return collectionData(q, { idField: 'id' }) as Observable<Event[]>;
+  }
+
+  getUpcomingEvents(): Observable<Event[]> {
+    const q = query(collection(this.firestore, 'events'), where("startDate", ">=", new Date(new Date().setHours(0, 0, 0, 0)).toISOString()));
+    return collectionData(q, { idField: 'id' }) as Observable<Event[]>;
   }
 
   addEvent(event: Event) {

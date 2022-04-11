@@ -5,22 +5,45 @@
         <ion-card-header>
             <ion-card-title>{{ 'home.current' | translate }}</ion-card-title>
         </ion-card-header>
-        <ion-card-content>
-            <ion-item lines="none">
-                <ion-label>Awesome Label</ion-label>
+        <ion-card-content *ngIf="currentEvents && currentEvents.length > 0; else nocurrentEvents">
+            <ion-item lines="none" *ngFor="let event of currentEvents" [routerLink]="['/event', event?.id]">
+                <ion-label>
+                    {{ event?.name + ' ' + (event?.alternateName ? '(' + event?.alternateName + ')' : '') + ' - ' + event?.location.city + ' - ' + (event?.startDate | date: 'yyyy.MM.dd') + ' - ' + (event?.endDate | date: 'MM.dd') }}
+                </ion-label>
+                <ion-button [routerLink]="['/event', event?.id]" expand="block" fill="clear">
+                    {{ 'shared.open' | translate}}
+                </ion-button>
             </ion-item>
         </ion-card-content>
+
+        <ng-template #nocurrentEvents>
+            <ion-card-header>
+                <ion-card-subtitle>{{ 'home.no_current_events' | translate }}</ion-card-subtitle>
+            </ion-card-header>
+        </ng-template>
+
     </ion-card>
 
     <ion-card>
         <ion-card-header>
             <ion-card-title>{{ 'home.next' | translate }}</ion-card-title>
         </ion-card-header>
-        <ion-card-content>
-            <ion-item lines="none">
-                <ion-label>Awesome Label</ion-label>
+        <ion-card-content *ngIf="upcomingEvents && upcomingEvents.length > 0; else noUpcomingEvents">
+            <ion-item lines="none" *ngFor="let event of upcomingEvents" [routerLink]="['/event', event?.id]">
+                <ion-label>
+                    {{ event?.name + ' ' + (event?.alternateName ? '(' + event?.alternateName + ')' : '') + ' - ' + event?.location.city + ' - ' + (event?.startDate | date: 'yyyy.MM.dd') + ' - ' + (event?.endDate | date: 'MM.dd') }}
+                </ion-label>
+                <ion-button [routerLink]="['/event', event?.id]" expand="block" fill="clear">
+                    {{ 'shared.open' | translate}}
+                </ion-button>
             </ion-item>
         </ion-card-content>
+
+        <ng-template #noUpcomingEvents>
+            <ion-card-header>
+                <ion-card-subtitle>{{ 'home.no_upcoming_events' | translate }}</ion-card-subtitle>
+            </ion-card-header>
+        </ng-template>
     </ion-card>
 
 </ion-content>

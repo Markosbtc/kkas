@@ -8,7 +8,9 @@
         "HOMEPAGE": "Főoldal",
         "current": "Jelenleg zajló esemény",
         "next": "Következő események",
-        "MYTEAM": "Egyesület"
+        "MYTEAM": "Egyesület",
+        "no_current_events": "Nincs jelenleg zajló esemény",
+        "no_upcoming_events": "Nincs megjeleníthető esemény"
     },
     "shared": {
         "filter": "Szűrők",
