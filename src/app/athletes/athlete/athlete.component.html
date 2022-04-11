@@ -51,7 +51,7 @@
         </ion-card>
     </ng-template>
 
-    <ion-accordion-group *ngIf="athlete && athlete.achievements?.length > 0" expand="inset">
+    <ion-accordion-group *ngIf="athlete && achievements.length > 0" expand="inset">
         <ion-accordion value="filter" toggle-icon="filter">
             <ion-item slot="header">
                 <ion-label>{{ 'shared.filter' | translate}}</ion-label>
@@ -103,8 +103,8 @@
         </ion-accordion>
     </ion-accordion-group>
 
-    <ng-container *ngIf="athlete && athlete.achievements?.length > 0; else noAchievement">
-        <ion-card *ngFor="let achievement of athlete.achievements">
+    <ng-container *ngIf="athlete && achievements?.length > 0; else noAchievement">
+        <ion-card *ngFor="let achievement of achievements">
             <ion-card-header>
                 <ion-card-title>{{ '//TODO:' }}</ion-card-title>
             </ion-card-header>
