@@ -30,7 +30,10 @@
 
     <ion-card>
         <ion-card-header>
-            <ion-card-title>{{ 'event.all' | translate }}</ion-card-title>
+            <ion-item lines="none">
+                <ion-card-title>{{ 'event.all' | translate }}</ion-card-title>
+                <ion-badge slot="end" color="tertiary" mode="ios"> {{ events?.length }} </ion-badge>
+            </ion-item>
         </ion-card-header>
         <ion-card-content *ngIf="events && events.length > 0; else noEvent">
             <ion-item lines="none" *ngFor="let event of events" [routerLink]="['/event', event.id]">
