@@ -32,6 +32,10 @@ npm-debug.log*
 
 .lingua
 
+# compodoc
+/documentation
+tsconfig.doc.json
+
 # Firebase
 .firebase
 *-debug.log
