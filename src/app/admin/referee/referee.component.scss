@@ -1,0 +1,54 @@
+#container {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30%;
+    transform: translateY(-30%);
+}
+
+#saveBtn {
+    position: relative;
+    left: 80%;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile+label {
+    font-size: 1.25em;
+    max-width: 80%;
+    font-weight: 700;
+    color: var(--ion-color-primary-contrast);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: var(--ion-color-primary);
+    display: inline-block;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+}
+
+.inputfile:focus+label,
+.inputfile+label:hover {
+    background-color: var(--ion-color-primary-shade);
+}
+
+.inputfile:focus+label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+
+/* Set the flex in order to size the text width to its content */
+
+ion-select::part(placeholder),
+ion-select::part(text) {
+    flex: 0 0 auto;
+}

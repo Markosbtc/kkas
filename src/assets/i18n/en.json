@@ -184,6 +184,7 @@
     "admin": {
         "team": "Team",
         "athlete": "Athlete",
+        "result": "Results",
         "no_team": "No Sports Team is registered to this user",
         "no_athlete": "No Athlete is registered to this team",
         "register_team": "Register a Sport Team",

@@ -184,6 +184,7 @@
     "admin": {
         "team": "Egyesület",
         "athlete": "Versenyző",
+        "result": "Eredmények",
         "no_team": "Nincs regisztrált egyesület a bejelentkezett felhasználóhoz",
         "no_athlete": "Nincs regisztrált sportoló ehhez az egyesülethez",
         "register_team": "Egyesület felvétele",

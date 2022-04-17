@@ -1,0 +1,78 @@
+<app-header [title]="'admin.result'"></app-header>
+<ion-content [fullscreen]="true">
+    <!-- <ng-container *ngIf="loaded; else loadEntries">
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <ion-item>
+                        <ion-label>Trka</ion-label>
+                        <ion-select (ionChange)="selectRace($event)">
+                            <ng-container *ngFor="let race of races">
+                                <ion-select-option [value]="race.id">{{ race.displayText }}</ion-select-option>
+                            </ng-container>
+                        </ion-select>
+                    </ion-item>
+                    <ion-input id="inNumbers" type="text" (ionChange)="reorderFromInput($event)" debounce="500"></ion-input>
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                        <ion-label>Rezultati</ion-label>
+                    </ion-item>
+                    <ng-container *ngIf="selectedRace">
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col size="auto" class="ion-no-padding">
+                                    <ion-item *ngFor="let copmetitor of selectedRace.competitors; let i = index" lines="none">
+                                        <ion-label> {{ i + 1 }}. </ion-label>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col class="ion-no-padding">
+                                    <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+                                        <ion-reorder *ngFor="let copmetitor of selectedRace.competitors">
+                                            <ion-item>
+                                                <ion-label>
+                                                    {{copmetitor.displayText}}
+                                                </ion-label>
+                                                <ion-icon name="reorder-two" class="ion-padding-end ion-margin-end"></ion-icon>
+                                            </ion-item>
+                                        </ion-reorder>
+                                    </ion-reorder-group>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ng-container>
+                </ion-col>
+            </ion-row>
+            <ion-button *ngIf="lastrace" id="saveBtn" size="large" (click)="save()" class="ion-margin-top">Sačuvaj
+            </ion-button>
+        </ion-grid>
+
+
+    </ng-container>
+
+    <ng-template #loadEntries>
+        <div id="container">
+            <input type="file" id="loadEntries" name="loadEntries" class="inputfile" accept=".xls, .xlsx" multiple="true" disabled/>
+            <label for="loadEntries">
+        <ion-icon name="documents-outline"></ion-icon>
+        Učitaj prijave
+      </label>
+            <br />
+            <input type="file" id="loadfStartList" name="loadfStartList" class="inputfile" accept=".xls, .xlsx" />
+            <label for="loadfStartList">
+        <ion-icon name="documents-outline"></ion-icon>
+        Učitaj startnu listu
+      </label>
+        </div>
+    </ng-template>
+ -->
+
+    <ion-row class="ion-margin">
+        <ion-col sizeLg="6" offsetLg="3" sizeMd="6" offsetMd="3">
+            <ion-button (click)="navigate()" expand="block">
+                Eredmények felvétele
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+</ion-content>
