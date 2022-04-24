@@ -328,7 +328,7 @@
                                 {{ 'form.placeholder_licenceValidTo' | translate }} </ion-text>
                             <ion-popover [trigger]="coachIndex+1*41" show-backdrop="false" side="top" arrow="false" class="date-popover">
                                 <ng-template>
-                                    <ion-datetime #datepickLicenceStart presentation="date" formControlName="licenceValidTo" (ionChange)="datepickLicenceStart.confirm(true);">
+                                    <ion-datetime #datepickLicenceEnd presentation="date" formControlName="licenceValidTo" (ionChange)="datepickLicenceEnd.confirm(true);">
                                     </ion-datetime>
                                 </ng-template>
                             </ion-popover>
@@ -371,8 +371,8 @@
         </ion-card-content>
     </ion-card>
     <!-- FIXME: -->
-    <ion-button (click)="asd()" expand="block" fill="clear" shape="round">
+    <!-- <ion-button (click)="asd()" expand="block" fill="clear" shape="round">
         Click me
-    </ion-button>
+    </ion-button> -->
 
 </ion-content>
