@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   @Input() withBack: boolean = false;
   darkMode: boolean = false;
   user = null;
+  langlist: string[] = ['Magyar', 'Srpski', 'English'];
 
   constructor(
     public translate: TranslateService,

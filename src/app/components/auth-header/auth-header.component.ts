@@ -10,6 +10,7 @@ import { LanguageStorageService } from 'src/app/shared/services/language-storage
 export class AuthHeaderComponent implements OnInit {
   @Input() title: string;
   darkMode: boolean = false;
+  langlist: string[] = ['Magyar', 'Srpski', 'English'];
 
   constructor(
     public translate: TranslateService,
