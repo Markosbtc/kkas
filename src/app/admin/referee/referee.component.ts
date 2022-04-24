@@ -7,7 +7,7 @@ import * as XLSX from 'xlsx';
   templateUrl: './referee.component.html',
   styleUrls: ['./referee.component.scss'],
 })
-export class RefereeComponent implements OnInit {
+export class RefereeComponent {
 
   races: Race[] = [];
   teamsK: TeamResult[] = [];
@@ -20,7 +20,7 @@ export class RefereeComponent implements OnInit {
   mkRaceIndex: number[] = [];
 
   constructor(
-    private datePipe: DatePipe
+    // private datePipe: DatePipe
   ) { }
 
   //--
@@ -32,6 +32,7 @@ export class RefereeComponent implements OnInit {
 
   //--
 
+  /*
   ngOnInit(): void {
     window.addEventListener('load', () => {
       const entryFilesSelector = document.getElementById('loadEntries');
@@ -410,7 +411,7 @@ export class RefereeComponent implements OnInit {
     this.teamsK.sort((a, b) => (a.total > b.total) ? -1 : ((b.total > a.total) ? 1 : 0));
     this.teamsMK.sort((a, b) => (a.total > b.total) ? -1 : ((b.total > a.total) ? 1 : 0));
   }
-
+*/
 }
 
 export interface Competitor {
