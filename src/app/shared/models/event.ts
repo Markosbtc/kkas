@@ -1,6 +1,4 @@
-import { Athlete } from "./athlete";
-import { Race } from "./race";
-import { Address, Organization, SportsTeam } from "./sportsTeam"
+import { Address, Organization, SportsTeam, SportsTeamRef } from "./sportsTeam"
 
 export interface Event {
     id?: string,
@@ -12,7 +10,7 @@ export interface Event {
     startDate: Date | string,
     endDate: Date | string,
     eventStatus: EventStatus.EventStatusType,
-    organizer: SportsTeam | Organization,
+    organizer: Organization | SportsTeam | SportsTeamRef,
     /* participation?: {
         teams: SportsTeam[],
         athletes: Athlete[],

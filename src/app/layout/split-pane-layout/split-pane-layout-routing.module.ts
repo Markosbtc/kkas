@@ -3,6 +3,8 @@ import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminAthletesFormComponent } from 'src/app/admin/admin-athletes-form/admin-athletes-form.component';
 import { AdminAthletesComponent } from 'src/app/admin/admin-athletes/admin-athletes.component';
+import { AdminEventFormComponent } from 'src/app/admin/admin-event-form/admin-event-form.component';
+import { AdminEventComponent } from 'src/app/admin/admin-event/admin-event.component';
 import { AdminTeamsFormComponent } from 'src/app/admin/admin-teams-form/admin-teams-form.component';
 import { AdminTeamsComponent } from 'src/app/admin/admin-teams/admin-teams.component';
 import { RefereeComponent } from 'src/app/admin/referee/referee.component';
@@ -27,6 +29,8 @@ const routes: Routes = [
   { path: 'admin/team',           component: AdminTeamsFormComponent,      ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ },
   { path: 'admin/athletes',       component: AdminAthletesComponent,       ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ },
   { path: 'admin/athlete',        component: AdminAthletesFormComponent,   ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ },
+  { path: 'admin/events',         component: AdminEventComponent,          ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ },
+  { path: 'admin/event',          component: AdminEventFormComponent,      ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ },
   { path: 'admin/results',        component: RefereeComponent,             ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ }
 ];
 

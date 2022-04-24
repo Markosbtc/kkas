@@ -20,6 +20,8 @@ import { AdminAthletesComponent } from 'src/app/admin/admin-athletes/admin-athle
 import { AdminAthletesFormComponent } from 'src/app/admin/admin-athletes-form/admin-athletes-form.component';
 import { AdminTeamsFormComponent } from 'src/app/admin/admin-teams-form/admin-teams-form.component';
 import { RefereeComponent } from 'src/app/admin/referee/referee.component';
+import { AdminEventComponent } from 'src/app/admin/admin-event/admin-event.component';
+import { AdminEventFormComponent } from 'src/app/admin/admin-event-form/admin-event-form.component';
 
 @NgModule({
   imports: [
@@ -43,7 +45,9 @@ import { RefereeComponent } from 'src/app/admin/referee/referee.component';
     AdminTeamsFormComponent,
     AdminAthletesComponent,
     AdminAthletesFormComponent,
-    RefereeComponent
+    AdminEventComponent,
+    AdminEventFormComponent,
+    RefereeComponent,
   ]
 })
 export class SplitPaneLayoutPageModule { }

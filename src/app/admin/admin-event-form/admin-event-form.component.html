@@ -1,0 +1,143 @@
+<app-header [title]="'admin.event'"></app-header>
+<ion-content [fullscreen]="true">
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>{{ 'admin.event' | translate }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <form [formGroup]="eventForm" (ngSubmit)="submitForm()">
+                <ion-item lines="none">
+                    <ion-label position="floating">{{ 'form.label_eventName' | translate }}</ion-label>
+                    <ion-input formControlName="name" type="text" placeholder="{{ 'form.placeholder_eventName' | translate }}" required></ion-input>
+                    <ion-note slot="error" *ngIf="isSubmitted && eventForm.get('name').hasError('required')">
+                        {{ 'form.err_eventName_required' | translate}}
+                    </ion-note>
+                </ion-item>
+
+                <ion-item lines="none">
+                    <ion-label position="floating">{{ 'form.label_eventAlternateName' | translate }}</ion-label>
+                    <ion-input formControlName="alternateName" type="text" placeholder="{{ 'form.placeholder_eventAlternateName' | translate }}">
+                    </ion-input>
+                </ion-item>
+
+                <ion-item lines="none">
+                    <ion-label position="floating">{{ 'form.label_description' | translate }}</ion-label>
+                    <ion-input formControlName="description" type="text" placeholder="{{ 'form.placeholder_description' | translate }}">
+                    </ion-input>
+                </ion-item>
+
+                <ion-accordion-group value="location">
+                    <ion-accordion value="location">
+                        <ion-item slot="header">
+                            <ion-label>{{ 'form.label_address' | translate }}</ion-label>
+                        </ion-item>
+                        <ion-list slot="content">
+                            <ion-item-group formGroupName="location">
+                                <ion-item lines="none">
+                                    <ion-label position="floating">{{ 'form.label_address_zip' | translate }}</ion-label>
+                                    <ion-input formControlName="zip" type="text" placeholder="{{ 'form.placeholder_address_zip' | translate }}" required></ion-input>
+                                    <ion-note slot="error" *ngIf="isSubmitted && eventForm.get('location.zip').hasError('required')">
+                                        {{ 'form.err_address_zip_required' | translate}}
+                                    </ion-note>
+                                </ion-item>
+                                <ion-item lines="none">
+                                    <ion-label position="floating">{{ 'form.label_address_city' | translate }}</ion-label>
+                                    <ion-input formControlName="city" type="text" placeholder="{{ 'form.placeholder_address_city' | translate }}" required></ion-input>
+                                    <ion-note slot="error" *ngIf="isSubmitted && eventForm.get('location.city').hasError('required')">
+                                        {{ 'form.err_address_city_required' | translate}}
+                                    </ion-note>
+                                </ion-item>
+                                <ion-item lines="none">
+                                    <ion-label position="floating">{{ 'form.label_address' | translate }}</ion-label>
+                                    <ion-input formControlName="address" type="text" placeholder="{{ 'form.placeholder_address' | translate }}" required></ion-input>
+                                    <ion-note slot="error" *ngIf="isSubmitted && eventForm.get('location.address').hasError('required')">
+                                        {{ 'form.err_address_required' | translate}}
+                                    </ion-note>
+                                </ion-item>
+                            </ion-item-group>
+                        </ion-list>
+                    </ion-accordion>
+                </ion-accordion-group>
+
+                <ion-item lines="none">
+                    <ion-label position="floating">{{ 'form.label_url' | translate }}</ion-label>
+                    <ion-input formControlName="url" type="text" placeholder="{{ 'form.placeholder_url' | translate }}">
+                    </ion-input>
+                </ion-item>
+
+                <ion-item button="true" id="open-date-inp" lines="none">
+                    <ion-label>{{ 'form.label_startDate' | translate }}</ion-label>
+                    <ion-text slot="end">{{ startDate.value? formatDate(startDate.value) : '' }}</ion-text>
+                    <ion-popover trigger="open-date-inp" show-backdrop="false" side="top" arrow="false" class="date-popover">
+                        <ng-template>
+                            <ion-datetime #popoverDatetime presentation="date" formControlName="startDate" (ionChange)="popoverDatetime.confirm(true);">
+                            </ion-datetime>
+                        </ng-template>
+                    </ion-popover>
+                    <ion-note slot="end" color="danger" *ngIf="isSubmitted && startDate.hasError('required')">
+                        {{ 'form.err_date_required' | translate}}
+                    </ion-note>
+                </ion-item>
+
+                <ion-item button="true" id="open-date-input" lines="none">
+                    <ion-label>{{ 'form.label_endDate' | translate }}</ion-label>
+                    <ion-text slot="end">{{ endDate.value? formatDate(endDate.value) : '' }}</ion-text>
+                    <ion-popover trigger="open-date-input" show-backdrop="false" side="top" arrow="false" class="date-popover">
+                        <ng-template>
+                            <ion-datetime #popoverDatetime2 presentation="date" formControlName="endDate" (ionChange)="popoverDatetime2.confirm(true);">
+                            </ion-datetime>
+                        </ng-template>
+                    </ion-popover>
+                    <ion-note slot="end" color="danger" *ngIf="isSubmitted && endDate.hasError('required')">
+                        {{ 'form.err_date_required' | translate}}
+                    </ion-note>
+                </ion-item>
+
+                <ion-item lines="none">
+                    <ion-label position="floating">{{ 'form.label_eventCategory' | translate }}</ion-label>
+                    <ion-select formControlName="eventCategory" interface="popover" placeholder="{{ 'form.placeholder_picker' | translate}}" required>
+                        <ion-select-option *ngFor="let item of eventCategoryTypes">{{ item | translate }}</ion-select-option>
+                    </ion-select>
+                    <ion-note slot="error" *ngIf="isSubmitted && eventForm.get('eventCategory').hasError('required')">
+                        {{ 'form.err_eventCategory_required' | translate}}
+                    </ion-note>
+                </ion-item>
+
+                <ion-row *ngIf="event?.eventStatus!=='cancelled'">
+                    <ion-col>
+                        <ion-button type="submit" color="secondary" expand="block">
+                            {{ id ? ('form.save' | translate) : ('form.submit' | translate) }}
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="id && event?.eventStatus!=='cancelled' ">
+                    <ion-col>
+                        <ion-button color="tertiary" expand="block" (click)="presentAlertConfirm('event.alert_cancel')">
+                            {{ 'event.cancel' | translate }}
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="id && event?.eventStatus==='cancelled' ">
+                    <ion-col>
+                        <ion-button color="secondary" expand="block" (click)="rescheduleEvent()">
+                            {{ 'event.reschedule' | translate }}
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="id">
+                    <ion-col>
+                        <ion-button color="danger" expand="block" (click)="presentAlertConfirm('event.alert_delete')">
+                            {{ 'event.delete' | translate }}
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+
+            </form>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

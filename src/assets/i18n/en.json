@@ -54,6 +54,12 @@
         "label_role": "Select a role",
         "label_team": "Select a team",
         "label_no_team": "New team",
+        "label_eventName": "Name of the Event",
+        "label_eventAlternateName": "Alternate Name",
+        "label_description": "Description",
+        "label_startDate": "Start Date",
+        "label_endDate": "End Date",
+        "label_eventCategory": "Type of Event",
         "placeholder_email": "email@address.com",
         "placeholder_url": "examplepage.com",
         "placeholder_telephone": "+381621111111",
@@ -70,6 +76,9 @@
         "placeholder_licenceValidTo": "Leave empty if there is no expiry date",
         "placeholder_roleName": "Operative trainer",
         "placeholder_note": "Note",
+        "placeholder_eventName": "Name of the Event",
+        "placeholder_eventAlternateName": "Alternate Name",
+        "placeholder_description": "Description",
         "err_name_required": "Name is required",
         "err_givenName_required": "Name is required",
         "err_familyName_required": "Family name is required",
@@ -89,7 +98,9 @@
         "err_licenceLevel": "Please pick a licence Level",
         "err_gender_required": "Please pick a gender",
         "err_role_required": "Please select a role",
-        "err_team_required": "Please select a team"
+        "err_team_required": "Please select a team",
+        "err_eventName_required": "The Name is Required",
+        "err_eventCategory_required": "Please select a category"
     },
     "event": {
         "result": "Result",
@@ -106,7 +117,12 @@
         "all": "Events",
         "all_races": "Races",
         "no_event": "No events found in the database",
-        "no_races": "No races found in the database"
+        "no_races": "No races found in the database",
+        "delete": "Delete Event",
+        "cancel": "Cancel Event",
+        "reschedule": "Reschedule Event",
+        "alert_delete": "Are you sure you want to permanently delete the event?",
+        "alert_cancel": "Are you sure you want to cancel the event?"
     },
     "event_status_type": {
         "scheduled": "Competition is scheduled.",
@@ -182,14 +198,19 @@
         "err_race_number": "No race with this race number"
     },
     "admin": {
+        "event": "Event",
+        "events": "Events",
+        "organized_events": "Events registered by your team",
         "team": "Team",
         "athlete": "Athlete",
         "result": "Results",
         "no_team": "No Sports Team is registered to this user",
         "no_athlete": "No Athlete is registered to this team",
+        "no_event": "No Event is registered by this team",
         "register_team": "Register a Sport Team",
         "edit_team": "Edit Team Info",
         "register_athlete": "Register an Athlete",
+        "register_event": "Register an Event",
         "update_athlete": "Update"
     },
     "auth": {
@@ -213,6 +234,11 @@
         "reset_email_sent": "Password Reset E-mail Sent",
         "err_reset_email": "Failed to Send E-mail",
         "reset_instructions": "Please provide the username or email address that you used when you signed up for your account"
+    },
+    "alert": {
+        "attention": "Attention!",
+        "cancel": "Cancel",
+        "confirm": "Confirm"
     },
     "qualification": "Qualification",
     "semifinal": "Semifinal",

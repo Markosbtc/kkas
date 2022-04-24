@@ -22,6 +22,11 @@ export class EventService {
     return docData(eventRef, { idField: 'id' }) as Observable<Event>;
   }
 
+  getEventsByTeamId(teamId: string): Observable<Event[]> {
+    const q = query(collection(this.firestore, 'events'), where("organizer.id", "==", teamId));
+    return collectionData(q, { idField: 'id' }) as Observable<Event[]>;
+  }  
+
   getEventSnapshot(eventRef: DocumentReference<any>) {
     return getDoc(eventRef);
   }

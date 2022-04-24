@@ -15,6 +15,7 @@ export class SplitPaneLayoutPage implements OnInit {
   public adminPages = [
     { title: 'home.MYTEAM', url: '/admin/teams', icon: 'bookmarks' },
     { title: 'home.COMPETITORS', url: '/admin/athletes', icon: 'people' },
+    { title: 'home.EVENTS', url: '/admin/events', icon: 'play' },
     { title: 'admin.result', url: '/admin/results', icon: 'accessibility' },
   ];
 

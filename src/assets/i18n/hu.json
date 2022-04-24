@@ -54,6 +54,12 @@
         "label_role": "Válasszon szerepet",
         "label_team": "Válasszon Csapatot",
         "label_no_team": "Új csapatot regisztrálok",
+        "label_eventName": "Esemény megnevezése",
+        "label_eventAlternateName": "Egyéb megnevezés",
+        "label_description": "Leírás",
+        "label_startDate": "Esemény kezdete",
+        "label_endDate": "Esemény vége",
+        "label_eventCategory": "Esemény típusa",
         "placeholder_email": "email@cim.com",
         "placeholder_url": "weboldal.com",
         "placeholder_telephone": "+381621111111",
@@ -70,6 +76,9 @@
         "placeholder_licenceValidTo": "Amennyiben nincs lejárati dátum, hagyja üresen",
         "placeholder_roleName": "Szövetségi edző",
         "placeholder_note": "Megjegyzés",
+        "placeholder_eventName": "Esemény megnevezése",
+        "placeholder_eventAlternateName": "Egyéb megnevezés",
+        "placeholder_description": "Leírás",
         "err_name_required": "A csapatnév megadása kötelező",
         "err_givenName_required": "Név megadása kötelező",
         "err_familyName_required": "Vezetéknév megadása kötelező",
@@ -89,7 +98,9 @@
         "err_licenceLevel": "Kérem adja meg az engedély szintjét",
         "err_gender_required": "Kérem válasszon nemet",
         "err_role_required": "Kérem válasszon szerepet",
-        "err_team_required": "Kérem válasszon csapatot"
+        "err_team_required": "Kérem válasszon csapatot",
+        "err_eventName_required": "Esemény megnevezése kötelező",
+        "err_eventCategory_required": "Kérem válasszon típust"
     },
     "event": {
         "result": "Eredmény",
@@ -106,7 +117,12 @@
         "all": "Összes",
         "all_races": "Összes futam",
         "no_event": "Nincs megjeleníthető esemény az adatbázisban",
-        "no_races": "Nincs megjeleníthető futam az adatbázisban"
+        "no_races": "Nincs megjeleníthető futam az adatbázisban",
+        "delete": "Esemény törlése",
+        "cancel": "Esemény lemondása",
+        "reschedule": "Esemény újraütemezése",
+        "alert_delete": "Biztosan törli az eseményt?",
+        "alert_cancel": "Biztosan lemondja az eseményt?"
     },
     "event_status_type": {
         "scheduled": "Competition is scheduled.",
@@ -182,14 +198,19 @@
         "err_race_number": "Nincs ilyen sorszámú futam"
     },
     "admin": {
+        "event": "Esemény",
+        "events": "Események",
+        "organized_events": "Az egyesület által meghirdetett események",
         "team": "Egyesület",
         "athlete": "Versenyző",
         "result": "Eredmények",
         "no_team": "Nincs regisztrált egyesület a bejelentkezett felhasználóhoz",
         "no_athlete": "Nincs regisztrált sportoló ehhez az egyesülethez",
+        "no_event": "Nincs az egyesület által meghirdetett esemény",
         "register_team": "Egyesület felvétele",
         "edit_team": "Adatok szerkeztése",
         "register_athlete": "Sportoló felvétele",
+        "register_event": "Esemény felvétele",
         "update_athlete": "Mentés"
     },
     "auth": {
@@ -213,6 +234,11 @@
         "reset_email_sent": "Jelszó visszaállító e-mail elküldve",
         "err_reset_email": "E-mail küldése sikertelen",
         "reset_instructions": "Kérem adja meg a felhasználónevét vagy e-mail címét amellyel regisztrált az oldalra"
+    },
+    "alert": {
+        "attention": "Figyelem!",
+        "cancel": "Mégsem",
+        "confirm": "Megerősít"
     },
     "qualification": "Elődöntő",
     "semifinal": "Középdöntő",
