@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
-    this.translate.addLangs(['hu', 'sr', 'en']);
+    this.translate.addLangs(['hu', 'rs', 'gb']);
     if (this.languageStorage.getLanguage()) {
       translate.use(this.languageStorage.getLanguage());
     }

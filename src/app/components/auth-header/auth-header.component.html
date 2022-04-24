@@ -14,7 +14,9 @@
                 <ion-content>
                     <ion-list lines="none">
                         <ion-item [button]="true" *ngFor="let language of translate.getLangs()" (click)="switchLang(language)">
-                            <ion-label>{{ language }}</ion-label>
+                            <ion-label>
+                                <span class="fi" [ngClass]="'fi-'+language"></span>
+                            </ion-label>
                         </ion-item>
                     </ion-list>
                 </ion-content>

@@ -15,7 +15,7 @@ export class AuthHeaderComponent implements OnInit {
     public translate: TranslateService,
     private languageStorage: LanguageStorageService
   ) {
-    this.translate.addLangs(['hu', 'sr', 'en']);
+    this.translate.addLangs(['hu', 'rs', 'gb']);
     if (this.languageStorage.getLanguage()) {
       translate.use(this.languageStorage.getLanguage());
     }
