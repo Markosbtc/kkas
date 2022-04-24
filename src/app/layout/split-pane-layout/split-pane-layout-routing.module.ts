@@ -12,7 +12,6 @@ import { AthleteListComponent } from 'src/app/athletes/athlete-list/athlete-list
 import { AthleteComponent } from 'src/app/athletes/athlete/athlete.component';
 import { EventListComponent } from 'src/app/events/event-list/event-list.component';
 import { EventComponent } from 'src/app/events/event/event.component';
-import { AuthGuard } from 'src/app/shared/guard/auth.guard';
 import { TeamsComponent } from 'src/app/teams/teams.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -31,7 +30,7 @@ const routes: Routes = [
   { path: 'admin/athlete',        component: AdminAthletesFormComponent,   ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ },
   { path: 'admin/events',         component: AdminEventComponent,          ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ },
   { path: 'admin/event',          component: AdminEventFormComponent,      ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ },
-  { path: 'admin/results',        component: RefereeComponent,             ...canActivate(redirectUnauthorizedToLogin)/* role: user*/ }
+  { path: 'admin/results',        component: RefereeComponent,             ...canActivate(redirectUnauthorizedToLogin)/* role: referee*/ }
 ];
 
 @NgModule({

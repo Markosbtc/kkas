@@ -11,7 +11,7 @@
                 <ion-label>{{ event.name + ' ' + (event.alternateName ? '(' + event.alternateName + ')' : '') + ' - ' + event.location.city + ' - ' + (event.startDate | date: 'yyyy.MM.dd') + ' - ' + (event.endDate | date: 'MM.dd' ) }} </ion-label>
                 <ion-label slot="end">
                     <ion-text color="primary">
-                        {{ event.eventStatus | translate }}
+                        {{ 'event_status_type.' + event.eventStatus | translate }}
                     </ion-text>
                 </ion-label>
             </ion-item>
