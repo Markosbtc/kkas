@@ -125,10 +125,10 @@
         "alert_cancel": "Biztosan lemondja az eseményt?"
     },
     "event_status_type": {
-        "scheduled": "Competition is scheduled.",
-        "postponed": "Competition will be postponed without being rescheduled yet.",
-        "rescheduled": "Competition is rescheduled.",
-        "cancelled": "Competition will not take place (suspended, cancelled)"
+        "scheduled": "Ütemezve",
+        "postponed": "Elhalasztva",
+        "rescheduled": "Újraütemezve",
+        "cancelled": "Lemondva"
     },
     "athlete": {
         "label_birthDate": "Születési dátum",
