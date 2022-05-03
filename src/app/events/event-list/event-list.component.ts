@@ -21,12 +21,17 @@ export class EventListComponent implements OnInit {
 
   ngOnInit() {
     this.getEvents();
+    this.sortEventsByDate();
   }
 
   getEvents() {
     this.eventService.getEvents().subscribe((res) => {
       this.events = res;
     });
+  }
+
+  sortEventsByDate() {
+    this.events.sort((a, b) => (a.startDate > b.startDate) ? 1 : ((b.startDate > a.startDate) ? -1 : 0));
   }
 
 }
