@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { ResultComponent } from '../result/result.component';
 import { EventService } from 'src/app/shared/services/event.service';
 import { RaceService } from 'src/app/shared/services/race.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-event',
@@ -17,6 +18,7 @@ export class EventComponent implements OnInit {
   title: string = "";
   event: Event;
   races: Race[] = [];
+  filteredRaces: Race[] = [];
 
   eventTeamF: string;
   athleteF: string;
@@ -24,6 +26,7 @@ export class EventComponent implements OnInit {
   ageGroupF: string;
   distanceF: string;
   genderF: string;
+  filters = {}
 
   boats = Boat.BOAT_TYPES;
   distances = Distance.DISTANCES;
@@ -45,7 +48,34 @@ export class EventComponent implements OnInit {
       });
       this.raceService.getRacesByEventId(this.id).subscribe((r) => {
         this.races = r;
+        // sort races descending by race number
+        this.races.sort((a, b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
+
+        this.applyFilters();
       });
+    }
+  }
+
+  applyFilters() {
+    this.filteredRaces = _.filter(this.races, _.conforms(this.filters));
+  }
+
+  removeFilter(property: string) {
+    delete this.filters[property];
+    this[property] = null;
+    this.applyFilters();
+  }
+
+  filterExact(property: string, rule: any) {
+    this.filters[property] = val => _.toLower(val) == _.toLower(rule);
+    this.applyFilters();
+  }
+
+  selectChange(event: any, filter: string, field: any) {
+    if (event.detail.value) {
+      this.filterExact(filter, field);
+    } else {
+      this.removeFilter(filter);
     }
   }
 
