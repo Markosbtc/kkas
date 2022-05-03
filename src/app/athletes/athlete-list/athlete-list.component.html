@@ -12,18 +12,18 @@
                     <ion-label class="filter-label ion-margin">{{ 'athlete.filter_name' | translate }}</ion-label>
                 </ion-searchbar>
 
-                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" placeholder="" animated="true" [(ngModel)]="yearF">
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" placeholder="" animated="true" [(ngModel)]="yearF" (ionChange)="filterIncludes('birthDate', yearF)" (ionClear)="removeFilter('birthDate')">
                     <ion-label class="filter-label ion-margin">{{ 'athlete.filter_age' | translate }}</ion-label>
                 </ion-searchbar>
 
-                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" placeholder="" animated="true" [(ngModel)]="teamNameF" (ionClear)="clearTeamName()">
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" placeholder="" animated="true" [(ngModel)]="teamNameF">
                     <ion-label class="filter-label ion-margin">{{ 'athlete.filter_team' | translate }}</ion-label>
                 </ion-searchbar>
 
                 <ion-item>
                     <ion-label class="ion-margin">{{ 'athlete.filter_gender' | translate }}</ion-label>
-                    <ion-select interface="popover">
-                        <ion-select-option value="all">{{ 'gender.all' | translate }}</ion-select-option>
+                    <ion-select interface="popover" [(ngModel)]="genderF" (ionChange)="genderSelectChange($event)">
+                        <ion-select-option value="">{{ 'gender.all' | translate }}</ion-select-option>
                         <ion-select-option value="male">{{ 'gender.male' | translate }}</ion-select-option>
                         <ion-select-option value="female">{{ 'gender.female' | translate }}</ion-select-option>
                     </ion-select>
@@ -36,11 +36,11 @@
         <ion-card-header>
             <ion-item lines="none">
                 <ion-card-title> {{ 'athlete.all' | translate }} </ion-card-title>
-                <ion-badge slot="end" color="tertiary" mode="ios"> {{ athletes?.length }} </ion-badge>
+                <ion-badge slot="end" color="tertiary" mode="ios"> {{ filteredAthletes?.length }} </ion-badge>
             </ion-item>
         </ion-card-header>
         <ion-card-content *ngIf="athletes && athletes.length > 0; else noAthlete">
-            <ion-item lines="none" *ngFor="let athlete of athletes" [routerLink]="['/athlete', athlete.id]">
+            <ion-item lines="none" *ngFor="let athlete of filteredAthletes" [routerLink]="['/athlete', athlete.id]">
                 <ion-label>{{ athlete.name?.familyName + ' ' + athlete.name?.givenName + ' (' + (athlete.birthDate | date: 'y') + ')' }} </ion-label>
                 <ion-label>{{ athlete.memberOf?.name + ' ' + (athlete.memberOf?.alternateName? '(' + athlete.memberOf?.alternateName + ')' : '' ) }} </ion-label>
             </ion-item>

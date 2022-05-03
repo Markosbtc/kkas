@@ -7,10 +7,10 @@
                 <ion-label>{{ 'shared.filter' | translate}}</ion-label>
             </ion-item>
             <ion-list slot="content">
-                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="eventName" placeholder="" animated="true">
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="eventName" placeholder="" animated="true" (ionChange)="filterIncludes('name', eventName)" (ionClear)="removeFilter('name')">
                     <ion-label class="filter-label ion-margin">{{ 'event.filter_event_name' | translate }}</ion-label>
                 </ion-searchbar>
-                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="eventYear" placeholder="" animated="true">
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="eventYear" placeholder="" animated="true" (ionChange)="filterIncludes('startDate', eventYear)" (ionClear)="removeFilter('startDate')">
                     <ion-label class="filter-label ion-margin">{{ 'event.filter_year' | translate }}</ion-label>
                 </ion-searchbar>
                 <ion-searchbar type="text" inputmode="text" showCancelButton="focus" [(ngModel)]="eventPlace" placeholder="" animated="true">
@@ -18,10 +18,9 @@
                 </ion-searchbar>
                 <ion-item>
                     <ion-label class="ion-margin">{{ 'event.filter_type' | translate }}</ion-label>
-                    <ion-select interface="popover">
-                        <ion-select-option value="all">{{ 'gender.all' | translate }}</ion-select-option>
-                        <ion-select-option value="male">{{ 'gender.male' | translate }}</ion-select-option>
-                        <ion-select-option value="female">{{ 'gender.female' | translate }}</ion-select-option>
+                    <ion-select interface="popover" value="" [(ngModel)]="eventType" (ionChange)="eventTypeSelectChange($event)">
+                        <ion-select-option value="">{{ 'gender.all' | translate }}</ion-select-option>
+                        <ion-select-option *ngFor="let item of eventCategoryTypes">{{ item | translate }}</ion-select-option>
                     </ion-select>
                 </ion-item>
             </ion-list>
@@ -32,11 +31,11 @@
         <ion-card-header>
             <ion-item lines="none">
                 <ion-card-title>{{ 'event.all' | translate }}</ion-card-title>
-                <ion-badge slot="end" color="tertiary" mode="ios"> {{ events?.length }} </ion-badge>
+                <ion-badge slot="end" color="tertiary" mode="ios"> {{ filteredEvents?.length }} </ion-badge>
             </ion-item>
         </ion-card-header>
         <ion-card-content *ngIf="events && events.length > 0; else noEvent">
-            <ion-item lines="none" *ngFor="let event of events" [routerLink]="['/event', event.id]">
+            <ion-item lines="none" *ngFor="let event of filteredEvents" [routerLink]="['/event', event.id]">
                 <ion-label>{{ event.name + ' ' + (event.alternateName ? '(' + event.alternateName + ')' : '') + ' - ' + event.location.city + ' - ' + (event.startDate | date: 'yyyy.MM.dd') + ' - ' + (event.endDate | date: 'MM.dd' ) }} </ion-label>
                 <ion-button [routerLink]="['/event', event.id]" expand="block" fill="clear">
                     {{ 'shared.open' | translate}}
