@@ -16,7 +16,7 @@
                     <ion-label class="filter-label ion-margin">{{ 'athlete.filter_age' | translate }}</ion-label>
                 </ion-searchbar>
 
-                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" placeholder="" animated="true" [(ngModel)]="teamNameF">
+                <ion-searchbar type="text" inputmode="text" showCancelButton="focus" placeholder="" animated="true" [(ngModel)]="teamNameF" (ionClear)="clearTeamName()">
                     <ion-label class="filter-label ion-margin">{{ 'athlete.filter_team' | translate }}</ion-label>
                 </ion-searchbar>
 

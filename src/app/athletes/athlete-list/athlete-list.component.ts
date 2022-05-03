@@ -46,6 +46,7 @@ export class AthleteListComponent implements OnInit, AfterViewInit {
       this.teamId = history.state.teamId;
       this.athleteService.getAthletesByTeamId(this.teamId).subscribe((res) => {
         this.athletes = res;
+        this.applyFilters();
       });
       if (history.state.teamName) {
         this.teamNameF = history.state.teamName;
@@ -58,6 +59,12 @@ export class AthleteListComponent implements OnInit, AfterViewInit {
         });
       }
     } else {
+      this.getAthletes();
+    }
+  }
+
+  clearTeamName() {
+    if (this.teamId) {
       this.getAthletes();
     }
   }
