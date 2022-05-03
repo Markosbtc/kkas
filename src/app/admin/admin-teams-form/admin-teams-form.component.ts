@@ -9,6 +9,7 @@ import { TeamService } from 'src/app/shared/services/team.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CoachService } from 'src/app/shared/services/coach.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Coach } from 'src/app/shared/models/coach';
 
 @Component({
   selector: 'app-admin-teams-form',
@@ -137,26 +138,26 @@ export class AdminTeamsFormComponent implements OnInit {
     return this.teamForm.controls.telephone as FormArray;
   }
 
-  setNewCoach(): void {
+  setNewCoach(coach?: Coach): void {
     const newcoach = this.formBuilder.group({
       name: this.formBuilder.group({
-        familyName: ['', [Validators.required]],
-        givenName: ['', [Validators.required]],
-        fullName: ['']
+        familyName: [coach?.name?.familyName ? coach?.name?.familyName : '', [Validators.required]],
+        givenName: [coach?.name?.givenName ? coach?.name?.givenName : '', [Validators.required]],
+        fullName: [coach?.name?.fullName ? coach?.name?.fullName : '']
       }),
-      image: [''], // TODO: file upload
-      email: [''],
-      url: [''],
-      gender: [''],
-      birthDate: ['', [Validators.required]],
-      deathDate: [],
-      licenceId: ['', [Validators.required]],
-      licenceValidFrom: ['', [Validators.required]],
-      licenceValidTo: [],
-      licenceLevel: ['', [Validators.required]],
-      roleName: [''],
-      note: [''],
-      team: []
+      image: [coach?.image ? coach?.image : ''], // TODO: file upload
+      email: [coach?.email ? coach?.email : ''],
+      url: [coach?.url ? coach?.url : ''],
+      gender: [coach?.gender ? coach?.gender : ''],
+      birthDate: [coach?.birthDate ? coach?.birthDate : '', [Validators.required]],
+      deathDate: [coach?.deathDate ? coach?.deathDate : null],
+      licenceId: [coach?.licenceId ? coach?.licenceId : '', [Validators.required]],
+      licenceValidFrom: [coach?.licenceValidFrom ? coach?.licenceValidFrom : '', [Validators.required]],
+      licenceValidTo: [coach?.licenceValidTo ? coach?.licenceValidTo : null],
+      licenceLevel: [coach?.licenceLevel ? coach?.licenceLevel : '', [Validators.required]],
+      roleName: [coach?.roleName ? coach?.roleName : ''],
+      note: [coach?.note ? coach?.note : ''],
+      team: [coach?.team ? coach?.team : null]
     });
 
     this.coaches.push(newcoach);
@@ -177,7 +178,6 @@ export class AdminTeamsFormComponent implements OnInit {
   getTeamInfo() {
     this.teamService.getSportsTeamById(this.id).subscribe((res) => {
       this.team = res;
-      console.log(res);
       this.initializeTeam(res);
     })
   }
@@ -224,7 +224,7 @@ export class AdminTeamsFormComponent implements OnInit {
     this.url.clear();
     this.phones.clear();
     this.coaches.clear();
-    // FIXME:
+
     for (const email of team.email) {
       this.setNewEmail(email);
     }
@@ -237,7 +237,10 @@ export class AdminTeamsFormComponent implements OnInit {
       this.setNewTelephone(telephone);
     }
 
-    //coaches
+    for (const coach of team.coaches) {
+      this.setNewCoach(coach);
+    }
+
   }
 
   formatDate(value: string): string {
@@ -249,9 +252,11 @@ export class AdminTeamsFormComponent implements OnInit {
   submitForm() {
     this.isSubmitted = true;
     if (this.teamForm.valid) {
-      const teamToUpload: SportsTeam = this.makeTeamFromForm(this.teamForm);
+      const teamToUpload: SportsTeam = this.makeTeamFromForm();
       if (this.id) { // update team
-        // FIXME: check this part, update coaches problematic
+        // FIXME: check this part, update coaches problematic:
+        // updates team.coaches fine, but
+        // firestore coaches collection does not update. Maybe cloud function? 
         this.teamService.updateSportsTeamById(this.id, teamToUpload).then(() => {
           this.presentToast(this.translate.instant('shared.success'));
           this.isSubmitted = false;
@@ -325,27 +330,42 @@ export class AdminTeamsFormComponent implements OnInit {
     }
   }
 
-  makeTeamFromForm(teamForm: FormGroup): SportsTeam {
-    const team: SportsTeam = teamForm.value;
+  makeTeamFromForm(): SportsTeam {
+    const team: SportsTeam = this.teamForm.value;
     team.captain.name.fullName = team.captain.name.familyName + ' ' + team.captain.name.givenName;
     team.president.name.fullName = team.president.name.familyName + ' ' + team.president.name.givenName;
     team.coaches?.forEach(coach => {
       coach.name.fullName = coach.name.familyName + ' ' + coach.name.givenName;
     });
 
-    //team.email = [];
-    /* teamForm.value.email?.forEach(e => {
-      team.email.push(e.email);
-    }); */
+    team.email = [];
+    this.teamForm.get('email').value.forEach(e => {
+      if (e.email) {
+        team.email.push(e.email);
+      }
+    });
 
-    if (this.team) { // TODO:
+    team.telephone = [];
+    this.teamForm.get('telephone').value.forEach(t => {
+      if (t.telephone) {
+        team.telephone.push(t.telephone);
+      }
+    });
+
+    team.url = [];
+    this.teamForm.get('url').value.forEach(w => {
+      if (w.url) {
+        team.url.push(w.url);
+      }
+    });
+
+    if (this.team) {
       team.coaches.forEach(coach => {
         coach.team = {
           name: this.team.name,
           alternateName: this.team.alternateName,
           city: this.team.address.city,
           id: this.id,
-          // ref: docSnap.ref ??
         }
       });
     }
@@ -365,9 +385,9 @@ export class AdminTeamsFormComponent implements OnInit {
 
   //FIXME:
   asd() {
-    console.log(this.teamForm.value);
-
-    console.log(this.makeTeamFromForm(this.teamForm));
+    // console.log(this.teamForm.value);
+    // console.log(this.makeTeamFromForm(this.teamForm));
+    console.log(this.makeTeamFromForm());
   }
 
 }
